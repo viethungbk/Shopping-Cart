@@ -17,11 +17,10 @@ export default class Header extends Component {
               <Logo></Logo>
               <Search></Search>
               <Cart></Cart>
-              <Navbar></Navbar>
             </div>
           </div>
         </div>
-
+        <Navbar></Navbar>
       </header>
     );
   }

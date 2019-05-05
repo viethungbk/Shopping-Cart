@@ -9,6 +9,7 @@ import Register from '../Register/Register';
 import ProductDetails from '../Products/ProductDetails/ProductDetails';
 import MyWishList from '../WishList/MyWishList';
 import NotFound from '../NotFound/NotFound';
+import ShoppingCart from '../ShoppingCart/ShoppingCart';
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
               <Route path="/product-details" exact component={ ProductDetails } />
               <Route path="/wishlist" exact component={ MyWishList } />
               <Route path="/not-found" exact component={ NotFound } />
+              <Route path="/shopping-cart" exact component={ ShoppingCart } />
 
             </Switch>
           </Layout>

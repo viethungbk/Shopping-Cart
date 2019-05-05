@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Link } from "react-router-dom";
-import Login from '../../Login/Login';
 
 export default class TopMenu extends Component {
   render() {
@@ -11,10 +10,10 @@ export default class TopMenu extends Component {
             <div className="cnt-account">
               <ul className="list-unstyled">
                 <li className="myaccount"><a href="#"><span>My Account</span></a></li>
-                <li className="wishlist"><a href="#"><span>Wishlist</span></a></li>
-                <li className="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
-                <li className="check"><a href="#"><span>Checkout</span></a></li>
-                <li className="login"><Link to="/user/login/"><span>Login</span></Link></li>
+                <li className="wishlist"><Link to="/wishList"><span>Wishlist</span></Link></li>
+                <li className="header_cart hidden-xs"><Link to="/shopping-cart"><span>My Cart</span></Link></li>
+                <li className="check"><Link to="/checkout"><span>Checkout</span></Link></li>
+                <li className="login"><Link to="/login/"><span>Login</span></Link></li>
               </ul>
             </div>
             {/* /.cnt-account */}
@@ -37,8 +36,6 @@ export default class TopMenu extends Component {
             <div className="clearfix" />
           </div>
         </div>
-
-      <Route path="/user/login/" component={Login} />
       </div>
 
     );
