@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Products extends Component {
+export default class Product extends Component {
   render() {
     return (
       <div className="tab-content outer-top-xs">

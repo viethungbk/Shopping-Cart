@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Route, Link } from "react-router-dom";
+import Login from '../../Login/Login';
 
 export default class TopMenu extends Component {
   render() {
@@ -12,7 +14,7 @@ export default class TopMenu extends Component {
                 <li className="wishlist"><a href="#"><span>Wishlist</span></a></li>
                 <li className="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
                 <li className="check"><a href="#"><span>Checkout</span></a></li>
-                <li className="login"><a href="#"><span>Login</span></a></li>
+                <li className="login"><Link to="/user/login/"><span>Login</span></Link></li>
               </ul>
             </div>
             {/* /.cnt-account */}
@@ -31,14 +33,12 @@ export default class TopMenu extends Component {
                   </ul>
                 </li>
               </ul>
-              {/* /.list-unstyled */}
             </div>
-            {/* /.cnt-cart */}
             <div className="clearfix" />
           </div>
-          {/* /.header-top-inner */}
         </div>
-        {/* /.container */}
+
+      <Route path="/user/login/" component={Login} />
       </div>
 
     );
