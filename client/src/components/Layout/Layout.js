@@ -12,7 +12,7 @@ export default class Layout extends Component {
           <Header></Header>
         </div>
 
-        <div className="row">
+        <div className="row body-content">
           <div clasName="container">
             <div ClassName="row">
               <SideBar></SideBar>

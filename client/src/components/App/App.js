@@ -7,6 +7,7 @@ import Login from '../Login/Login';
 import Contact from '../Contact/Contact';
 import Register from '../Register/Register';
 import ProductDetails from '../Products/ProductDetails/ProductDetails';
+import MyWishList from '../WishList/MyWishList';
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
               <Route path="/register" exact component={ Register } />
               <Route path="/contact" exact component={ Contact } />
               <Route path="/product-details" exact component={ ProductDetails } />
+              <Route path="/wishlist" exact component={ MyWishList } />
 
             </Switch>
           </Layout>
