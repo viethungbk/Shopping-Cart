@@ -11,11 +11,11 @@ export default class Product extends Component {
                 <div className="products">
                   <div className="product">
                     <div className="product-image">
-                      <div className="image"> 
+                      <div className="image">
                         <a href="detail.html">
-                          <img src="assets/images/products/s10.jpg" alt /> 
+                          <img src="assets/images/products/s10.jpg" alt />
                           <img src="assets/images/products/s10_hover.jpg" alt className="hover-image" />
-                        </a> 
+                        </a>
                       </div>
                       {/* /.image */}
                       <div className="tag new"><span>new</span></div>
@@ -26,7 +26,7 @@ export default class Product extends Component {
                       <div className="rating rateit-small" />
                       <div className="description" />
                       <div className="product-price"> <span className="price"> $450.99 </span> <span className="price-before-discount">$ 800</span> </div>
-                      {/* /.product-price */} 
+                      {/* /.product-price */}
                     </div>
                     {/* /.product-info */}
                     <div className="cart clearfix animate-effect">
@@ -40,13 +40,13 @@ export default class Product extends Component {
                           <li className="lnk"> <a data-toggle="tooltip" className="add-to-cart" href="detail.html" title="Compare"> <i className="fa fa-signal" aria-hidden="true" /> </a> </li>
                         </ul>
                       </div>
-                      {/* /.action */} 
+                      {/* /.action */}
                     </div>
-                    {/* /.cart */} 
+                    {/* /.cart */}
                   </div>
-                  {/* /.product */} 
+                  {/* /.product */}
                 </div>
-                {/* /.products */} 
+                {/* /.products */}
               </div>
               {/* /.item */}
             </div>
