@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Services extends Component {
   render() {
@@ -11,11 +12,11 @@ export default class Services extends Component {
           {/* /.module-heading */}
           <div className="module-body">
             <ul className="list-unstyled">
-              <li className="first"><a href="#" title="Contact us">My Account</a></li>
-              <li><a href="#" title="About us">Order History</a></li>
-              <li><a href="#" title="faq">FAQ</a></li>
-              <li><a href="#" title="Popular Searches">Specials</a></li>
-              <li className="last"><a href="#" title="Where is my order?">Help Center</a></li>
+              <li className="first"><Link to="" title="Contact us">My Account</Link></li>
+              <li><Link to="" title="About us">Order History</Link></li>
+              <li><Link to="" title="faq">FAQ</Link></li>
+              <li><Link to="" title="Popular Searches">Specials</Link></li>
+              <li className="last"><Link to="" title="Where is my order?">Help Center</Link></li>
             </ul>
           </div>
         </div>
@@ -26,11 +27,11 @@ export default class Services extends Component {
           </div>
           <div className="module-body">
             <ul className="list-unstyled">
-              <li className="first"><a title="Your Account" href="#">About us</a></li>
-              <li><a title="Information" href="#">Customer Service</a></li>
-              <li><a title="Addresses" href="#">Company</a></li>
-              <li><a title="Addresses" href="#">Investor Relations</a></li>
-              <li className="last"><a title="Orders History" href="#">Advanced Search</a></li>
+              <li className="first"><Link title="Your Account" to="">About us</Link></li>
+              <li><Link title="Information" to="">Customer Service</Link></li>
+              <li><Link title="Addresses" to="">Company</Link></li>
+              <li><Link title="Addresses" to="">Investor Relations</Link></li>
+              <li className="last"><Link title="Orders History" to="">Advanced Search</Link></li>
             </ul>
           </div>
         </div>
@@ -41,11 +42,11 @@ export default class Services extends Component {
           </div>
           <div className="module-body">
             <ul className="list-unstyled">
-              <li className="first"><a href="#" title="About us">Shopping Guide</a></li>
-              <li><a href="#" title="Blog">Blog</a></li>
-              <li><a href="#" title="Company">Company</a></li>
-              <li><a href="#" title="Investor Relations">Investor Relations</a></li>
-              <li className=" last"><a href="contact-us.html" title="Suppliers">Contact Us</a></li>
+              <li className="first"><Link to="" title="About us">Shopping Guide</Link></li>
+              <li><Link to="" title="Blog">Blog</Link></li>
+              <li><Link to="" title="Company">Company</Link></li>
+              <li><Link to="" title="Investor Relations">Investor Relations</Link></li>
+              <li className=" last"><Link to="/contact" title="Suppliers">Contact Us</Link></li>
             </ul>
           </div>
         </div>

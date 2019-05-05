@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class ShoppingCart extends Component {
   render() {
@@ -21,14 +22,14 @@ export default class ShoppingCart extends Component {
                 </thead>{/* /thead */}
                 <tbody>
                   <tr>
-                    <td className="romove-item"><a href="#" title="cancel" className="icon"><i className="fa fa-trash-o" /></a></td>
+                    <td className="romove-item"><Link to="" title="cancel" className="icon"><i className="fa fa-trash-o" /></Link></td>
                     <td className="cart-image">
-                      <a className="entry-thumbnail" href="detail.html">
-                        <img src="assets/images/products/p1.jpg" alt />
-                      </a>
+                      <Link className="entry-thumbnail" to="/product-details">
+                        <img src="assets/images/products/p1.jpg" alt="product thumb" />
+                      </Link>
                     </td>
                     <td className="cart-product-name-info">
-                      <h4 className="cart-product-description"><a href="detail.html">Floral Print Buttoned</a></h4>
+                      <h4 className="cart-product-description"><Link to="/product-details">Floral Print Buttoned</Link></h4>
                       <div className="row">
                         <div className="col-sm-12">
                           <div className="rating rateit-small" />
@@ -43,7 +44,7 @@ export default class ShoppingCart extends Component {
                         <span className="product-color">COLOR:<span>Blue</span></span>
                       </div>
                     </td>
-                    <td className="cart-product-edit"><a href="#" className="product-edit">Edit</a></td>
+                    <td className="cart-product-edit"><Link to="" className="product-edit">Edit</Link></td>
                     <td className="cart-product-quantity">
                       <div className="quant-input">
                         <div className="arrows">
@@ -57,14 +58,14 @@ export default class ShoppingCart extends Component {
                     <td className="cart-product-grand-total"><span className="cart-grand-total-price">$300.00</span></td>
                   </tr>
                   <tr>
-                    <td className="romove-item"><a href="#" title="cancel" className="icon"><i className="fa fa-trash-o" /></a></td>
+                    <td className="romove-item"><Link to="" title="cancel" className="icon"><i className="fa fa-trash-o" /></Link></td>
                     <td className="cart-image">
-                      <a className="entry-thumbnail" href="detail.html">
-                        <img src="assets/images/products/p2.jpg" alt />
-                      </a>
+                      <Link className="entry-thumbnail" to="/product-details">
+                        <img src="assets/images/products/p2.jpg" alt="product thumb" />
+                      </Link>
                     </td>
                     <td className="cart-product-name-info">
-                      <h4 className="cart-product-description"><a href="detail.html">Floral Print Buttoned</a></h4>
+                      <h4 className="cart-product-description"><Link to="/product-details">Floral Print Buttoned</Link></h4>
                       <div className="row">
                         <div className="col-sm-12">
                           <div className="rating rateit-small" />
@@ -79,7 +80,7 @@ export default class ShoppingCart extends Component {
                         <span className="product-color">COLOR:<span>Pink</span></span>
                       </div>
                     </td>
-                    <td className="cart-product-edit"><a href="#" className="product-edit">Edit</a></td>
+                    <td className="cart-product-edit"><Link to="" className="product-edit">Edit</Link></td>
                     <td className="cart-product-quantity">
                       <div className="cart-quantity">
                         <div className="quant-input">
@@ -100,8 +101,8 @@ export default class ShoppingCart extends Component {
                     <td colSpan={7}>
                       <div className="shopping-cart-btn">
                         <span className>
-                          <a href="#" className="btn btn-upper btn-primary outer-left-xs">Continue Shopping</a>
-                          <a href="#" className="btn btn-upper btn-primary pull-right outer-right-xs">Update shopping cart</a>
+                          <Link to="" className="btn btn-upper btn-primary outer-left-xs">Continue Shopping</Link>
+                          <Link to="" className="btn btn-upper btn-primary pull-right outer-right-xs">Update shopping cart</Link>
                         </span>
                       </div>{/* /.shopping-cart-btn */}
                     </td>

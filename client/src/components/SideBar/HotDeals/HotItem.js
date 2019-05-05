@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class HotItem extends Component {
   render() {
@@ -7,10 +8,10 @@ export default class HotItem extends Component {
         <div className="products">
           <div className="hot-deal-wrapper">
             <div className="image">
-              <a href="#">
-                <img src="assets/images/hot-deals/p13.jpg" alt />
-                <img src="assets/images/hot-deals/p13_hover.jpg" alt className="hover-image" />
-              </a>
+              <Link to="">
+                <img src="assets/images/hot-deals/p13.jpg" alt="hot deals" />
+                <img src="assets/images/hot-deals/p13_hover.jpg" alt="hot deals" className="hover-image" />
+              </Link>
             </div>
             <div className="sale-offer-tag"><span>49%<br />
               off</span></div>
@@ -31,7 +32,7 @@ export default class HotItem extends Component {
           </div>
           {/* /.hot-deal-wrapper */}
           <div className="product-info text-left m-t-20">
-            <h3 className="name"><a href="detail.html">Floral Print Buttoned</a></h3>
+            <h3 className="name"><Link to="/product-details">Floral Print Buttoned</Link></h3>
             <div className="rating rateit-small" />
             <div className="product-price"> <span className="price"> $600.00 </span> <span className="price-before-discount">$800.00</span> </div>
             {/* /.product-price */}

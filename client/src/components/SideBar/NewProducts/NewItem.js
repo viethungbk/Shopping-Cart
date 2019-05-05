@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class NewItem extends Component {
   render() {
@@ -12,14 +13,14 @@ export default class NewItem extends Component {
                 {/* Anh Item */}
                 <div className="col col-xs-5">
                   <div className="product-image">
-                    <div className="image"> <a href="#"> <img src="assets/images/products/p5.jpg" alt /> </a> </div>
+                    <div className="image"> <Link to=""> <img src="assets/images/products/p5.jpg" alt="new product" /> </Link> </div>
                   </div>
                 </div>
 
                 {/* Thong tin Item */}
                 <div className="col col-xs-7">
                   <div className="product-info">
-                    <h3 className="name"><a href="#">Ten San Pham</a></h3>
+                    <h3 className="name"><Link to="">Ten San Pham</Link></h3>
                     <div className="rating rateit-small" />
                     <div className="product-price"> <span className="price"> $450.99 </span> </div>
                   </div>

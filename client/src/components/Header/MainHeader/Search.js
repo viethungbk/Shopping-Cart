@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Search extends Component {
   render() {
@@ -8,18 +9,18 @@ export default class Search extends Component {
           <form>
             <div className="control-group">
               <ul className="categories-filter animate-dropdown">
-                <li className="dropdown"> <a className="dropdown-toggle" data-toggle="dropdown" href="category.html">Categories <b className="caret" /></a>
+                <li className="dropdown"> <Link className="dropdown-toggle" data-toggle="dropdown" to="/">Categories <b className="caret" /></Link>
                   <ul className="dropdown-menu" role="menu">
                     <li className="menu-header">Computer</li>
-                    <li role="presentation"><a role="menuitem" tabIndex={-1} href="category.html">- Clothing</a></li>
-                    <li role="presentation"><a role="menuitem" tabIndex={-1} href="category.html">- Electronics</a></li>
-                    <li role="presentation"><a role="menuitem" tabIndex={-1} href="category.html">- Shoes</a></li>
-                    <li role="presentation"><a role="menuitem" tabIndex={-1} href="category.html">- Watches</a></li>
+                    <li role="presentation"><Link role="menuitem" tabIndex={-1} to="/">- Clothing</Link></li>
+                    <li role="presentation"><Link role="menuitem" tabIndex={-1} to="/">- Electronics</Link></li>
+                    <li role="presentation"><Link role="menuitem" tabIndex={-1} to="/">- Shoes</Link></li>
+                    <li role="presentation"><Link role="menuitem" tabIndex={-1} to="/">- Watches</Link></li>
                   </ul>
                 </li>
               </ul>
               <input className="search-field" placeholder="Search here..." />
-              <a className="search-button" href="#" />
+              <Link className="search-button" to="" />
             </div>
           </form>
         </div>

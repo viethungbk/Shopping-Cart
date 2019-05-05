@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Product from './Product';
 import ProductCategory from './ProductCategory';
-import Slider from './Slider';
 
 export default class ListProducts extends Component {
   render() {

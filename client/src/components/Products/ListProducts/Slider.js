@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Slider extends Component {
   render() {
@@ -13,7 +14,7 @@ export default class Slider extends Component {
                 <div className="slider-header fadeInDown-1">Top Brands</div>
                 <div className="big-text fadeInDown-1"> New Collections </div>
                 <div className="excerpt fadeInDown-2 hidden-xs"> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> </div>
-                <div className="button-holder fadeInDown-3"> <a href="index6c11.html?page=single-product" className="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                <div className="button-holder fadeInDown-3"> <Link to="" className="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</Link> </div>
               </div>
             </div>
           </div>
@@ -24,7 +25,7 @@ export default class Slider extends Component {
                 <div className="slider-header fadeInDown-1">Spring 2018</div>
                 <div className="big-text fadeInDown-1"> Women Fashion </div>
                 <div className="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span> </div>
-                <div className="button-holder fadeInDown-3"> <a href="index6c11.html?page=single-product" className="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                <div className="button-holder fadeInDown-3"> <Link to="" className="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</Link> </div>
               </div>
             </div>
           </div>

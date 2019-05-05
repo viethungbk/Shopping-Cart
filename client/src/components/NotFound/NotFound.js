@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class NotFound extends Component {
   render() {
@@ -11,11 +12,11 @@ export default class NotFound extends Component {
                 <div className="col-md-12 x-text text-center">
                   <h1>404</h1>
                   <p>We are sorry, the page you've requested is not available. </p>
-                  <form role="form" className="outer-top-vs outer-bottom-xs">
+                  <form className="outer-top-vs outer-bottom-xs">
                     <input placeholder="Search" autoComplete="off" />
                     <button className="  btn-default le-button">Go</button>
                   </form>
-                  <a href="home.html"><i className="fa fa-home" /> Go To Homepage</a>
+                  <Link to="/"><i className="fa fa-home" /> Go To Homepage</Link>
                 </div>
               </div>
             </div>

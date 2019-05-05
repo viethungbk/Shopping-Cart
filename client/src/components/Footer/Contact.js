@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Contact extends Component {
   render() {
@@ -21,7 +22,7 @@ export default class Contact extends Component {
               </li>
               <li className="media">
                 <div className="pull-left"> <span className="icon fa-stack fa-lg"> <i className="fa fa-envelope fa-stack-1x fa-inverse" /> </span> </div>
-                <div className="media-body"> <span><a href="#">marazzo@themesground.com</a></span> </div>
+                <div className="media-body"> <span><Link to="">marazzo@themesground.com</Link></span> </div>
               </li>
             </ul>
           </div>

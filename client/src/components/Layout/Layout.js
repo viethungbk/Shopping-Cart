@@ -13,8 +13,8 @@ export default class Layout extends Component {
         </div>
 
         <div className="row body-content outer-top-vs">
-          <div clasName="container">
-            <div ClassName="row">
+          <div className="container">
+            <div className="row">
               <SideBar></SideBar>
               { this.props.children }
             </div>

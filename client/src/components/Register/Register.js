@@ -6,7 +6,7 @@ export default class Register extends Component {
       <div className="container">
         <div className="col-md-6 col-sm-6 col-md-push-3 create-new-account">
           <p className="text title-tag-line">Create your new account.</p>
-          <form className="register-form outer-top-xs" role="form">
+          <form className="register-form outer-top-xs">
             <div className="form-group">
               <label className="info-title" htmlFor="inputEmail">Email Address <span>*</span></label>
               <input type="email" className="form-control unicase-form-control text-input" id="inputEmail" />

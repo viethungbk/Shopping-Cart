@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class ProductInfo extends Component {
   render() {
@@ -14,7 +15,7 @@ export default class ProductInfo extends Component {
                 </div>
                 <div className="pull-left">
                   <div className="reviews">
-                    <a href="#" className="lnk">(13 Reviews)</a>
+                    <Link to="" className="lnk">(13 Reviews)</Link>
                   </div>
                 </div>
               </div>
@@ -50,15 +51,15 @@ export default class ProductInfo extends Component {
               </div>
               <div className="col-sm-6 col-xs-6">
                 <div className="favorite-button m-t-5">
-                  <a className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" href="#">
+                  <Link className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" to="">
                     <i className="fa fa-heart" />
-                  </a>
-                  <a className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Add to Compare" href="#">
+                  </Link>
+                  <Link className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Add to Compare" to="">
                     <i className="fa fa-signal" />
-                  </a>
-                  <a className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="E-mail" href="#">
+                  </Link>
+                  <Link className="btn btn-primary" data-toggle="tooltip" data-placement="right" title="E-mail" to="">
                     <i className="fa fa-envelope" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>{/* /.row */}
@@ -80,7 +81,7 @@ export default class ProductInfo extends Component {
                 </div>
               </div>
               <div className="add-btn">
-                <a href="#" className="btn btn-primary"><i className="fa fa-shopping-cart inner-right-vs" /> ADD TO CART</a>
+                <Link to="" className="btn btn-primary"><i className="fa fa-shopping-cart inner-right-vs" /> ADD TO CART</Link>
               </div>
             </div>{/* /.row */}
           </div>{/* /.quantity-container */}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class TopMenu extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class TopMenu extends Component {
           <div className="header-top-inner">
             <div className="cnt-account">
               <ul className="list-unstyled">
-                <li className="myaccount"><a href="#"><span>My Account</span></a></li>
+                <li className="myaccount"><Link to=""><span>My Account</span></Link></li>
                 <li className="wishlist"><Link to="/wishList"><span>Wishlist</span></Link></li>
                 <li className="header_cart hidden-xs"><Link to="/shopping-cart"><span>My Cart</span></Link></li>
                 <li className="check"><Link to="/checkout"><span>Checkout</span></Link></li>
@@ -19,16 +19,16 @@ export default class TopMenu extends Component {
             {/* /.cnt-account */}
             <div className="cnt-block">
               <ul className="list-unstyled list-inline">
-                <li className="dropdown dropdown-small"> <a href="#" className="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span className="value">USD </span><b className="caret" /></a>
+                <li className="dropdown dropdown-small"> <Link to="" className="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span className="value">USD </span><b className="caret" /></Link>
                   <ul className="dropdown-menu">
-                    <li><a href="#">USD</a></li>
-                    <li><a href="#">VND</a></li>
+                    <li><Link to="">USD</Link></li>
+                    <li><Link to="">VND</Link></li>
                   </ul>
                 </li>
-                <li className="dropdown dropdown-small lang"> <a href="#" className="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span className="value">English </span><b className="caret" /></a>
+                <li className="dropdown dropdown-small lang"> <Link to="" className="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span className="value">English </span><b className="caret" /></Link>
                   <ul className="dropdown-menu">
-                    <li><a href="#">English</a></li>
-                    <li><a href="#">Tieng Viet</a></li>
+                    <li><Link to="">English</Link></li>
+                    <li><Link to="">Tieng Viet</Link></li>
                   </ul>
                 </li>
               </ul>

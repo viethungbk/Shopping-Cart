@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Navbar extends Component {
   render() {
@@ -14,40 +15,40 @@ export default class Navbar extends Component {
               <div className="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                 <div className="nav-outer">
                   <ul className="nav navbar-nav">
-                    <li className="active dropdown"> <a href="home.html">Home</a> </li>
+                    <li className="active dropdown"> <Link to="/">Home</Link> </li>
                     <li className="dropdown yamm mega-menu">
-                      <a href="home.html" data-hover="dropdown" className="dropdown-toggle" data-toggle="dropdown">Samsung</a>
+                      <Link to="/" data-hover="dropdown" className="dropdown-toggle" data-toggle="dropdown">Samsung</Link>
                     </li>
                     <li className="dropdown mega-menu">
-                      <a href="category.html" data-hover="dropdown" className="dropdown-toggle" data-toggle="dropdown">Apple <span className="menu-label hot-menu hidden-xs">hot</span> </a>
+                      <Link to="/" data-hover="dropdown" className="dropdown-toggle" data-toggle="dropdown">Apple <span className="menu-label hot-menu hidden-xs">hot</span> </Link>
                     </li>
-                    <li className="dropdown hidden-sm"> <a href="category.html">Huawei <span className="menu-label new-menu hidden-xs">new</span> </a> </li>
-                    <li className="dropdown hidden-sm"> <a href="category.html">Xiaomi</a> </li>
-                    <li className="dropdown"> <a href="contact.html">LG</a> </li>
-                    <li className="dropdown"> <a href="contact.html">Asus</a> </li>
-                    <li className="dropdown"> <a href="contact.html">Nokia</a> </li>
-                    <li className="dropdown"> <a href="#" className="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Pages</a>
+                    <li className="dropdown hidden-sm"> <Link to="/">Huawei <span className="menu-label new-menu hidden-xs">new</span> </Link> </li>
+                    <li className="dropdown hidden-sm"> <Link to="/">Xiaomi</Link> </li>
+                    <li className="dropdown"> <Link to="/">LG</Link> </li>
+                    <li className="dropdown"> <Link to="/">Asus</Link> </li>
+                    <li className="dropdown"> <Link to="/">Nokia</Link> </li>
+                    <li className="dropdown"> <Link to="#" className="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Pages</Link>
                       <ul className="dropdown-menu pages">
                         <li>
                           <div className="yamm-content">
                             <div className="row">
                               <div className="col-xs-12 col-menu">
                                 <ul className="links">
-                                  <li><a href="home.html">Home</a></li>
-                                  <li><a href="category.html">Category</a></li>
-                                  <li><a href="detail.html">Detail</a></li>
-                                  <li><a href="shopping-cart.html">Shopping Cart Summary</a></li>
-                                  <li><a href="checkout.html">Checkout</a></li>
-                                  <li><a href="blog.html">Blog</a></li>
-                                  <li><a href="blog-details.html">Blog Detail</a></li>
-                                  <li><a href="contact.html">Contact</a></li>
-                                  <li><a href="sign-in.html">Sign In</a></li>
-                                  <li><a href="my-wishlist.html">Wishlist</a></li>
-                                  <li><a href="terms-conditions.html">Terms and Condition</a></li>
-                                  <li><a href="track-orders.html">Track Orders</a></li>
-                                  <li><a href="product-comparison.html">Product-Comparison</a></li>
-                                  <li><a href="faq.html">FAQ</a></li>
-                                  <li><a href="404.html">404</a></li>
+                                  <li><Link to="/">Home</Link></li>
+                                  <li><Link to="/">Category</Link></li>
+                                  <li><Link to="/">Detail</Link></li>
+                                  <li><Link to="/shopping-cart">Shopping Cart Summary</Link></li>
+                                  <li><Link to="/checkout">Checkout</Link></li>
+                                  <li><Link to="/blog">Blog</Link></li>
+                                  <li><Link to="/blog-details">Blog Detail</Link></li>
+                                  <li><Link to="/contact">Contact</Link></li>
+                                  <li><Link to="/login">Login</Link></li>
+                                  <li><Link to="/wishlist">Wishlist</Link></li>
+                                  <li><Link to="/terms-conditions">Terms and Condition</Link></li>
+                                  <li><Link to="/track-orders">Track Orders</Link></li>
+                                  <li><Link to="/product-comparison">Product-Comparison</Link></li>
+                                  <li><Link to="/faq">FAQ</Link></li>
+                                  <li><Link to="/not-found">404</Link></li>
                                 </ul>
                               </div>
                             </div>
@@ -55,7 +56,7 @@ export default class Navbar extends Component {
                         </li>
                       </ul>
                     </li>
-                    <li className="dropdown  navbar-right special-menu"> <a href="#">Get 30% off on selected items</a> </li>
+                    <li className="dropdown  navbar-right special-menu"> <Link to="">Get 30% off on selected items</Link> </li>
                   </ul>
                   <div className="clearfix" />
                 </div>

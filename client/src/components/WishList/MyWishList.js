@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class MyWishList extends Component {
   render() {
@@ -15,9 +16,9 @@ export default class MyWishList extends Component {
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="col-md-2 col-sm-6 col-xs-6"><img src="assets/images/products/p1.jpg" alt="imga" /></td>
+                    <td className="col-md-2 col-sm-6 col-xs-6"><img src="assets/images/products/p1.jpg" alt="product" /></td>
                     <td className="col-md-7 col-sm-6 col-xs-6">
-                      <div className="product-name"><a href="#">Floral Print Buttoned</a></div>
+                      <div className="product-name"><Link to="">Floral Print Buttoned</Link></div>
                       <div className="rating">
                         <i className="fa fa-star rate" />
                         <i className="fa fa-star rate" />
@@ -32,16 +33,16 @@ export default class MyWishList extends Component {
                       </div>
                     </td>
                     <td className="col-md-2 ">
-                      <a href="#" className="btn-upper btn btn-primary">Add to cart</a>
+                      <Link to="" className="btn-upper btn btn-primary">Add to cart</Link>
                     </td>
                     <td className="col-md-1 close-btn">
-                      <a href="#" className><i className="fa fa-times" /></a>
+                      <Link to="" className><i className="fa fa-times" /></Link>
                     </td>
                   </tr>
                   <tr>
-                    <td className="col-md-2"><img src="assets/images/products/p2.jpg" alt="phoro" /></td>
+                    <td className="col-md-2"><img src="assets/images/products/p2.jpg" alt="product" /></td>
                     <td className="col-md-7">
-                      <div className="product-name"><a href="#">Floral Print Buttoned</a></div>
+                      <div className="product-name"><Link to="">Floral Print Buttoned</Link></div>
                       <div className="rating">
                         <i className="fa fa-star rate" />
                         <i className="fa fa-star rate" />
@@ -56,10 +57,10 @@ export default class MyWishList extends Component {
                       </div>
                     </td>
                     <td className="col-md-2">
-                      <a href="#" className="btn-upper btn btn-default">Add to cart</a>
+                      <Link to="" className="btn-upper btn btn-default">Add to cart</Link>
                     </td>
                     <td className="col-md-1 close-btn">
-                      <a href="#" className><i className="fa fa-times" /></a>
+                      <Link to="" className><i className="fa fa-times" /></Link>
                     </td>
                   </tr>
                 </tbody>
