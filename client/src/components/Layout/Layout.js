@@ -7,12 +7,12 @@ import SideBar from '../SideBar/SideBar';
 export default class Layout extends Component {
   render() {
     return (
-      <div className="container-fluid cnt-home">
+      <div className="container-fluid cnt-home" id="top-banner-and-menu">
         <div className="row">
           <Header></Header>
         </div>
 
-        <div className="row body-content">
+        <div className="row body-content outer-top-vs">
           <div clasName="container">
             <div ClassName="row">
               <SideBar></SideBar>
