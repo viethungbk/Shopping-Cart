@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
-import ListProducts from '../Products/ListProducts/ListProducts';
 import Layout from '../Layout/Layout';
 import Login from '../Login/Login';
 import Contact from '../Contact/Contact';
@@ -10,6 +9,7 @@ import ProductDetails from '../Products/ProductDetails/ProductDetails';
 import MyWishList from '../WishList/MyWishList';
 import NotFound from '../NotFound/NotFound';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
+import Content from '../Content/Content';
 
 class App extends Component {
   render() {
@@ -18,7 +18,7 @@ class App extends Component {
         <div className="App">
           <Layout>
             <Switch>
-              <Route path="/" exact component={ ListProducts } />
+              <Route path="/" exact component={ Content } />
               <Route path="/login" exact component={ Login } />
               <Route path="/register" exact component={ Register } />
               <Route path="/contact" exact component={ Contact } />
