@@ -8,6 +8,8 @@ export default class Login extends Component {
     this.state = {
       txtEmail: '',
       txtPassword: '',
+      isShowMessage: false,
+      message: ''
     }
   }
 
@@ -26,8 +28,25 @@ export default class Login extends Component {
         console.log(res);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.response);
+        this.setState({
+          isShowMessage: true,
+          message: err.response.data
+        });
+        console.log(this.state)
       });
+  }
+
+  showMessage() {
+    if (!this.state.isShowMessage) {
+      return null;
+    }
+    let message = JSON.stringify(this.state.message);
+    return (
+      <div className="alert alert-danger">
+        <h4>{ message }</h4>
+      </div>
+    );
   }
 
   changeInput = (event) => {
@@ -54,6 +73,9 @@ export default class Login extends Component {
             <Link to="" className="facebook-sign-in"><i className="fa fa-facebook" /> Login with Facebook</Link>
             <Link to="" className="twitter-sign-in"><i className="fa fa-twitter" /> Login with Twitter</Link>
           </div>
+
+          <hr />
+          { this.showMessage() }
 
           {/* User Input */}
           <form className="register-form outer-top-xs" action="/api/user/login" method="POST">
