@@ -15,6 +15,11 @@ const ProductSchema = new Schema({
     type: String,
     required: true
   },
+  iventory: {
+    type: Number,
+    required: true
+  },
+  image: [String],
   generalInfo: {
     OS: String,
     language: [String]
