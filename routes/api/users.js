@@ -35,12 +35,14 @@ router.post('/register', (req, res) => {
         errors.email = 'Email already exists.';
         return res.status(400).json(errors);
       } else {
+        // Create or get an avatar
         const avatar = gravatar.url(req.body.email, {
           s: '200',   // Size
           r: 'pg',    // Rating
           d: 'mm'     // Default
         });
 
+        // Create new user
         const newUser = new User({
           name: req.body.name,
           email: req.body.email,
@@ -48,6 +50,7 @@ router.post('/register', (req, res) => {
           password: req.body.password
         });
 
+        // Hash password
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;

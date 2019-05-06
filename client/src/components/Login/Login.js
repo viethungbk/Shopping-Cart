@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 export default class Login extends Component {
@@ -9,7 +9,8 @@ export default class Login extends Component {
       txtEmail: '',
       txtPassword: '',
       isShowMessage: false,
-      message: ''
+      message: '',
+      isLogin: false
     }
   }
 
@@ -25,6 +26,9 @@ export default class Login extends Component {
     axios.post('/api/users/login', user)
       .then(res => {
         console.log(res);
+        this.setState({
+          isLogin: true
+        });
       })
       .catch(err => {
         console.log(err.response);
@@ -60,9 +64,20 @@ export default class Login extends Component {
     });
   }
 
+  redirect() {
+    if (!this.state.isLogin) {
+      return null;
+    }
+    return (
+      <Redirect to="/" />
+    );
+  }
+
   render() {
     return (
       <div className="container sign-in-page">
+        { this.redirect() }
+
         <div className="col-md-6 col-sm-6 col-md-push-3 sign-in">
           <h4>Login</h4>
           <p>Hello, Welcome to your account.</p>
@@ -115,6 +130,10 @@ export default class Login extends Component {
               onClick={(event) => this.submitForm(event)}>
               Login
             </button>
+
+            <hr />
+            <div>Don't have account ?</div>
+            <Link to="/register"><h4>Create New Account</h4></Link>
 
           </form>
         </div>
