@@ -15,7 +15,6 @@ export default class Login extends Component {
 
   submitForm = (event) => {
     event.preventDefault();
-    // event.target.reset();
     console.log('Submit');
     let user = {};
     user.email = this.state.txtEmail;
@@ -41,7 +40,7 @@ export default class Login extends Component {
     if (!this.state.isShowMessage) {
       return null;
     }
-    let message = JSON.stringify(this.state.message);
+    let message = this.state.message.email || this.state.message.password;
     return (
       <div className="alert alert-danger">
         <h4>{ message }</h4>
