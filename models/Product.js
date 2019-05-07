@@ -30,27 +30,14 @@ const ProductSchema = new Schema({
     resolution: String,
     screenSize: String
   },
-  camera: {
-    primary: String,      // Camera chính (trước)
-    secondary: String,    // Camera phụ (sau)
-    features: [String],
-    video: String
-  },
+  camera: String,
   cpu: String,
   ram: String,
   memory: {
     rom: String,
     cardSlot: String
   },
-  comms: {
-    wifi: String,
-    blutooth: String,
-    simCard: String,
-    usb: String,
-    chargingProt: String
-  },
-  battery: String,
-  sensors: [String]
+  battery: String
 });
 
 module.exports = Product = mongoose.model('products', ProductSchema);
