@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default class HeaderAdmin extends Component {
   render() {
     return (
-      <div className="navbar navbar-inverse" role="navigation">
+      <div className="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div className="container-fluid">
       <div className="navbar-header">
         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
