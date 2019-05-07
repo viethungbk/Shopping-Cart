@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import HeaderAdmin from './HeaderAdmin';
 import { BrowserRouter as Router } from "react-router-dom";
+import HeaderAdmin from './HeaderAdmin';
 import SideBar from './SideBar';
 import Content from './Content';
 

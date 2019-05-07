@@ -13,14 +13,14 @@ export default class HeaderAdmin extends Component {
           <span className="icon-bar" />
           <span className="icon-bar" />
         </button>
-        <a className="navbar-brand" href="#">PHONE ONLINE</a>
+        <Link to="/admin" className="navbar-brand">PHONE ONLINE</Link>
       </div>
       <div className="navbar-collapse collapse">
         <ul className="nav navbar-nav navbar-right">
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Settings</a></li>
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Help</a></li>
+          <li><Link to="/admin">Dashboard</Link></li>
+          <li><Link to="">Settings</Link></li>
+          <li><Link to="">Profile</Link></li>
+          <li><Link to="">Help</Link></li>
         </ul>
         <form className="navbar-form navbar-right">
           <input type="text" className="form-control" placeholder="Search..." />
