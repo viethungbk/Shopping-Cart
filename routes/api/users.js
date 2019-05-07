@@ -8,8 +8,8 @@ const passport = require('passport');
 const router = express.Router();
 
 // Load Input Validation
-const validateRegisterInput = require('../../validation/register');
-const validateLoginInput = require('../../validation/login');
+const validateRegisterInput = require('../../validation/user/register');
+const validateLoginInput = require('../../validation/user/login');
 
 // Load user model
 const User = require('../../models/User');
