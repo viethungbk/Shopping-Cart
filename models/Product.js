@@ -22,16 +22,9 @@ const ProductSchema = new Schema({
     required: true
   },
   image: [String],
-  generalInfo: {
-    OS: String,
-    language: [String]
-  },
-  screen: {
-    typeScreen: String,
-    displayColor: String,
-    resolution: String,
-    screenSize: String
-  },
+  os: String,
+  language: [String],
+  screen: String,
   camera: String,
   cpu: String,
   ram: String,

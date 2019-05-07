@@ -37,22 +37,7 @@ router.post('/add', (req, res) => {
   }
 
   // Create new product
-  const newProduct = new Product({
-    name: data.name,
-    price: data.price,
-    brand: data.brand,
-    iventory: data.iventory,
-    image: data.image,
-    generalInfo: data.generalInfo,
-    screen: data.screen,
-    camera: data.camera,
-    cpu: data.cpu,
-    ram: data.ram,
-    memory: data.memory,
-    comms: data.comms,
-    battery: data.battery,
-    sensors: data.sensors
-  });
+  const newProduct = new Product({...data})
 
   newProduct
   .save()
