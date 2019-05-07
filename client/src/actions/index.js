@@ -1,10 +1,11 @@
-import * as types from './../constants/ActionTypes';
+import * as Types from './../constants/ActionTypes';
 
 
-export const addToCart = (product, quantity)=>{
+const actAddToCart = (product, quantity)=>{
     return {
-        type : types.ADD_TO_CART,
+        type : Types.ADD_TO_CART,
         product : product,
         quantity : quantity
     }
 }
+export default actAddToCart;

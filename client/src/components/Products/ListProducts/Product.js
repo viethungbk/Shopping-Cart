@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-export default class Product extends Component {
+class Product extends Component {
+
     showRating = (avarageRating) => {
         var result = [];
-        for(var i=0;i<avarageRating;i++){
-            result.push(<i key={i} className="fa fa-star star"/>);
+        for (var i = 0; i < avarageRating; i++) {
+            result.push(<i key={i} className="fa fa-star star" />);
         }
-        for(var j=0;j<5-avarageRating;j++){
-            result.push(<i key={5-j} className="fa fa-star-o"/>);
+        for (var j = 0; j < 5 - avarageRating; j++) {
+            result.push(<i key={5 - j} className="fa fa-star-o" />);
         }
         return result;
     }
+    
+    // Phải dispath 1 cái action để thêm vào reducer cart
+    onAddToCart = (product) => {
+        this.props.onAddToCart(product);
+    }
+
     render() {
+
         var { product } = this.props;
+
         return (
             <div className="item item-carousel">
                 <div className="products">
@@ -50,8 +59,16 @@ export default class Product extends Component {
                             <div className="action">
                                 <ul className="list-unstyled">
                                     <li className="add-cart-button btn-group">
-                                        <button data-toggle="tooltip" className="btn btn-primary icon" type="button" title="Add Cart"> <i className="fa fa-shopping-cart" /> </button>
-                                        <button className="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                        <button data-toggle="tooltip" className="btn btn-primary icon"
+                                            type="button"
+                                            title="Add Cart"
+                                            onClick={() => { this.onAddToCart(product) }}
+                                        >
+                                            <i className="fa fa-shopping-cart" />
+                                        </button>
+                                        <button className="btn btn-primary cart-btn" type="button">
+                                            Add to cart
+                                        </button>
                                     </li>
                                     <li className="lnk wishlist"> <Link data-toggle="tooltip" className="add-to-cart" to="/product-details" title="Wishlist"> <i className="icon fa fa-heart" /> </Link> </li>
                                     <li className="lnk"> <Link data-toggle="tooltip" className="add-to-cart" to="/product-details" title="Compare"> <i className="fa fa-signal" aria-hidden="true" /> </Link> </li>
@@ -64,3 +81,5 @@ export default class Product extends Component {
         );
     }
 }
+
+export default Product;

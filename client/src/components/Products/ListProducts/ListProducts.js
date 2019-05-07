@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import Product from './Product';
 import ProductCategory from './ProductCategory';
 import { connect } from 'react-redux';
+import actAddToCart from "./../../../actions/index";
 
 class ListProducts extends Component {
+    
     showProducts = (products) => {
+        var {onAddToCart} = this.props;
         var listProducts = products.map((product, index) => {
             return <Product
                 key={index}
                 product={product}
+                onAddToCart={onAddToCart}
             />
         });
         return listProducts;
@@ -41,4 +45,14 @@ const mapStateToProps = state => {
         products : state.products
     }
 }
-export default connect(mapStateToProps, null)(ListProducts);
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onAddToCart: (product) => {
+            dispatch(actAddToCart(product , 1));
+        }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListProducts);
