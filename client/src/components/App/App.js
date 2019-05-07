@@ -10,6 +10,7 @@ import MyWishList from '../WishList/MyWishList';
 import NotFound from '../NotFound/NotFound';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import Content from '../Content/Content';
+import LayoutAdmin from '../Admin/LayoutAdmin';
 
 class App extends Component {
     render() {
