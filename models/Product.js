@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const ObjectId = mongoose.Schema.Types.ObjectId;
+
 // Create Schema
 const ProductSchema = new Schema({
   name: {
@@ -20,16 +22,9 @@ const ProductSchema = new Schema({
     required: true
   },
   image: [String],
-  generalInfo: {
-    OS: String,
-    language: [String]
-  },
-  screen: {
-    typeScreen: String,
-    displayColor: String,
-    resolution: String,
-    screenSize: String
-  },
+  os: String,
+  language: [String],
+  screen: String,
   camera: String,
   cpu: String,
   ram: String,
@@ -37,7 +32,22 @@ const ProductSchema = new Schema({
     rom: String,
     cardSlot: String
   },
-  battery: String
+  battery: String,
+  rate: [{
+    rating: {
+      type: Number,
+      required: true
+    },
+    rateduser: {
+      type: ObjectId,
+      ref: 'users',
+      required: true
+    },
+    date: {
+      type: Date,
+      default: Date.now
+    }
+  }]
 });
 
 module.exports = Product = mongoose.model('products', ProductSchema);
