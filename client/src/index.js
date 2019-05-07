@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
+import LayoutAdmin from './components/Admin/LayoutAdmin';
 import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import appReducers from './reducers/index';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const store = createStore(
     appReducers,
@@ -15,6 +17,11 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Router>
+            <Switch>
+                <Route path="/" exact component={App} />
+                <Route path="/admin" exact component={LayoutAdmin} />
+            </Switch>
+        </Router>
     </Provider>, document.getElementById('root'));
 serviceWorker.unregister();
