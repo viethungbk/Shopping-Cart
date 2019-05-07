@@ -12,27 +12,26 @@ import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import Content from '../Content/Content';
 
 class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <Layout>
-            <Switch>
-              <Route path="/" exact component={ Content } />
-              <Route path="/login" exact component={ Login } />
-              <Route path="/register" exact component={ Register } />
-              <Route path="/contact" exact component={ Contact } />
-              <Route path="/product-details" exact component={ ProductDetails } />
-              <Route path="/wishlist" exact component={ MyWishList } />
-              <Route path="/not-found" exact component={ NotFound } />
-              <Route path="/shopping-cart" exact component={ ShoppingCart } />
-
-            </Switch>
-          </Layout>
-        </div>
-      </Router>
-    );
-  }
+    render() {
+        return (
+            <Router>
+                <div className="App">
+                    <Layout>
+                        <Switch>
+                            <Route path="/" exact component={Content} />
+                            <Route path="/login" exact component={Login} />
+                            <Route path="/register" exact component={Register} />
+                            <Route path="/contact" exact component={Contact} />
+                            <Route path="/product-details" exact component={ProductDetails} />
+                            <Route path="/wishlist" exact component={MyWishList} />
+                            <Route path="/not-found" exact component={NotFound} />
+                            <Route path="/shopping-cart" exact component={ShoppingCart} />
+                        </Switch>
+                    </Layout>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;
