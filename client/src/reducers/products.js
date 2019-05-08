@@ -6,7 +6,7 @@ let inittialState = [];
 
 axios.get('/api/products/')
     .then(products => {
-        inittialState = products;
+        inittialState = products.data;
         console.log(inittialState);
     })
     .catch(err => console.log(err.response));
