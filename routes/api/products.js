@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
     })
 });
 
-// @route   GET api/products/add
+// @route   POST api/products/add
 // @desc    Add a product
 // @access  Private
 router.post('/add', (req, res) => {
@@ -41,7 +41,7 @@ router.post('/add', (req, res) => {
 
   newProduct
   .save()
-  .then(product => res.json(data))
+  .then(product => res.json(product))
   .catch(err => console.log(err));
 })
 
