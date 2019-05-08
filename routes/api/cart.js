@@ -54,7 +54,6 @@ router.post('/add', passport.authenticate('jwt', { session: false }), (req, res)
 
         // If there is product in cart
         if (productIds.includes(item.product._id)) {
-          console.log('found product');
           Cart.findOneAndUpdate({
             user: user,
             listItems: {
@@ -78,6 +77,19 @@ router.post('/add', passport.authenticate('jwt', { session: false }), (req, res)
       }
     })
       .catch(err => console.log(err));
+});
+
+// @route   DELETE api/cart/
+// @desc    Empty the cart
+// @access  Private
+router.delete('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const user = req.user;
+
+  Cart.findOneAndRemove({ user: user })
+    .exec()
+    .then(cart => res.json(cart))
+    .catch(err => console.log(err));
+
 });
 
 module.exports = router;
