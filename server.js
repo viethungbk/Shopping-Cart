@@ -7,6 +7,7 @@ const cors = require('cors');
 const users = require('./routes/api/users.js');
 const products = require('./routes/api/products.js');
 const cart = require('./routes/api/cart');
+const blog = require('./routes/api/blog');
 
 const app = express();
 
@@ -25,7 +26,7 @@ app.use(bodyParser.json());
 //   .then(() => console.log('MongoDB connected'))
 //   .catch(err => console.log(err));
 
-mongoose.connect('mongodb://localhost/shopping-cart', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/shopping-cart', { useNewUrlParser: true, useFindAndModify: false })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
@@ -39,6 +40,7 @@ require('./config/passport')(passport);
 app.use('/api/users', users);
 app.use('/api/products', products);
 app.use('/api/cart', cart);
+app.use('/api/blogs', blog);
 
 const port = process.env.PORT || 5000;
 

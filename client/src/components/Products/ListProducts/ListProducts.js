@@ -21,6 +21,7 @@ class ListProducts extends Component {
     render() {
         var { products } = this.props;
         var {children} = this.props;
+        console.log('Listproducts')
         return (
             <div id="product-tabs-slider" className="scroll-tabs outer-top-vs">
                 <ProductCategory>

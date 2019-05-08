@@ -18,6 +18,10 @@ const BlogSchema = new Schema({
     ref: 'users',
     required: true
   },
+  content: {
+    type: String,
+    required: true
+  },
   comments: [{
     userCommented: {
       type: ObjectId,
