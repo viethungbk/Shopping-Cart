@@ -3,16 +3,19 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Product from './Product';
 import * as MSG from './../../constants/Message';
-
+import actDeleteCartItem from './../../actions/index';
 
 class ShoppingCart extends Component {
     showCartItem = (cart) => {
         let result = MSG.MSG_CART_EMPTY;
+        let {onDeleteCartItem} = this.props;
+
         result = cart.map((item, index) => {
             return <Product
                 key={index}
                 product={item.product}
                 quantity={item.quantity}
+                onDeleteCartItem={onDeleteCartItem}
             />
         });
         return result;
@@ -193,4 +196,12 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(ShoppingCart);
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onDeleteCartItem: (item) => {
+            dispatch(actDeleteCartItem(item));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);

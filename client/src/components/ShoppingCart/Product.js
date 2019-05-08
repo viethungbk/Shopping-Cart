@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 class Product extends Component {
+
+    onDeleteCartItem = (item) => {
+        this.props.onDeleteCartItem(item);
+    }
 
     render() {
         var { product, quantity } = this.props;
-        console.log(this.props);
 
         return (
             <tr>
-                <td className="romove-item">
-                    <Link to="" title="cancel" className="icon"><i className="fa fa-trash-o" /></Link></td>
+                <td className="romove-item" onClick={() => this.onDeleteCartItem(product)}>
+                    <span>
+                        <i className="fa fa-trash-o" />
+                    </span>
+                </td>
                 <td className="cart-image">
                     <Link className="entry-thumbnail" to="/product-details">
                         <img src={product.img} alt="product thumb" />
@@ -57,12 +63,12 @@ class Product extends Component {
                 </td>
                 <td className="cart-product-sub-total">
                     <span className="cart-sub-total-price">
-                        ${product.price} 
+                        ${product.price}
                     </span>
                 </td>
                 <td className="cart-product-grand-total">
                     <span className="cart-grand-total-price">
-                        ${product.price*quantity}
+                        ${product.price * quantity}
                     </span>
                 </td>
             </tr>
