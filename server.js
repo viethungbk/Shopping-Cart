@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 //   .then(() => console.log('MongoDB connected'))
 //   .catch(err => console.log(err));
 
-mongoose.connect('mongodb://localhost/shopping-cart')
+mongoose.connect('mongodb://localhost/shopping-cart', { useNewUrlParser: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
