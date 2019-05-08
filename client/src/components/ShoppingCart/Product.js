@@ -6,24 +6,29 @@ class Product extends Component {
         this.props.onDeleteCartItem(item);
     }
 
+    onUpdateCartItemQuantity = (item, quantity) => {
+        this.props.onUpdateCartItemQuantity(item, quantity);
+    }
+
+
     render() {
-        var { product, quantity } = this.props;
+        var { item } = this.props;
 
         return (
             <tr>
-                <td className="romove-item" onClick={() => this.onDeleteCartItem(product)}>
+                <td className="romove-item" onClick={() => this.onDeleteCartItem(item)}>
                     <span>
                         <i className="fa fa-trash-o" />
                     </span>
                 </td>
                 <td className="cart-image">
                     <Link className="entry-thumbnail" to="/product-details">
-                        <img src={product.img} alt="product thumb" />
+                        <img src={item.product.img} alt="product thumb" />
                     </Link>
                 </td>
                 <td className="cart-product-name-info">
                     <h4 className="cart-product-description">
-                        <Link to="/product-details">{product.name}</Link></h4>
+                        <Link to="/product-details">{item.product.name}</Link></h4>
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="rating rateit-small" />
@@ -48,27 +53,35 @@ class Product extends Component {
                 <td className="cart-product-quantity">
                     <div className="quant-input">
                         <div className="arrows">
-                            <div className="arrow plus gradient"><span className="ir">
-                                <i className="icon fa fa-sort-asc" />
-                            </span>
+                            <div className="arrow plus gradient"
+                                onClick={() => { this.onUpdateCartItemQuantity(item, 1) }}
+                            >
+                                <span className="ir">
+                                    <i className="icon fa fa-sort-asc" />
+                                </span>
                             </div>
-                            <div className="arrow minus gradient">
+                            <div className="arrow minus gradient"
+                                onClick={() => { this.onUpdateCartItemQuantity(item, -1) }}
+                            >
                                 <span className="ir">
                                     <i className="icon fa fa-sort-desc" />
                                 </span>
                             </div>
                         </div>
-                        <input type="text" defaultValue={quantity} />
+                        <input type="text"
+                            value={item.quantity}
+                            onChange={() => { }}
+                        />
                     </div>
                 </td>
                 <td className="cart-product-sub-total">
                     <span className="cart-sub-total-price">
-                        ${product.price}
+                        ${item.product.price}
                     </span>
                 </td>
                 <td className="cart-product-grand-total">
                     <span className="cart-grand-total-price">
-                        ${product.price * quantity}
+                        ${item.product.price * item.quantity}
                     </span>
                 </td>
             </tr>

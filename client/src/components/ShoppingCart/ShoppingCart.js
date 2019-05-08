@@ -2,36 +2,46 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Product from './Product';
-import * as MSG from './../../constants/Message';
-import actDeleteCartItem from './../../actions/index';
+import { actDeleteCartItem, actUpdateCartItemQuantity } from './../../actions/index';
+import MessageCartEmpty from "./MessageCartEmpty";
+
 
 class ShoppingCart extends Component {
-    showCartItem = (cart) => {
-        let result = MSG.MSG_CART_EMPTY;
-        let {onDeleteCartItem} = this.props;
 
-        result = cart.map((item, index) => {
-            return <Product
-                key={index}
-                product={item.product}
-                quantity={item.quantity}
-                onDeleteCartItem={onDeleteCartItem}
-            />
-        });
-        return result;
+    showCartItem = (cart) => {
+        if (typeof cart==='string') {   //Khi typeof laf String thi cart rong
+            return <MessageCartEmpty />
+        } else {
+            let { onDeleteCartItem, onUpdateCartItemQuantity } = this.props;
+            let result = [];
+            for (let i = 0; i < cart.length; i++) {
+                result.push(<Product
+                    key={i}
+                    item={cart[i]}
+                    onDeleteCartItem={onDeleteCartItem}
+                    onUpdateCartItemQuantity={onUpdateCartItemQuantity}
+                />);
+            }
+            return result;
+        }
     }
 
     grandTotal = (cart) => {
+        // console.log(cart);
         let total = 0;
-        for (let i = 0; i < cart.length; i++) {
-            total += cart[i].product.price;
+        if (typeof cart==='string') {
+            return 0;
+        }else{
+            for(let i=0;i<cart.length;i++){
+                total = total + ( cart[i].product.price * cart[i].quantity);
+            }
+            return total;
         }
-        return total;
+        
     }
 
     render() {
         let { cart } = this.props;
-
 
         return (
             <div className="row ">
@@ -55,6 +65,7 @@ class ShoppingCart extends Component {
                                 <tbody>
                                     {this.showCartItem(cart)}
                                 </tbody>{/* /tbody */}
+
                                 <tfoot>
                                     <tr>
                                         <td colSpan={7}>
@@ -200,8 +211,14 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         onDeleteCartItem: (item) => {
             dispatch(actDeleteCartItem(item));
+        },
+        onUpdateCartItemQuantity: (item, quantity)=>{
+            dispatch(actUpdateCartItemQuantity(item,quantity));
         }
     }
 }
 
+
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);
+
+

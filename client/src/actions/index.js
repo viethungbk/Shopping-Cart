@@ -11,9 +11,17 @@ const actAddToCart = (product, quantity) => {
 
 
 export function actDeleteCartItem(item) {
-    return { 
+    return {
         type: Types.DELETE_CART_ITEM,
-        item : item
+        item: item
+    }
+}
+
+export function actUpdateCartItemQuantity(item, quantity) {
+    return{
+        type : Types.UPDATE_CART_ITEM_QUANTITY,
+        item,
+        quantity
     }
 }
 
