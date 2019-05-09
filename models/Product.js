@@ -21,17 +21,14 @@ const ProductSchema = new Schema({
     type: Number,
     required: true
   },
-  image: [String],
+  image: Buffer,
   os: String,
   language: [String],
   screen: String,
   camera: String,
   cpu: String,
   ram: String,
-  memory: {
-    rom: String,
-    cardSlot: String
-  },
+  memmory: String,
   battery: String,
   rate: [{
     rating: {

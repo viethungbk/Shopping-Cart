@@ -33,7 +33,7 @@ class Product extends Component {
                         <div className="product-image">
                             <div className="image">
                                 <Link to="/product-details">
-                                    {/* <img src={product.image[0]} alt={product.name} /> */}
+                                    <img src={product.image} alt={product.name} />
                                     {/* <img src={product.image[1]} alt="product hover" className="hover-image" /> */}
                                 </Link>
                             </div>
