@@ -27,64 +27,65 @@ class Product extends Component {
     render() {
 
         var { product } = this.props;
-        console.log("run");
-        console.log(product.image);
+        // console.log("run");
+        // console.log(product.image);
 
         return (
-            <div className="item item-carousel">
-                <div className="products">
-                    <div className="product">
+            <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div className="item item-carousel">
+                    <div className="products">
+                        <div className="product">
 
-                        {/* Anh San Pham */}
-                        <div className="product-image">
-                            <div className="image">
-                                <Link to="/product-details">
-                                    <img src={product.img} alt={product.name} />
-                                    {/* <img src={product.img_hover} alt="product hover" className="hover-image" /> */}
-
-                                </Link>
+                            {/* Anh San Pham */}
+                            <div className="product-image">
+                                <div className="image">
+                                    <Link to="/product-details">
+                                        <img src={product.img} alt={product.name} />
+                                        {/* <img src={product.img_hover} alt="product hover" className="hover-image" /> */}
+                                    </Link>
+                                </div>
+                                <div className="tag new"><span>new</span></div>
                             </div>
-                            <div className="tag new"><span>new</span></div>
-                        </div>
 
-                        {/* Thong tin San Pham */}
-                        <div className="product-info text-left">
-                            <h3 className="name"><Link to="/product-details">{product.name}</Link></h3>
-                            {this.showRating(product.rating)}
-                            <div className="description" />
-                            <div className="product-price">
-                                <span className="price">
-                                    ${product.price}
-                                </span>
-                                <span className="price-before-discount">
-                                    $ {product.price_before_discount}
-                                </span>
+                            {/* Thong tin San Pham */}
+                            <div className="product-info text-left">
+                                <h3 className="name"><Link to="/product-details">{product.name}</Link></h3>
+                                {this.showRating(product.rating)}
+                                <div className="description" />
+                                <div className="product-price">
+                                    <span className="price">
+                                        ${product.price}
+                                    </span>
+                                    <span className="price-before-discount">
+                                        $ {product.price_before_discount}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Hanh dong */}
-                        <div className="cart clearfix animate-effect">
-                            <div className="action">
-                                <ul className="list-unstyled">
-                                    <li className="add-cart-button btn-group">
-                                        <button data-toggle="tooltip" className="btn btn-primary icon"
-                                            type="button"
-                                            title="Add Cart"
-                                            onClick={() => { this.onAddToCart(product) }}
-                                        >
-                                            <i className="fa fa-shopping-cart" />
-                                        </button>
-                                    </li>
-                                    <li className="lnk wishlist" >
-                                        <Link data-toggle="tooltip" className="add-to-cart" to="/product-details" title="Wishlist" onClick={() => { this.onAddWishlist(product) }}>
-                                            <i className="icon fa fa-heart" />
-                                        </Link> </li>
-                                    <li className="lnk">
-                                        <Link data-toggle="tooltip" className="add-to-cart" to="/product-details" title="Compare">
-                                            <i className="fa fa-signal" aria-hidden="true" />
-                                        </Link>
-                                    </li>
-                                </ul>
+                            {/* Hanh dong */}
+                            <div className="cart clearfix animate-effect">
+                                <div className="action">
+                                    <ul className="list-unstyled">
+                                        <li className="add-cart-button btn-group">
+                                            <button data-toggle="tooltip" className="btn btn-primary icon"
+                                                type="button"
+                                                title="Add Cart"
+                                                onClick={() => { this.onAddToCart(product) }}
+                                            >
+                                                <i className="fa fa-shopping-cart" />
+                                            </button>
+                                        </li>
+                                        <li className="lnk wishlist" >
+                                            <Link data-toggle="tooltip" className="add-to-cart" to="/product-details" title="Wishlist" onClick={() => { this.onAddWishlist(product) }}>
+                                                <i className="icon fa fa-heart" />
+                                            </Link> </li>
+                                        <li className="lnk">
+                                            <Link data-toggle="tooltip" className="add-to-cart" to="/product-details" title="Compare">
+                                                <i className="fa fa-signal" aria-hidden="true" />
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -3,3 +3,18 @@
     background-color: darkorange;
     text-align: center;
 }
+.mr-5{
+    margin-right:5px;
+}
+
+.height-20{
+    height: 35px;
+}
+
+.float-right{
+    float: right;
+    margin-bottom:0px; 
+}
+.mt-15px{
+    margin-top: 15px;
+}

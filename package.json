@@ -34,6 +34,7 @@
     "redux-thunk": "^2.3.0",
     "validator": "^10.11.0"
   },
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "cors": "^2.8.5",
     "nodemon": "^1.18.11"

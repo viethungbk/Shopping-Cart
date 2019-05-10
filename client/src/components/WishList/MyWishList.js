@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Product from "./Product";
 import actAddToCart, {actDeleteWishItem} from "./../../actions/index";
-
+import MessageWishListEmpty from "./MessageWishListEmpty";
 
 class MyWishList extends Component {
 
    showWishList = (wishList) => {
       let result = [];
       let { onAddToCart, onDeleteWishItem } = this.props;
+      if(wishList.length===0){
+         return <MessageWishListEmpty />;
+      }
       result = wishList.map((product, index) => {
          return <Product
             key={index}

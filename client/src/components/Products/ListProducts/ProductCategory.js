@@ -1,30 +1,45 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+
 
 class ProductCategory extends Component {
+    onSort = (sortBy) => {
+        this.props.onSort(sortBy);
+    }
     render() {
         return (
-            <div className="more-info-tab clearfix ">
-                <h3 className="new-product-title pull-left">
-                    {this.props.children}
-                </h3>
-                <ul className="nav nav-tabs nav-tab-line pull-right" id="new-products-1">
-                    <li className="active">
-                        <Link data-transition-type="backSlide" to="#all" data-toggle="tab">
-                            Tất cả
-                        </Link>
-                    </li>
-                    <li>
-                        <Link data-transition-type="backSlide" to="#smartphone" data-toggle="tab">
-                            Giá tăng dần
-                        </Link>
-                    </li>
-                    <li>
-                        <Link data-transition-type="backSlide" to="#laptop" data-toggle="tab">
-                            Giá giảm dần
-                        </Link>
-                    </li>
-                </ul>
+            <div>
+                <div className="more-info-tab clearfix ">
+                    <h3 className="new-product-title pull-left">
+                        {this.props.children}
+                    </h3>
+
+                    <div className="navbar float-right mt-15px">
+                        <ul className="nav navbar-nav">
+                            <li className="active">
+                                <span className="label label-success height-20 mr-5"
+                                    onClick={() => { this.onSort(0) }}
+                                >
+                                    Yêu thích nhất
+                                 </span>
+                            </li>
+                            <li>
+                                <span className="label label-danger height-20 mr-5"
+                                    onClick={() => { this.onSort(1) }}
+                                >
+
+                                    Giá tăng dần
+                                </span>
+                            </li>
+                            <li>
+                                <span className="label label-danger height-20 "
+                                    onClick={() => { this.onSort(-1) }}
+                                >
+                                    Giá giảm dần
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         );
     }

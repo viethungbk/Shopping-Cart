@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Product from './Product';
-import { actDeleteCartItem, actUpdateCartItemQuantity } from './../../actions/index';
+import { actDeleteCartItem, actUpdateCartItemQuantity, actFetchCartItemsRequest } from './../../actions/index';
 import MessageCartEmpty from "./MessageCartEmpty";
+// import { log } from 'util';
 
 
 class ShoppingCart extends Component {
 
+    componentDidMount() {
+        this.props.fetchAllCartItems();
+    }
+
     showCartItem = (cart) => {
-        if (typeof cart==='string') {   //Khi typeof laf String thi cart rong
+        if (typeof cart === 'string') {   //Khi typeof la String thi cart rong
             return <MessageCartEmpty />
         } else {
             let { onDeleteCartItem, onUpdateCartItemQuantity } = this.props;
@@ -29,19 +34,20 @@ class ShoppingCart extends Component {
     grandTotal = (cart) => {
         // console.log(cart);
         let total = 0;
-        if (typeof cart==='string') {
+        if (typeof cart === 'string') {
             return 0;
-        }else{
-            for(let i=0;i<cart.length;i++){
-                total = total + ( cart[i].product.price * cart[i].quantity);
+        } else {
+            for (let i = 0; i < cart.length; i++) {
+                total = total + (cart[i].product.price * cart[i].quantity);
             }
             return total;
         }
-        
+
     }
 
     render() {
         let { cart } = this.props;
+        // console.log(cart);
 
         return (
             <div className="row ">
@@ -209,11 +215,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
+        fetchAllCartItems: () => {
+            dispatch(actFetchCartItemsRequest());
+        },
         onDeleteCartItem: (item) => {
             dispatch(actDeleteCartItem(item));
         },
-        onUpdateCartItemQuantity: (item, quantity)=>{
-            dispatch(actUpdateCartItemQuantity(item,quantity));
+        onUpdateCartItemQuantity: (item, quantity) => {
+            dispatch(actUpdateCartItemQuantity(item, quantity));
         }
     }
 }

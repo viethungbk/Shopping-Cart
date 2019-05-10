@@ -7,11 +7,33 @@ import actAddToCart, { actAddToWishList, actFetchProductsRequest } from "./../..
 
 class ListProducts extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            sortBy: 0
+        }
+    }
+
     componentDidMount() {
         this.props.fetchAllProducts();
     }
 
     showProducts = (products) => {
+        let sortBy = this.state.sortBy;
+        console.log(sortBy);
+        if (sortBy === 0) {
+            products = products.sort((a, b) => {
+                return b.rating - a.rating;
+            });
+        } else if (sortBy === 1) {
+            products = products.sort((a, b) => {
+                return a.price - b.price;
+            });
+        } else {
+            products = products.sort((a, b) => {
+                return b.price - a.price;
+            });
+        }
         let { onAddToCart, onAddToWishList } = this.props;
         let listProducts = products.map((product, index) => {
             return <Product
@@ -26,14 +48,13 @@ class ListProducts extends Component {
 
     onSort = (sortBy) => {
         console.log(sortBy);
-
+        this.setState({
+            sortBy : sortBy
+        })
     }
 
     render() {
-        let { products } = this.props;
-        console.log(products);
-        
-        let { children } = this.props;
+        let { products, children } = this.props;
 
         return (
             <div className="container">
@@ -42,11 +63,8 @@ class ListProducts extends Component {
                 >
                     {children}
                 </ProductCategory>
-
                 <div className="row">
-                    <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        {this.showProducts(products)}
-                    </div>
+                    {this.showProducts(products)}
                 </div>
             </div>
         );
@@ -61,7 +79,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchAllProducts : () => {
+        fetchAllProducts: () => {
             dispatch(actFetchProductsRequest());
         },
         onAddToCart: (product) => {

@@ -45,6 +45,7 @@ let inittialState = [
 //     })
 //     .catch(err => console.log(err.response));
 
+
 const wishList = (state = inittialState, action) => {
     switch (action.type) {
         case Types.ADD_TO_WISH_LIST:
