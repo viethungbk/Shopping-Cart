@@ -13,17 +13,22 @@ class Product extends Component {
         }
         return result;
     }
-    
+
     // Phải dispath 1 cái action để thêm vào reducer cart
     onAddToCart = (product) => {
         this.props.onAddToCart(product);
     }
 
+    onAddToWishList = (product) => {
+        
+        this.props.onAddToWishList(product);
+    }
+
     render() {
 
         var { product } = this.props;
-        console.log(product);
-        console.log('run');
+        console.log("run");
+        
         return (
             <div className="item item-carousel">
                 <div className="products">
@@ -33,8 +38,8 @@ class Product extends Component {
                         <div className="product-image">
                             <div className="image">
                                 <Link to="/product-details">
-                                    {/* <img src={product.image[0]} alt={product.name} /> */}
-                                    {/* <img src={product.image[1]} alt="product hover" className="hover-image" /> */}
+                                    <img src={product.img} alt={product.name} />
+                                    <img src={product.img_hover} alt="product hover" className="hover-image" />
                                 </Link>
                             </div>
                             <div className="tag new"><span>new</span></div>
@@ -67,12 +72,16 @@ class Product extends Component {
                                         >
                                             <i className="fa fa-shopping-cart" />
                                         </button>
-                                        <button className="btn btn-primary cart-btn" type="button">
-                                            Add to cart
-                                        </button>
                                     </li>
-                                    <li className="lnk wishlist"> <Link data-toggle="tooltip" className="add-to-cart" to="/product-details" title="Wishlist"> <i className="icon fa fa-heart" /> </Link> </li>
-                                    <li className="lnk"> <Link data-toggle="tooltip" className="add-to-cart" to="/product-details" title="Compare"> <i className="fa fa-signal" aria-hidden="true" /> </Link> </li>
+                                    <li className="lnk wishlist" >
+                                        <Link data-toggle="tooltip" className="add-to-cart" to="/product-details" title="Wishlist" onClick={() => { this.onAddWishlist(product) }}>
+                                            <i className="icon fa fa-heart" />
+                                        </Link> </li>
+                                    <li className="lnk">
+                                        <Link data-toggle="tooltip" className="add-to-cart" to="/product-details" title="Compare">
+                                            <i className="fa fa-signal" aria-hidden="true" />
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

@@ -1,4 +1,4 @@
-// import * as Types from "./../constants/Message";
+import * as Types from "./../constants/ActionTypes";
 import axios from 'axios';
 
 
@@ -36,26 +36,22 @@ let inittialState = [
         iventory: 20,
         rating: 1
     }
-
-
-
-
-
-
 ];
 
-axios.get('/api/products/')
-    .then(products => {
-        inittialState = products.data;
-        // console.log(inittialState);
-    })
-    .catch(err => console.log(err.response));
+// axios.get('/api/wishList/')
+//     .then(wishList => {
+//         inittialState = products.data;
+//         // console.log(inittialState);
+//     })
+//     .catch(err => console.log(err.response));
 
-const products = (state = inittialState, action) => {
+const wishList = (state = inittialState, action) => {
     switch (action.type) {
-
+        case Types.ADD_TO_WISH_LIST:
+            state.push(action.product);
+            return [...state];
         default: return [...state];
     }
 }
 
-export default products;
+export default wishList;

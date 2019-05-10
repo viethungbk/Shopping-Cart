@@ -25,4 +25,10 @@ export function actUpdateCartItemQuantity(item, quantity) {
     }
 }
 
+export function actAddToWishList(product) {
+    return{
+        type : Types.ADD_TO_WISH_LIST,
+        product : product
+    }
+}
 export default actAddToCart;

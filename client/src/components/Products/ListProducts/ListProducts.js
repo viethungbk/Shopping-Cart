@@ -2,38 +2,44 @@ import React, { Component } from 'react';
 import Product from './Product';
 import ProductCategory from './ProductCategory';
 import { connect } from 'react-redux';
-import actAddToCart from "./../../../actions/index";
+import actAddToCart, { actAddToWishList } from "./../../../actions/index";
+
 
 class ListProducts extends Component {
-    
+
     showProducts = (products) => {
-        var {onAddToCart} = this.props;
-        var listProducts = products.map((product, index) => {
+        let { onAddToCart, onAddToWishList } = this.props;
+        let listProducts = products.map((product, index) => {
             return <Product
                 key={index}
                 product={product}
                 onAddToCart={onAddToCart}
+                onAddToWishList={onAddToWishList}
             />
         });
         return listProducts;
     }
 
+    onSort = (sortBy) => {
+        console.log(sortBy);
+
+    }
+
     render() {
-        var { products } = this.props;
-        var {children} = this.props;
-        console.log('Listproducts')
+        let { products } = this.props;
+        let { children } = this.props;
+
         return (
-            <div id="product-tabs-slider" className="scroll-tabs outer-top-vs">
-                <ProductCategory>
+            <div className="container">
+                <ProductCategory
+                    onSort={this.onSort}
+                >
                     {children}
                 </ProductCategory>
-                <div className="tab-content outer-top-xs">
-                    <div className="tab-pane in active" id="all">
-                        <div className="product-slider">
-                            <div className="owl-carousel home-owl-carousel custom-carousel owl-theme">
-                                {this.showProducts(products)}
-                            </div>
-                        </div>
+
+                <div className="row">
+                    <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        {this.showProducts(products)}
                     </div>
                 </div>
             </div>
@@ -43,14 +49,17 @@ class ListProducts extends Component {
 
 const mapStateToProps = state => {
     return {
-        products : state.products
+        products: state.products
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
         onAddToCart: (product) => {
-            dispatch(actAddToCart(product , 1));
+            dispatch(actAddToCart(product, 1));
+        },
+        onAddToWishList: (product) => {
+            dispatch(actAddToWishList(product));
         }
     }
 }
