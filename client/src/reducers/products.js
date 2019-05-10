@@ -36,18 +36,12 @@ let inittialState = [
         iventory: 20,
         rating: 1
     }
-
-
-
-
-
-
 ];
 
 axios.get('/api/products/')
     .then(products => {
         inittialState = products.data;
-        // console.log(inittialState);
+        console.log(inittialState);
     })
     .catch(err => console.log(err.response));
 

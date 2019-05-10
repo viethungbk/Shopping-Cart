@@ -1,4 +1,8 @@
 const express = require('express');
+const multer  = require('multer');
+const fs = require('fs');
+
+const upload = multer({ dest: '../../public/uploads' });
 
 // Load Input Validation
 const validateProductInput = require('../../validation/product/product');
@@ -26,7 +30,7 @@ router.get('/', (req, res) => {
 // @route   POST api/products/add
 // @desc    Add a product
 // @access  Private
-router.post('/add', (req, res) => {
+router.post('/add', upload.single('fileImages'), (req, res) => {
   const data = req.body;
 
   const { errors, isValid } = validateProductInput(data);
@@ -37,12 +41,16 @@ router.post('/add', (req, res) => {
   }
 
   // Create new product
-  const newProduct = new Product({...data})
+  const newProduct = new Product({...data});
+  newProduct.image = fs.readFileSync(req.file.path);
 
   newProduct
   .save()
   .then(product => res.json(product))
-  .catch(err => console.log(err));
+  .catch(err => {
+    console.log(err);
+    return res.status(400).json(err.message);
+  });
 })
 
 module.exports = router;
