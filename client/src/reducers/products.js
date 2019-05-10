@@ -1,54 +1,18 @@
-// import * as Types from "./../constants/Message";
-import axios from 'axios';
+// import axios from 'axios';
+import * as Types from "./../constants/ActionTypes";
+// import { log } from 'util';
 
-
-let inittialState = [
-    {
-        id: 3,
-        brand: "Huawei",
-        name: "Huawei P30 Pro",
-        img: "assets/images/products/Huawei-P30-Pro.jpg",
-        img_hover: "assets/images/products/Huawei-P30-Pro-hover.jpg",
-        price: 2000000,
-        price_before_discount: 3000000,
-        iventory: 20,
-        rating: 1
-    },
-    {
-        id: 5,
-        brand: "Huawei",
-        name: "Huawei P30 Pro",
-        img: "assets/images/products/Huawei-P30-Pro.jpg",
-        img_hover: "assets/images/products/Huawei-P30-Pro-hover.jpg",
-        price: 2000000,
-        price_before_discount: 3000000,
-        iventory: 20,
-        rating: 1
-    },
-    {
-        id: 4,
-        brand: "Huawei",
-        name: "Huawei P30 Pro",
-        img: "assets/images/products/Huawei-P30-Pro.jpg",
-        img_hover: "assets/images/products/Huawei-P30-Pro-hover.jpg",
-        price: 2000000,
-        price_before_discount: 3000000,
-        iventory: 20,
-        rating: 1
-    }
-];
-
-axios.get('/api/products/')
-    .then(products => {
-        inittialState = products.data;
-        console.log(inittialState);
-    })
-    .catch(err => console.log(err.response));
+let inittialState = [];
 
 const products = (state = inittialState, action) => {
     switch (action.type) {
-
-        default: return [...state];
+        case Types.FETCH_PRODUCTS:
+            state = action.products;
+            console.log(action.products);
+            
+            return [...state];
+        default:
+            return [...state];
     }
 }
 

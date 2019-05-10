@@ -23,7 +23,7 @@ class App extends Component {
                             <Route path="/register" exact component={Register} />
                             <Route path="/contact" exact component={Contact} />
                             <Route path="/product-details" exact component={ProductDetails} />
-                            <Route path="/wishlist" exact component={MyWishList} />
+                            <Route path="/wishList" exact component={MyWishList} />
                             <Route path="/not-found" exact component={NotFound} />
                             <Route path="/shopping-cart" exact component={ShoppingCart} />
                         </Switch>

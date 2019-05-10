@@ -39,4 +39,4 @@ const users = (state = inittialState, action) => {
     }
 }
 
-export default products;
+export default users;

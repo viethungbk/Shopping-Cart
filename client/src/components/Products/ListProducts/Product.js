@@ -28,6 +28,7 @@ class Product extends Component {
 
         var { product } = this.props;
         console.log("run");
+        console.log(product.image);
 
         return (
             <div className="item item-carousel">
@@ -38,8 +39,8 @@ class Product extends Component {
                         <div className="product-image">
                             <div className="image">
                                 <Link to="/product-details">
-                                    <img src={product.image} alt={product.name} />
-                                    <img src={product.img_hover} alt="product hover" className="hover-image" />
+                                    <img src={product.img} alt={product.name} />
+                                    {/* <img src={product.img_hover} alt="product hover" className="hover-image" /> */}
 
                                 </Link>
                             </div>

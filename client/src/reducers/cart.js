@@ -50,24 +50,32 @@ var inittialState = [
 ];
 
 const cart = (state = inittialState, action) => {
-    let { product, quantity } = action;
+
     switch (action.type) {
         case Types.ADD_TO_CART:
-            let index = state.findIndex(item => item.product.id === action.product.id);
-            if (index === -1) {
-                state.push({
+            let { product, quantity } = action;
+            if (typeof state !== "string") {
+                let index = state.findIndex(item => item.product.id === product.id);
+                if (index === -1) {
+                    state.push({
+                        product,
+                        quantity
+                    });
+                } else {
+                    state[index].quantity += quantity;
+                }
+                return [...state];
+            }else{
+                state = [{
                     product,
                     quantity
-                });
-            } else {
-                state[index].quantity += quantity;
+                }]
+                return [...state];
             }
-            return [...state];
+           
 
         case Types.DELETE_CART_ITEM:
-
             let indexDelete = state.findIndex(item => item.product.id === action.item.product.id);
-
             if (indexDelete !== -1) {
                 state.splice(indexDelete, 1);
             }

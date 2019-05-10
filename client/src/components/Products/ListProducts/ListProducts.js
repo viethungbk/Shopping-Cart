@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import Product from './Product';
 import ProductCategory from './ProductCategory';
 import { connect } from 'react-redux';
-import actAddToCart, { actAddToWishList } from "./../../../actions/index";
+import actAddToCart, { actAddToWishList, actFetchProductsRequest } from "./../../../actions/index";
 
 
 class ListProducts extends Component {
+
+    componentDidMount() {
+        this.props.fetchAllProducts();
+    }
 
     showProducts = (products) => {
         let { onAddToCart, onAddToWishList } = this.props;
@@ -27,6 +31,8 @@ class ListProducts extends Component {
 
     render() {
         let { products } = this.props;
+        console.log(products);
+        
         let { children } = this.props;
 
         return (
@@ -55,6 +61,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
+        fetchAllProducts : () => {
+            dispatch(actFetchProductsRequest());
+        },
         onAddToCart: (product) => {
             dispatch(actAddToCart(product, 1));
         },

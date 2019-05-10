@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Product from "./Product";
+import actAddToCart, {actDeleteWishItem} from "./../../actions/index";
+
 
 class MyWishList extends Component {
 
    showWishList = (wishList) => {
       let result = [];
-      console.log(wishList);
+      let { onAddToCart, onDeleteWishItem } = this.props;
       result = wishList.map((product, index) => {
          return <Product
             key={index}
             product={product}
+            onAddToCart={onAddToCart}
+            onDeleteWishItem={onDeleteWishItem}
          />
       });
       return result;
@@ -40,10 +44,23 @@ class MyWishList extends Component {
       );
    }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
    return {
       wishList: state.wishList
    }
 }
 
-export default connect(mapStateToProps, null)(MyWishList);
+
+const mapDispatchToProps = (dispatch, props) => {
+   return {
+      onAddToCart: (product) => {
+         dispatch(actAddToCart(product, 1));
+      },
+      onDeleteWishItem: (product)=> {
+         dispatch(actDeleteWishItem(product));
+      }
+   }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyWishList);

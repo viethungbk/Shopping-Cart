@@ -1,5 +1,5 @@
 import * as Types from "./../constants/ActionTypes";
-import axios from 'axios';
+// import axios from 'axios';
 
 
 let inittialState = [
@@ -48,8 +48,17 @@ let inittialState = [
 const wishList = (state = inittialState, action) => {
     switch (action.type) {
         case Types.ADD_TO_WISH_LIST:
-            state.push(action.product);
+            if (typeof state !== 'string') {
+                state.push(action.product);
+            }
+            return [action.product];
+
+        case Types.DELETE_WISH_ITEM:
+            let indexDelete = state.findIndex(item => item.id === action.product.id );
+            state.splice(indexDelete,1);
             return [...state];
+
+
         default: return [...state];
     }
 }
