@@ -129,4 +129,11 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
   });
 });
 
+// @route   GET api/users/wishlist
+// @desc    Return current user wishlist
+// @access  Private
+router.get('/wishlist', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.json(req.user.wishlist);
+});
+
 module.exports = router;
