@@ -6,7 +6,7 @@ export default class Slider extends Component {
     return (
       <div id="hero">
         <div id="owl-main" className="owl-carousel owl-inner-nav owl-ui-sm">
-          <div className="item" style={{ backgroundImage: 'url(assets/images/sliders/01.jpg)' }}>
+          <div className="item" style={{ backgroundImage: 'url(/assets/images/sliders/01.jpg)' }}>
             <div className="container-fluid">
 
               {/* caption */}
@@ -19,7 +19,7 @@ export default class Slider extends Component {
             </div>
           </div>
 
-          <div className="item" style={{ backgroundImage: 'url(assets/images/sliders/02.jpg)' }}>
+          <div className="item" style={{ backgroundImage: 'url(/assets/images/sliders/02.jpg)' }}>
             <div className="container-fluid">
               <div className="caption bg-color vertical-center text-left">
                 <div className="slider-header fadeInDown-1">Spring 2018</div>

@@ -19,7 +19,7 @@ export default class Cart extends Component {
               <div className="cart-item product-summary">
                 <div className="row">
                   <div className="col-xs-4">
-                    <div className="image"> <Link to="/product-details"><img src="assets/images/products/p4.jpg" alt="product" /></Link> </div>
+                    <div className="image"> <Link to="/product-details"><img src="/assets/images/products/p4.jpg" alt="product" /></Link> </div>
                   </div>
                   <div className="col-xs-7">
                     <h3 className="name"><Link to="">Simple Product</Link></h3>

@@ -15,7 +15,7 @@ export default class NewItem extends Component {
                                     <div className="product-image">
                                         <div className="image">
                                             <Link to="">
-                                                <img src="assets/images/products/iphone-xs-max.jpg" alt="New product" />
+                                                <img src="/assets/images/products/iphone-xs-max.jpg" alt="New product" />
                                             </Link>
                                         </div>
                                     </div>

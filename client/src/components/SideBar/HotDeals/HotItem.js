@@ -9,8 +9,8 @@ export default class HotItem extends Component {
           <div className="hot-deal-wrapper">
             <div className="image">
               <Link to="">
-                <img src="assets/images/hot-deals/p13.jpg" alt="hot deals" />
-                <img src="assets/images/hot-deals/p13_hover.jpg" alt="hot deals" className="hover-image" />
+                <img src="/assets/images/hot-deals/p13.jpg" alt="hot deals" />
+                <img src="/assets/images/hot-deals/p13_hover.jpg" alt="hot deals" className="hover-image" />
               </Link>
             </div>
             <div className="sale-offer-tag"><span>49%<br />
