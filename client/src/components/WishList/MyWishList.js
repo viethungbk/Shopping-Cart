@@ -36,7 +36,7 @@ export default class MyWishList extends Component {
                                  <Link to="" className="btn-upper btn btn-primary">Add to cart</Link>
                               </td>
                               <td className="col-md-1 close-btn">
-                                 <Link to="" className><i className="fa fa-times" /></Link>
+                                 <Link to=""><i className="fa fa-times" /></Link>
                               </td>
                            </tr>
                            <tr>
@@ -64,7 +64,7 @@ export default class MyWishList extends Component {
                                  <Link to="" className="btn-upper btn btn-default">Add to cart</Link>
                               </td>
                               <td className="col-md-1 close-btn">
-                                 <Link to="" className><i className="fa fa-times" /></Link>
+                                 <Link to=""><i className="fa fa-times" /></Link>
                               </td>
                            </tr>
                         </tbody>

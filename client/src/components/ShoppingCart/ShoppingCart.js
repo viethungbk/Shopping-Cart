@@ -100,7 +100,7 @@ export default class ShoppingCart extends Component {
                            <tr>
                               <td colSpan={7}>
                                  <div className="shopping-cart-btn">
-                                    <span className>
+                                    <span>
                                        <Link to="" className="btn btn-upper btn-primary outer-left-xs">Continue Shopping</Link>
                                        <Link to="" className="btn btn-upper btn-primary pull-right outer-right-xs">Update shopping cart</Link>
                                     </span>
@@ -148,7 +148,7 @@ export default class ShoppingCart extends Component {
                               </div>
                               <div className="form-group">
                                  <label className="info-title control-label">Zip/Postal Code</label>
-                                 <input type="text" className="form-control unicase-form-control text-input" placeholder />
+                                 <input type="text" className="form-control unicase-form-control text-input" />
                               </div>
                               <div className="pull-right">
                                  <button type="submit" className="btn-upper btn btn-primary">GET A QOUTE</button>
@@ -201,7 +201,7 @@ export default class ShoppingCart extends Component {
                            <td>
                               <div className="cart-checkout-btn pull-right">
                                  <button type="submit" className="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</button>
-                                 <span className>Checkout with multiples address!</span>
+                                 <span>Checkout with multiples address!</span>
                               </div>
                            </td>
                         </tr>
