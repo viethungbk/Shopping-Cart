@@ -1,4 +1,9 @@
 const express = require('express');
+const multer  = require('multer');
+const fs = require('fs');
+const passport = require('passport');
+
+const upload = multer({ dest: '../../public/uploads' });
 
 // Load Input Validation
 const validateProductInput = require('../../validation/product/product');
@@ -19,14 +24,14 @@ router.get('/', (req, res) => {
         error = 'Not Found';
         return res.status(404).json(error);
       }
-      return res.status(400).json(products);
+      return res.json(products);
     })
 });
 
-// @route   GET api/products/add
+// @route   POST api/products/add
 // @desc    Add a product
 // @access  Private
-router.post('/add', (req, res) => {
+router.post('/add', passport.authenticate('jwt', { session: false }), upload.single('fileImages'), (req, res) => {
   const data = req.body;
 
   const { errors, isValid } = validateProductInput(data);
@@ -37,27 +42,58 @@ router.post('/add', (req, res) => {
   }
 
   // Create new product
-  const newProduct = new Product({
-    name: data.name,
-    price: data.price,
-    brand: data.brand,
-    iventory: data.iventory,
-    image: data.image,
-    generalInfo: data.generalInfo,
-    screen: data.screen,
-    camera: data.camera,
-    cpu: data.cpu,
-    ram: data.ram,
-    memory: data.memory,
-    comms: data.comms,
-    battery: data.battery,
-    sensors: data.sensors
-  });
+  const newProduct = new Product({...data});
+  newProduct.image = fs.readFileSync(req.file.path);
 
   newProduct
   .save()
-  .then(product => res.json(data))
-  .catch(err => console.log(err));
+  .then(product => res.json(product))
+  .catch(err => {
+    console.log(err);
+    return res.status(400).json(err.message);
+  });
 })
+
+
+// @route   PUT api/products/:id
+// @desc    Update a product
+// @access  Private
+router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const data = req.body;
+
+  // Create new product
+  const newProduct = new Product({...data});
+
+  Product.findByIdAndUpdate(req.params.id, newProduct)
+    .exec()
+    .then(product => {
+      if (!product) {
+        error = 'Not Found';
+        return res.status(404).json(error);
+      }
+      return res.json("Update successfull");
+    })
+    .catch(err => res.json(err.message));
+});
+
+// @route   POST api/products/
+// @desc    Add a product to wishlist
+// @access  Public
+router.post('/add-to-wishlist', passport.authenticate('jwt', { session: false }), (req, res) => {
+  let user = req.user;
+
+  // Load user model
+  const User = require('../../models/User');
+  
+  user.wishlist.push(req.body);
+  console.log(user);
+
+  
+
+  User.findById(user.id, user)
+    .exec()
+    .then(rs => res.json(rs))
+    .catch(err => res.status(400).json(err.message));
+});
 
 module.exports = router;
