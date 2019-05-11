@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import callApi from '../../apiCaller';
 
 export default class Register extends Component {
   constructor(props) {
@@ -24,10 +24,8 @@ export default class Register extends Component {
     user.name = this.state.txtName;
     user.password = this.state.txtPassword;
     user.password2 = this.state.txtPassword2;
-    console.log(this.state);
-    console.log(user);
 
-    axios.post('/api/users/register', user)
+    callApi('api/users/register', 'post',user)
       .then(res => {
         console.log(res);
         this.setState({
@@ -40,7 +38,6 @@ export default class Register extends Component {
           isShowMessage: true,
           message: err.response.data
         });
-        console.log(this.state)
       });
   }
 
@@ -61,8 +58,6 @@ export default class Register extends Component {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    console.log(name);
-    console.log(value);
 
     this.setState({
       [name]: value
