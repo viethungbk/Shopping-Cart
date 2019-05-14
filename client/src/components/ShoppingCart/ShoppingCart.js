@@ -1,7 +1,41 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import callApi from '../../apiCaller';
+import Item from './Item';
 
 export default class ShoppingCart extends Component {
+   constructor(props) {
+      super(props);
+
+      this.state = {
+         items: [{
+            id: '',
+            product: {},
+            quantity: 0
+         }]
+      }
+   }
+
+   componentDidMount() {
+
+      callApi('api/cart/', 'get', null)
+         .then(rs => {
+           this.setState({
+             items: rs.data[0].listItems
+           });
+         })
+         .catch(err => console.log(err));
+
+   }
+
+   showItems() {
+    return this.state.items.map((item,index) => {
+      return (
+        <Item key={ index } item={ item.product } ></Item>
+      );
+    })
+   }
+
    render() {
       return (
          <div className="row ">
@@ -11,90 +45,17 @@ export default class ShoppingCart extends Component {
                      <table className="table">
                         <thead>
                            <tr>
-                              <th className="cart-romove item">Remove</th>
-                              <th className="cart-description item">Image</th>
-                              <th className="cart-product-name item">Product Name</th>
-                              <th className="cart-edit item">Edit</th>
-                              <th className="cart-qty item">Quantity</th>
-                              <th className="cart-sub-total item">Subtotal</th>
-                              <th className="cart-total last-item">Grandtotal</th>
+                              <th className="cart-romove item">Xóa</th>
+                              <th className="cart-description item">Hình Ảnh</th>
+                              <th className="cart-product-name item">Tên Sản Phẩm</th>
+                              <th className="cart-qty item">Số Lượng</th>
+                              <th className="cart-sub-total item">Đơn Giá</th>
+                              <th className="cart-total last-item">Tổng</th>
                            </tr>
                         </thead>{/* /thead */}
                         <tbody>
-                           <tr>
-                              <td className="romove-item"><Link to="" title="cancel" className="icon"><i className="fa fa-trash-o" /></Link></td>
-                              <td className="cart-image">
-                                 <Link className="entry-thumbnail" to="/product-details">
-                                    <img src="assets/images/products/p1.jpg" alt="product thumb" />
-                                 </Link>
-                              </td>
-                              <td className="cart-product-name-info">
-                                 <h4 className="cart-product-description"><Link to="/product-details">Floral Print Buttoned</Link></h4>
-                                 <div className="row">
-                                    <div className="col-sm-12">
-                                       <div className="rating rateit-small" />
-                                    </div>
-                                    <div className="col-sm-12">
-                                       <div className="reviews">
-                                          (06 Reviews)
-                                    </div>
-                                    </div>
-                                 </div>{/* /.row */}
-                                 <div className="cart-product-info">
-                                    <span className="product-color">COLOR:<span>Blue</span></span>
-                                 </div>
-                              </td>
-                              <td className="cart-product-edit"><Link to="" className="product-edit">Edit</Link></td>
-                              <td className="cart-product-quantity">
-                                 <div className="quant-input">
-                                    <div className="arrows">
-                                       <div className="arrow plus gradient"><span className="ir"><i className="icon fa fa-sort-asc" /></span></div>
-                                       <div className="arrow minus gradient"><span className="ir"><i className="icon fa fa-sort-desc" /></span></div>
-                                    </div>
-                                    <input type="text" defaultValue={1} />
-                                 </div>
-                              </td>
-                              <td className="cart-product-sub-total"><span className="cart-sub-total-price">$300.00</span></td>
-                              <td className="cart-product-grand-total"><span className="cart-grand-total-price">$300.00</span></td>
-                           </tr>
-                           <tr>
-                              <td className="romove-item"><Link to="" title="cancel" className="icon"><i className="fa fa-trash-o" /></Link></td>
-                              <td className="cart-image">
-                                 <Link className="entry-thumbnail" to="/product-details">
-                                    <img src="assets/images/products/p2.jpg" alt="product thumb" />
-                                 </Link>
-                              </td>
-                              <td className="cart-product-name-info">
-                                 <h4 className="cart-product-description"><Link to="/product-details">Floral Print Buttoned</Link></h4>
-                                 <div className="row">
-                                    <div className="col-sm-12">
-                                       <div className="rating rateit-small" />
-                                    </div>
-                                    <div className="col-sm-12">
-                                       <div className="reviews">
-                                          (06 Reviews)
-                    </div>
-                                    </div>
-                                 </div>{/* /.row */}
-                                 <div className="cart-product-info">
-                                    <span className="product-color">COLOR:<span>Pink</span></span>
-                                 </div>
-                              </td>
-                              <td className="cart-product-edit"><Link to="" className="product-edit">Edit</Link></td>
-                              <td className="cart-product-quantity">
-                                 <div className="cart-quantity">
-                                    <div className="quant-input">
-                                       <div className="arrows">
-                                          <div className="arrow plus gradient"><span className="ir"><i className="icon fa fa-sort-asc" /></span></div>
-                                          <div className="arrow minus gradient"><span className="ir"><i className="icon fa fa-sort-desc" /></span></div>
-                                       </div>
-                                       <input type="text" defaultValue={1} />
-                                    </div>
-                                 </div>
-                              </td>
-                              <td className="cart-product-sub-total"><span className="cart-sub-total-price">$300.00</span></td>
-                              <td className="cart-product-grand-total"><span className="cart-grand-total-price">$300.00</span></td>
-                           </tr>
+                            {/* items */}
+                            { this.showItems() }
                         </tbody>{/* /tbody */}
                         <tfoot>
                            <tr>

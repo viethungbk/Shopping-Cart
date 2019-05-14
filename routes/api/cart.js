@@ -6,7 +6,7 @@ const Cart = require('../../models/Cart');
 
 const router = express.Router();
 
-// @route   GET api/cart//
+// @route   GET api/cart/
 // @desc    Get user's cart
 // @access  private
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -18,7 +18,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
         error = 'Not Found';
         return res.status(404).json(error);
       }
-      return res.status(400).json(cart);
+      return res.json(cart);
     })
 });
 

@@ -28,10 +28,29 @@ router.get('/', (req, res) => {
     })
 });
 
+// @route   GET api/products/:id
+// @desc    Get a product by id
+// @access  Public
+router.get('/:id', (req, res) => {
+  console.log(req.params)
+
+  Product.findById(req.params.id)
+    .exec()
+    .then(product => {
+      if (!product) {
+        error = 'Not Found';
+        return res.status(404).json(error);
+      }
+      return res.json(product);
+    })
+    .catch(err => res.json(err.message));
+});
+
+
 // @route   POST api/products/add
 // @desc    Add a product
 // @access  Private
-router.post('/add', passport.authenticate('jwt', { session: false }), upload.single('fileImages'), (req, res) => {
+router.post('/add', upload.single('fileImages'), (req, res) => {
   const data = req.body;
 
   const { errors, isValid } = validateProductInput(data);
@@ -58,7 +77,7 @@ router.post('/add', passport.authenticate('jwt', { session: false }), upload.sin
 // @route   PUT api/products/:id
 // @desc    Update a product
 // @access  Private
-router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.patch('/:id', (req, res) => {
   const data = req.body;
 
   // Create new product
@@ -79,7 +98,7 @@ router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res
 // @route   POST api/products/
 // @desc    Add a product to wishlist
 // @access  Public
-router.post('/add-to-wishlist', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/add-to-wishlist', (req, res) => {
   let user = req.user;
 
   // Load user model
