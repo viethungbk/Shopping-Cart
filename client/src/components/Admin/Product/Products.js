@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
-axios.defaults.headers.post['content-type'] = 'multipart/form-data';
 
 export default class Products extends Component {
   // constructor(props) {
@@ -122,6 +119,13 @@ export default class Products extends Component {
             </div>
 
             <div className="form-group">
+              <label htmlFor="pricebefore" className="col-sm-2 control-label">Giá trước Sale*</label>
+              <div className="col-sm-10">
+                <input type="text" className="form-control" id="pricebefore" name="pricebefore" placeholder="30 000 000" />
+              </div>
+            </div>
+
+            <div className="form-group">
               <label htmlFor="brand" className="col-sm-2 control-label">Hãng Điện thoại*</label>
               <div className="col-sm-10">
                 <input type="text" className="form-control" id="brand" name="brand" placeholder="Iphone" />
@@ -135,54 +139,11 @@ export default class Products extends Component {
               </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="os" className="col-sm-2 control-label">Hệ điều hành</label>
-              <div className="col-sm-10">
-                <input type="text" className="form-control" id="os" name="os" placeholder="Android" />
-              </div>
-            </div>
+            <label className="col-sm-2" htmlFor="details">Mô tả sản phẩm:</label>
 
-            <div className="form-group">
-              <label htmlFor="language" className="col-sm-2 control-label">Ngôn ngữ</label>
-              <div className="col-sm-10">
-                <input type="text" className="form-control" id="language" name="language" placeholder="Tiếng Việt" />
-              </div>
-            </div>
+            <textarea id="details" className="col-sm-10" name="details" defaultValue="Details" rows="5" cols="33"></textarea>
 
-            <div className="form-group">
-              <label htmlFor="screen" className="col-sm-2 control-label">Màn hình</label>
-              <div className="col-sm-10">
-                <input type="text" className="form-control" id="screen" name="screen" placeholder="FullHD" />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="camera" className="col-sm-2 control-label">Camera</label>
-              <div className="col-sm-10">
-                <input type="text" className="form-control" id="camera" name="camera" placeholder="Trước: 10Mpx, Sau: 24px" />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="cpu" className="col-sm-2 control-label">CPU</label>
-              <div className="col-sm-10">
-                <input type="text" className="form-control" id="cpu" name="cpu" placeholder="Snapdragon 810" />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="memmory" className="col-sm-2 control-label">Bộ nhớ</label>
-              <div className="col-sm-10">
-                <input type="text" className="form-control" id="memmory" name="memmory" placeholder="ROM 512GB" />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="battery" className="col-sm-2 control-label">Pin</label>
-              <div className="col-sm-10">
-                <input type="text" className="form-control" id="battery" name="battery" placeholder="4000mAh" />
-              </div>
-            </div>
+            <hr />
 
             <div className="form-group">
               <label htmlFor="fileImages" className="col-sm-2 control-label">Thêm Ảnh</label>
