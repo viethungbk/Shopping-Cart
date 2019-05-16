@@ -2,39 +2,48 @@ import React, { Component } from 'react';
 import Product from './Product';
 import ProductCategory from './ProductCategory';
 import callApi from '../../../apiCaller';
+import { connect } from 'react-redux';
+import actFetchKeySearch from '../../../actions/index';
 
 
-export default class ListProducts extends Component {
+class ListProducts extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       products: []
     };
   }
 
+  componentWillMount(){
+    console.log("goi act dispatch");
+    
+    this.props.onFetchKeySearch("key Search");
+  }
+  
   componentDidMount() {
+    console.log(this.props.keySearch);
     console.log('hi');
     callApi('api/products/', 'get', null)
-      .then(res => {
-        this.setState({
-          products: res.data
-        });
-      })
-      .catch(err => console.log(err));
+    .then(res => {
+      this.setState({
+        products: res.data
+      });
+    })
+    .catch(err => console.log(err));
   }
-
+  
   showProducts() {
-    let products = this.state.products;
+    const products = this.state.products;
     console.log('product: ', products);
-
+    
     let listProducts = products.map(product => {
       return <Product key={product._id} product={product}></Product>;
     });
-
+    
     return listProducts;
   }
-
+  
   render() {
     console.log('render');
     return (
@@ -58,3 +67,16 @@ export default class ListProducts extends Component {
   }
 }
 
+const mapStateToProps = state =>{
+  return {
+    keySearch : state.keySearch
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchKeySearch: (keySearch) => {
+      dispatch(actFetchKeySearch(keySearch));
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ListProducts);
