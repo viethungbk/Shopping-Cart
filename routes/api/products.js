@@ -1,17 +1,17 @@
 const express = require('express');
-const multer  = require('multer');
+const multer = require('multer');
 const fs = require('fs');
 const passport = require('passport');
 
 const upload = multer({ dest: '../../public/uploads' });
 const productUpload = upload.fields([
-  {name: 'name'},
-  {name: 'price'},
-  {name: 'pricebefore'},
-  {name: 'brand'},
-  {name: 'iventory'},
-  {name: 'details'},
-  {name: 'image'}
+  { name: 'name' },
+  { name: 'price' },
+  { name: 'pricebefore' },
+  { name: 'brand' },
+  { name: 'iventory' },
+  { name: 'details' },
+  { name: 'image' }
 ]);
 
 // Load Input Validation
@@ -61,31 +61,34 @@ router.get('/:id', (req, res) => {
 // @access  Private
 router.post('/add', productUpload, (req, res) => {
   const data = req.body;
-  const files = req.files['image'];
 
   const { errors, isValid } = validateProductInput(data);
-
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
-  let images = [];
-  files.map(file => {
-    images.push(fs.readFileSync(file.path));
-  });
-
   // Create new product
   let newProduct = new Product({ ...data });
-  newProduct.image = images;
+
+  const files = req.files['image'];
+  console.log(files);
+
+  if (files !== undefined) {
+    let images = [];
+    files.map(file => {
+      images.push(fs.readFileSync(file.path));
+    });
+    newProduct.image = images;
+  }
 
   newProduct
-  .save()
-  .then(product => res.json(product))
-  .catch(err => {
-    console.log(err);
-    return res.status(400).json(err.message);
-  });
+    .save()
+    .then(product => res.json(product))
+    .catch(err => {
+      console.log(err);
+      return res.status(400).json(err.message);
+    });
 })
 
 
@@ -96,7 +99,7 @@ router.patch('/:id', (req, res) => {
   const data = req.body;
 
   // Create new product
-  const newProduct = new Product({...data});
+  const newProduct = new Product({ ...data });
 
   Product.findByIdAndUpdate(req.params.id, newProduct)
     .exec()
@@ -118,11 +121,11 @@ router.post('/add-to-wishlist', (req, res) => {
 
   // Load user model
   const User = require('../../models/User');
-  
+
   user.wishlist.push(req.body);
   console.log(user);
 
-  
+
 
   User.findById(user.id, user)
     .exec()
