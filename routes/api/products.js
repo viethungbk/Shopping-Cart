@@ -4,6 +4,15 @@ const fs = require('fs');
 const passport = require('passport');
 
 const upload = multer({ dest: '../../public/uploads' });
+const productUpload = upload.fields([
+  {name: 'name'},
+  {name: 'price'},
+  {name: 'pricebefore'},
+  {name: 'brand'},
+  {name: 'iventory'},
+  {name: 'details'},
+  {name: 'image'}
+]);
 
 // Load Input Validation
 const validateProductInput = require('../../validation/product/product');
@@ -50,8 +59,9 @@ router.get('/:id', (req, res) => {
 // @route   POST api/products/add
 // @desc    Add a product
 // @access  Private
-router.post('/add', upload.single('fileImages'), (req, res) => {
+router.post('/add', productUpload, (req, res) => {
   const data = req.body;
+  const files = req.files['image'];
 
   const { errors, isValid } = validateProductInput(data);
 
@@ -60,9 +70,14 @@ router.post('/add', upload.single('fileImages'), (req, res) => {
     return res.status(400).json(errors);
   }
 
+  let images = [];
+  files.map(file => {
+    images.push(fs.readFileSync(file.path));
+  });
+
   // Create new product
-  const newProduct = new Product({...data});
-  newProduct.image = fs.readFileSync(req.file.path);
+  let newProduct = new Product({ ...data });
+  newProduct.image = images;
 
   newProduct
   .save()
