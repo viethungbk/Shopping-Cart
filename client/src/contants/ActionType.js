@@ -1,0 +1,1 @@
+export const FETCH_KEY_SEARCH = 'FETCH_KEY_SEARCH';
