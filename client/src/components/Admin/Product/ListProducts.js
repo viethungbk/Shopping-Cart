@@ -2,42 +2,43 @@ import React, { Component } from 'react';
 import callApi from '../../../apiCaller';
 import Item from './Item';
 
-export default class Users extends Component {
+export default class ListProducts extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      users: []
+      products: []
     }
   }
   componentDidMount() {
-    callApi('api/users', 'get', null, null)
+    callApi('api/products', 'get', null, null)
       .then(res => {
         console.log(res.data);
         this.setState({
-          users: res.data
+          products: res.data
         });
         console.log(this.state);
       })
       .catch(err => console.log(err));
   }
 
-  showUsers() {
-    const { users } = this.state;
+  showProducts() {
+    const { products } = this.state;
 
-    let listUsers = users.map((user, index) => {
-      return <Item key={ index } index={ index } user={ user }></Item>;
+    let listProducts = products.map((product, index) => {
+      console.log(index);
+      return <Item key={ index } index= { index } product={ product }></Item>;
     });
 
-    return listUsers;
+    return listProducts;
   }
 
   render() {
     return (
       <div className="">
-        <h1 className="page-header">Users</h1>
+        <h1 className="page-header">Product</h1>
 
-        <h2 className="sub-header">User</h2>
+        <h2 className="sub-header">Porduct</h2>
         <div className="table-responsive">
           <table className="table table-striped">
             <thead>
@@ -45,14 +46,14 @@ export default class Users extends Component {
                 <th>#id</th>
                 <th>Ảnh</th>
                 <th>Tên</th>
-                <th>Email</th>
-                <th>Số Điện Thoại</th>
+                <th>Giá</th>
+                <th>Giá trước</th>
                 <th>Sửa</th>
                 <th>Xóa</th>
               </tr>
             </thead>
             <tbody>
-              { this.showUsers() }
+              { this.showProducts() }
             </tbody>
           </table>
         </div>

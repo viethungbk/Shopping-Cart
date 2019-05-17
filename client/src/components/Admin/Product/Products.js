@@ -18,8 +18,27 @@ export default class Products extends Component {
     }
   }
 
+  checkInput() {
+    const { name, price, pricebefore, iventory, brand } = this.state;
+
+    if (name && price && pricebefore && iventory && brand) {
+      return true;
+    }
+
+    return false;
+  }
+
   submitForm = (event) => {
     event.preventDefault();
+
+    if (!this.checkInput()) {
+      this.setState({
+        isFailed: true,
+        message: 'Input Error'
+      });
+      return;
+    }
+
 
     let product = new FormData();
 
@@ -41,6 +60,7 @@ export default class Products extends Component {
       .then(res => {
         console.log(res);
         this.setState({
+          isFailed: false,
           isAdded: true,
           message: res.data
         });

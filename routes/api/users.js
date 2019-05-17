@@ -19,7 +19,22 @@ const User = require('../../models/User');
 // @access  Public
 router.get('/test', (req, res) => res.json({ msg: "Users Works" }));
 
-// @route   GET api/users/register
+// @route   GET api/users/
+// @desc    Get all users
+// @access  Public
+router.get('/', (req, res) => {
+  let error = null;
+  User.find({})
+    .then(users => {
+      if (!users) {
+        error = 'Not Found';
+        return res.status(404).json(error);
+      }
+      return res.json(users);
+    })
+});
+
+// @route   POST api/users/register
 // @desc    Register user
 // @access  Public
 router.post('/register', (req, res) => {
@@ -66,7 +81,7 @@ router.post('/register', (req, res) => {
     })
 });
 
-// @route   GET api/users/login
+// @route   POST api/users/login
 // @desc    Login user / Returning TWT Token
 // @access  Public
 router.post('/login', (req, res) => {
@@ -120,7 +135,7 @@ router.post('/login', (req, res) => {
 // @route   GET api/users/current
 // @desc    Return current user
 // @access  Private
-router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/current', (req, res) => {
   res.json({
     id: req.user.id,
     name: req.user.name,

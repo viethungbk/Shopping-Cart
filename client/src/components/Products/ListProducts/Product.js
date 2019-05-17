@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import arrayBufferToBase64 from '../../../arrayBufferToBase64';
+
 export default class Product extends Component {
 	showRating = (avarageRating) => {
 		var result = [];
@@ -13,14 +15,6 @@ export default class Product extends Component {
 		return result;
 	}
 
-	// Convert array to base64
-	arrayBufferToBase64(buffer) {
-		var binary = '';
-		var bytes = [].slice.call(new Uint8Array(buffer));
-		bytes.forEach((b) => binary += String.fromCharCode(b));
-		return window.btoa(binary);
-	};
-
 	showImage(images) {
 		const numberImages = images.length;
 
@@ -30,14 +24,14 @@ export default class Product extends Component {
 
 		if (numberImages === 1) {
 			return (
-				<img src={'data:image/jpeg;base64,' + this.arrayBufferToBase64(images[0].data)} alt="product"/>
+				<img src={'data:image/jpeg;base64,' + arrayBufferToBase64(images[0].data)} alt="product"/>
 			);
 		}
 
 		return (
 			<div>
-				<img src={'data:image/jpeg;base64,' + this.arrayBufferToBase64(images[0].data)} alt="main product img" />
-				<img src={'data:image/jpeg;base64,' + this.arrayBufferToBase64(images[1].data)} alt="product hover" className="hover-image" />
+				<img src={'data:image/jpeg;base64,' + arrayBufferToBase64(images[0].data)} alt="main product img" />
+				<img src={'data:image/jpeg;base64,' + arrayBufferToBase64(images[1].data)} alt="product hover" className="hover-image" />
 			</div>
 		);
 	}
