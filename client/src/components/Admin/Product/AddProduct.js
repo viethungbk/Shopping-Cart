@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import callApi from '../../../apiCaller';
 
-export default class Products extends Component {
+export default class AddProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {

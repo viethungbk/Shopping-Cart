@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import arrayBufferToBase64 from '../../../arrayBufferToBase64';
 
 export default class Item extends Component {
@@ -16,7 +17,7 @@ export default class Item extends Component {
 
   render() {
     const { product, index } = this.props;
-
+    console.log(product);
     return (
       <tr>
         <td>{index + 1}</td>
@@ -26,7 +27,9 @@ export default class Item extends Component {
         <td>{product.name}</td>
         <td>{product.price}</td>
         <td>{product.pricebefore}</td>
-        <td><button type="button" className="btn btn-primary" onClick={ () => this.props.onEditItem(product._id) }>Sửa</button></td>
+        <td>
+          <Link to={`/admin/edit-product/${product._id}`}><button type="button" className="btn btn-primary">Sửa</button></Link>
+        </td>
         <td><button type="button" className="btn btn-danger" onClick={ () => this.props.onDeleteItem(product._id) }>Xóa</button></td>
       </tr>
     )

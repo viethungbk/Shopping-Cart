@@ -7,7 +7,7 @@ export default class SideBar extends Component {
       <div>
         <ul className="nav nav-sidebar-dashboard">
           <li className="active"><Link to="">Overview</Link></li>
-          <li><Link to="/admin/add-products">Add Products</Link></li>
+          <li><Link to="/admin/add-products">Add Product</Link></li>
           <li><Link to="/admin/list-products">List Products</Link></li>
           <li><Link to="/admin/users">Users</Link></li>
         </ul>
