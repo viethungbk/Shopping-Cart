@@ -6,9 +6,9 @@ export default class EditProduct extends Component {
     super(props);
     this.state = {
       name: '',
-      price: null,
-      pricebefore: null,
-      iventory: null,
+      price: 0,
+      pricebefore: 0,
+      iventory: 0,
       brand: '',
       details: '',
       image: [],
@@ -18,7 +18,19 @@ export default class EditProduct extends Component {
     }
   }
 
+  componentDidMount() {
+    const productId = this.props.match.params.id;
 
+    callApi(`api/products/${productId}`, 'get', null, null)
+      .then(res => {
+        const product = res.data;
+        console.log(product);
+        this.setState({
+          ...product
+        })
+      })
+      .catch(err => console.log(err));
+  }
 
   checkInput() {
     const { name, price, pricebefore, iventory, brand } = this.state;
@@ -58,7 +70,9 @@ export default class EditProduct extends Component {
       'Content-Type': 'multipart/form-data'
     }
 
-    callApi('api/products/add','post', product, headers)
+    const productId = this.props.match.params.id;
+
+    callApi(`api/products/${productId}`, 'patch', product, headers)
       .then(res => {
         console.log(res);
         this.setState({
@@ -125,6 +139,8 @@ export default class EditProduct extends Component {
 
   render() {
     console.log(this.props.match.params.id);
+    const { name, price, pricebefore, iventory, brand, details } = this.state;
+
     return (
       <div className="container">
         <div className="row">
@@ -141,40 +157,40 @@ export default class EditProduct extends Component {
             <div className="form-group">
               <label htmlFor="name" className="col-sm-2 control-label">Tên sản phẩm*</label>
               <div className="col-sm-10">
-                <input type="text" className="form-control" id="name" name="name" placeholder="Iphone XS Max" onChange={ event => this.changeInput(event) } />
+                <input type="text" className="form-control" id="name" name="name" value={ name } placeholder="Iphone XS Max" onChange={ event => this.changeInput(event) } />
               </div>
             </div>
 
             <div className="form-group">
               <label htmlFor="price" className="col-sm-2 control-label">Giá bán*</label>
               <div className="col-sm-10">
-                <input type="text" className="form-control" id="price" name="price" placeholder="20 000 000" onChange={ event => this.changeInput(event) } />
+                <input type="text" className="form-control" id="price" name="price" value={ price } placeholder="20 000 000" onChange={ event => this.changeInput(event) } />
               </div>
             </div>
 
             <div className="form-group">
               <label htmlFor="pricebefore" className="col-sm-2 control-label">Giá trước Sale*</label>
               <div className="col-sm-10">
-                <input type="text" className="form-control" id="pricebefore" name="pricebefore" placeholder="30 000 000" onChange={ event => this.changeInput(event) } />
+                <input type="text" className="form-control" id="pricebefore" name="pricebefore" value={ pricebefore } placeholder="30 000 000" onChange={ event => this.changeInput(event) } />
               </div>
             </div>
 
             <div className="form-group">
               <label htmlFor="brand" className="col-sm-2 control-label">Hãng Điện thoại*</label>
               <div className="col-sm-10">
-                <input type="text" className="form-control" id="brand" name="brand" placeholder="Iphone" onChange={ event => this.changeInput(event) } />
+                <input type="text" className="form-control" id="brand" name="brand" value={ brand } placeholder="Iphone" onChange={ event => this.changeInput(event) } />
               </div>
             </div>
 
             <div className="form-group">
               <label htmlFor="iventory" className="col-sm-2 control-label">Số lượng*</label>
               <div className="col-sm-10">
-                <input type="text" className="form-control" id="iventory" name="iventory" placeholder="1000" onChange={ event => this.changeInput(event) } />
+                <input type="text" className="form-control" id="iventory" name="iventory" value={ iventory } placeholder="1000" onChange={ event => this.changeInput(event) } />
               </div>
             </div>
 
             <label className="col-sm-2" htmlFor="details">Mô tả sản phẩm:</label>
-            <textarea id="details" className="col-sm-10" name="details" value={ this.state.details } rows="5" cols="33" onChange={ event => this.changeInput(event) }></textarea>
+            <textarea id="details" className="col-sm-10" name="details" value={ details } rows="5" cols="33" onChange={ event => this.changeInput(event) }></textarea>
 
             <hr />
 
@@ -186,7 +202,7 @@ export default class EditProduct extends Component {
             <div className="form-group">
               <div className="col-sm-offset-2 col-sm-10">
                 <button type="submit" className="btn btn-primary" onClick={ event => this.submitForm(event) }>
-                  Add
+                  Update
                 </button>
               </div>
             </div>

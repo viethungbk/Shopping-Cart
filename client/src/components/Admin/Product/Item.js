@@ -17,7 +17,7 @@ export default class Item extends Component {
 
   render() {
     const { product, index } = this.props;
-    console.log(product);
+
     return (
       <tr>
         <td>{index + 1}</td>

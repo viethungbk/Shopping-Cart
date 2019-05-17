@@ -41,8 +41,6 @@ router.get('/', (req, res) => {
 // @desc    Get a product by id
 // @access  Public
 router.get('/:id', (req, res) => {
-  console.log(req.params)
-
   Product.findById(req.params.id)
     .exec()
     .then(product => {
@@ -86,7 +84,6 @@ router.post('/add', productUpload, (req, res) => {
   let newProduct = new Product({ ...data });
 
   const files = req.files['image'];
-  console.log(files);
 
   if (files !== undefined) {
     let images = [];
@@ -109,11 +106,21 @@ router.post('/add', productUpload, (req, res) => {
 // @route   PUT api/products/:id
 // @desc    Update a product
 // @access  Private
-router.patch('/:id', (req, res) => {
+router.patch('/:id', productUpload, (req, res) => {
   const data = req.body;
 
-  // Create new product
-  const newProduct = new Product({ ...data });
+  // Create new product with older product id
+  const newProduct = new Product({ _id: req.params.id, ...data });
+
+  const files = req.files['image'];
+
+  if (files !== undefined) {
+    let images = [];
+    files.map(file => {
+      images.push(fs.readFileSync(file.path));
+    });
+    newProduct.image = images;
+  }
 
   Product.findByIdAndUpdate(req.params.id, newProduct)
     .exec()
@@ -121,8 +128,9 @@ router.patch('/:id', (req, res) => {
       if (!product) {
         error = 'Not Found';
         return res.status(404).json(error);
+      } else {
+        return res.json("Update successfull");
       }
-      return res.json("Update successfull");
     })
     .catch(err => res.json(err.message));
 });
