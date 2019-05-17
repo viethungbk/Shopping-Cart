@@ -1,36 +1,46 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 export default class Slider extends Component {
   render() {
-    return (
-      <div id="hero">
-        <div id="owl-main" className="owl-carousel owl-inner-nav owl-ui-sm">
-          <div className="item" style={{ backgroundImage: 'url(assets/images/sliders/01.jpg)' }}>
-            <div className="container-fluid">
+      return (
 
-              {/* caption */}
-              <div className="caption bg-color vertical-center text-left">
-                <div className="slider-header fadeInDown-1">Top Brands</div>
-                <div className="big-text fadeInDown-1"> New Collections </div>
-                <div className="excerpt fadeInDown-2 hidden-xs"> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> </div>
-                <div className="button-holder fadeInDown-3"> <Link to="" className="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</Link> </div>
+        <div  >
+          <div id="myCarousel" className="carousel slide" data-ride="carousel">
+            {/* Indicators */}
+            <ol className="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to={0} className="active" />
+              <li data-target="#myCarousel" data-slide-to={1} />
+              <li data-target="#myCarousel" data-slide-to={2} />
+            </ol>
+            {/* Wrapper for slides */}
+            <div className="carousel-inner" style={{height:500}}>
+              <div className="item active">
+                <img src="assets/images/banners/banner-side.png" alt="Los Angeles" style={{ width: '100%'}} />
+              </div>
+              <div className="item">
+                <img src="assets/images/banners/home-banner.jpg" alt="Chicago" style={{ width: '100%' }} />
+                <img src="assets/images/banners/home-banner.jpg" alt="Chicago" style={{ width: '100%' }} />
+              </div>
+              <div className="item">
+                <img src="assets/images/banners/banner-side.png" alt="New york" style={{ width: '100%' }} />
               </div>
             </div>
-          </div>
-
-          <div className="item" style={{ backgroundImage: 'url(assets/images/sliders/02.jpg)' }}>
-            <div className="container-fluid">
-              <div className="caption bg-color vertical-center text-left">
-                <div className="slider-header fadeInDown-1">Spring 2018</div>
-                <div className="big-text fadeInDown-1"> Women Fashion </div>
-                <div className="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span> </div>
-                <div className="button-holder fadeInDown-3"> <Link to="" className="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</Link> </div>
-              </div>
-            </div>
+            {/* Left and right controls */}
+            <a className="left carousel-control" href="#myCarousel" data-slide="prev">
+              <span className="glyphicon glyphicon-chevron-left" />
+              <span className="sr-only">Previous</span>
+            </a>
+            <a className="right carousel-control" href="#myCarousel" data-slide="next">
+              <span className="glyphicon glyphicon-chevron-right" />
+              <span className="sr-only">Next</span>
+            </a>
           </div>
         </div>
-      </div>
-    );
-  }
+      
+      );
+    }
+
 }
+
+
+

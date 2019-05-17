@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import actAddToCart from "./../../actions/index";
-// import { connect } from 'react-redux';
+
 
 
 
 class Product extends Component {
 
-    onAddToCart = (product) => {
-        this.props.onAddToCart(product);
+    onAddToCart = (product, quantity) => {
+        this.props.onAddToCart(product, quantity);
     }
     onDeleteWishItem = (product) => {
         this.props.onDeleteWishItem(product);
@@ -16,7 +15,6 @@ class Product extends Component {
 
     render() {
         let { product } = this.props;
-        console.log(product);
         return (
             <tr>
                 <td className="col-md-2 col-sm-6 col-xs-6"><img src={product.img} alt="product" /></td>
@@ -35,7 +33,7 @@ class Product extends Component {
                         <span>${product.price_before_discount}</span>
                     </div>
                 </td>
-                <td className="col-md-2 " onClick={() => { this.onAddToCart(product) }} >
+                <td className="col-md-2 " onClick={() => { this.onAddToCart(product, 1) }} >
                     <Link to="/shopping-cart" className="btn-upper btn btn-primary">Add to cart</Link>
                 </td>
                 <td className="col-md-1 close-btn" onClick={() => { this.onDeleteWishItem(product) }} >

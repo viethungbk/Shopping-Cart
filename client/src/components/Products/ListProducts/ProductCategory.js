@@ -10,7 +10,7 @@ class ProductCategory extends Component {
             <div>
                 <div className="more-info-tab clearfix ">
                     <h3 className="new-product-title pull-left">
-                        {this.props.children}
+                        -{this.props.children}
                     </h3>
 
                     <div className="navbar float-right mt-15px">

@@ -1,0 +1,266 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "brand": "Samsung",
+      "name": "Samsung Note 9",
+      "img": "assets/images/products/samsung-note-9.jpg",
+      "img_hover": "assets/images/products/samsung-note-9.2.jpg",
+      "price": 150,
+      "price_before_discount": 1500,
+      "iventory": 50,
+      "detail": "Sản phẩm chính hãng",
+      "rating": 3,
+      "status": true
+    },
+    {
+      "id": 2,
+      "brand": "Samsung",
+      "name": "Samsung Note 10",
+      "img": "assets/images/products/samsung-note-9.jpg",
+      "img_hover": "assets/images/products/samsung-note-9.2.jpg",
+      "price": 300,
+      "price_before_discount": 450,
+      "iventory": 50,
+      "detail": "Sản phẩm chính hãng",
+      "rating": 4,
+      "status": true
+    },
+    {
+      "id": 3,
+      "brand": "Iphone",
+      "name": "Iphone XS Max",
+      "img": "assets/images/products/iphone-xs-max-hover.jpg",
+      "img_hover": "assets/images/products/iphone-xs-max-hover.jpg",
+      "price": 310,
+      "price_before_discount": 450,
+      "iventory": 50,
+      "detail": "Sản phẩm chính hãng",
+      "rating": 4,
+      "status": true
+    },
+    {
+      "id": 3,
+      "brand": "Iphone",
+      "name": "Huawei",
+      "img": "assets/images/products/Huawei-P30-Pro.jpg",
+      "img_hover": "assets/images/products/Huawei-P30-Pro.jpg",
+      "price": 310,
+      "price_before_discount": 450,
+      "iventory": 50,
+      "detail": "Sản phẩm chính hãng",
+      "rating": 4,
+      "status": true
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Lê Đình Phúc",
+      "email": "ledinhphucts98@gmail.com",
+      "userName": "dinhphuc",
+      "password": "dinhphuc",
+      "cart": [
+        {
+          "product": {
+            "id": 1,
+            "brand": "Samsung",
+            "name": "Samsung Note 9",
+            "img": "assets/images/products/samsung-note-9.jpg",
+            "img_hover": "assets/images/products/samsung-note-9.2.jpg",
+            "price": 100,
+            "price_before_discount": 1500,
+            "iventory": 50,
+            "color": "bule",
+            "date_import": "08/04/2019",
+            "detail": "Sản phẩm chính hãng",
+            "rating": 3,
+            "status": true
+          },
+          "quantity": 3
+        }
+      ],
+      "wishList": [
+        {
+          "id": 1,
+          "brand": "Samsung",
+          "name": "Samsung Note 9",
+          "img": "assets/images/products/samsung-note-9.jpg",
+          "img_hover": "assets/images/products/samsung-note-9.2.jpg",
+          "price": 100,
+          "price_before_discount": 1500,
+          "iventory": 50,
+          "color": "bule",
+          "date_import": "08/04/2019",
+          "detail": "Sản phẩm chính hãng",
+          "rating": 3,
+          "status": true
+        }
+      ],
+      "orders": [
+        {
+          "id": 1,
+          "products": [
+            {
+              "id": 1,
+              "brand": "Samsung",
+              "name": "Samsung Note 9",
+              "img": "assets/images/products/samsung-note-9.jpg",
+              "img_hover": "assets/images/products/samsung-note-9.2.jpg",
+              "price": 100,
+              "price_before_discount": 1500,
+              "iventory": 50,
+              "color": "bule",
+              "date_import": "08/04/2019",
+              "detail": "Sản phẩm chính hãng",
+              "rating": 3,
+              "status": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lê Đình Phúc",
+      "email": "ledinhphuc98@gmail.com",
+      "userName": "dinhphuc36",
+      "password": "dinhphuc36",
+      "cart": [
+        {
+          "id": 1,
+          "product": {
+            "id": 1,
+            "brand": "Samsung",
+            "name": "Samsung Note 9",
+            "img": "assets/images/products/samsung-note-9.jpg",
+            "img_hover": "assets/images/products/samsung-note-9.2.jpg",
+            "price": 100,
+            "price_before_discount": 1500,
+            "iventory": 50,
+            "color": "bule",
+            "date_import": "08/04/2019",
+            "detail": "Sản phẩm chính hãng",
+            "rating": 3,
+            "status": true
+          },
+          "quantity": 3
+        }
+      ],
+      "wishList": [
+        {
+          "id": 1,
+          "brand": "Samsung",
+          "name": "Samsung Note 9",
+          "img": "assets/images/products/samsung-note-9.jpg",
+          "img_hover": "assets/images/products/samsung-note-9.2.jpg",
+          "price": 100,
+          "price_before_discount": 1500,
+          "iventory": 50,
+          "color": "bule",
+          "date_import": "08/04/2019",
+          "detail": "Sản phẩm chính hãng",
+          "rating": 3,
+          "status": true
+        }
+      ],
+      "orders": [
+        {
+          "id": 1,
+          "products": [
+            {
+              "id": 1,
+              "brand": "Samsung",
+              "name": "Samsung Note 9",
+              "img": "assets/images/products/samsung-note-9.jpg",
+              "img_hover": "assets/images/products/samsung-note-9.2.jpg",
+              "price": 100,
+              "price_before_discount": 1500,
+              "iventory": 50,
+              "color": "bule",
+              "date_import": "08/04/2019",
+              "detail": "Sản phẩm chính hãng",
+              "rating": 3,
+              "status": true
+            }
+          ]
+        }
+      ],
+      "id": 2
+    },
+    {
+      "email": "viethung@gmail.com",
+      "password": "123456",
+      "id": 14
+    },
+    {
+      "name": "Lê Đình Phúc",
+      "email": "ledinhphuc888461@gmail.com",
+      "userName": "",
+      "password": "1",
+      "cart": [],
+      "wishList": [],
+      "orders": [],
+      "id": 5
+    },
+    {
+      "name": "Lê Đình Phúc",
+      "email": "ledinhphucts9228@gmail.com",
+      "userName": "",
+      "password": "1",
+      "cart": [],
+      "wishList": [],
+      "orders": [],
+      "id": 6
+    },
+    {
+      "name": "Lê Đình Phúc",
+      "email": "ledinhphucts912328@gmail.com",
+      "userName": "",
+      "password": "1",
+      "cart": [],
+      "wishList": [],
+      "orders": [],
+      "id": 7
+    },
+    {
+      "name": "Lê Đình Phúc",
+      "email": "ledinhphucts928@gmail.com",
+      "userName": "",
+      "password": "1",
+      "cart": [],
+      "wishList": [],
+      "orders": [],
+      "id": 8
+    },
+    {
+      "name": "Lê Đình Phúc",
+      "email": "ledinhphucts9823@gmail.com",
+      "userName": "",
+      "password": "2",
+      "cart": [],
+      "wishList": [],
+      "orders": [],
+      "id": 9
+    },
+    {
+      "name": "Lê Đình Phúc",
+      "email": "ledinhphucts9ưew8@gmail.com",
+      "userName": "",
+      "password": "1",
+      "cart": [],
+      "wishList": [],
+      "orders": [],
+      "id": 10
+    },
+    {
+      "name": "Lê Đình Phúc",
+      "email": "ledinhphucts981@gmail.com",
+      "userName": "",
+      "password": "ư",
+      "cart": [],
+      "wishList": [],
+      "orders": [],
+      "id": 11
+    }
+  ]
+}

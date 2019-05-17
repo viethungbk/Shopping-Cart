@@ -1,96 +1,47 @@
 
 import * as Types from './../constants/ActionTypes';
-import * as  MSG from "./../constants/Message.js";
+// import * as  MSG from "./../constants/Message.js";
+// import callApi from "./../utils/apiCaller";
 // import { log } from 'util';
 //gọi lên server lấy dữ liệu
 // var data = JSON.parse(localStorage.getItem('cart'));
 
-let inittialState = [
-    // {
-    //     product: {
-    //         id: 1,
-    //         brand: "Samsung",
-    //         name: "Samsung Note 9",
-    //         img: "assets/images/products/samsung-note-9.jpg",
-    //         img_hover: "assets/images/products/samsung-note-9.2.jpg",
-    //         price: 100,
-    //         price_before_discount: 1500000,
-    //         iventory: 50,
-    //         rating: 5
-    //     },
-    //     quantity: 4
-    // },
-    // {
-    //     product: {
-    //         id: 2,
-    //         brand: "Iphone",
-    //         name: "Iphone XS max plus",
-    //         img: "assets/images/products/iphone-xs-max.jpg",
-    //         img_hover: "assets/images/products/iphone-xs-max-hover.jpg",
-    //         price: 300,
-    //         price_before_discount: 3500000,
-    //         iventory: 30,
-    //         rating: 2
-    //     },
-    //     quantity: 2
-    // },
-    // {
-    //     product: {
-    //         id: 3,
-    //         brand: "Huawei",
-    //         name: "Huawei P30 Pro",
-    //         img: "assets/images/products/Huawei-P30-Pro.jpg",
-    //         img_hover: "assets/images/products/Huawei-P30-Pro-hover.jpg",
-    //         price: 200,
-    //         price_before_discount: 3000000,
-    //         iventory: 20,
-    //         rating: 1
-    //     },
-    //     quantity: 3
-    // }
-];
+let inittialState = [];
 
 
 
 const cart = (state = inittialState, action) => {
+    let index = -1;
     switch (action.type) {
+        case Types.REMOVE_USER:
+            state = [];
+            return [...state];
+        case Types.FETCH_USER_DATA:
+            state = action.user.cart;
+            return [...state];
         case Types.FETCH_CART_ITEMS:
-        console.log(action.cart);
-        state = action.cart;
-        return [...state];
-
-
+            state = action.cart;
+            return [...state];
         case Types.ADD_TO_CART:
-            let { product, quantity } = action;
-            if (typeof state !== "string") {
-                let index = state.findIndex(item => item.product.id === product.id);
-                if (index === -1) {
-                    state.push({
-                        product,
-                        quantity
-                    });
-                } else {
-                    state[index].quantity += quantity;
-                }
-            }else{
-                state = [{
-                    product,
-                    quantity
-                }]
+            index = state.findIndex(item => item.product.id === action.product.id);
+            if (index !== -1) {
+                state[index].quantity += action.quantity;
+            } else {
+                state.push({ product: action.product, quantity: action.quantity });
             }
             return [...state];
         case Types.DELETE_CART_ITEM:
-            let indexDelete = state.findIndex(item => item.product.id === action.item.product.id);
-            if (indexDelete !== -1) {
-                state.splice(indexDelete, 1);
+            index = state.findIndex(item => item.product.id === action.item.product.id);
+            if (index !== -1) {
+                state.splice(index, 1);
             }
-            return state.length === 0 ? MSG.MSG_CART_EMPTY : [...state];
+            return [...state];
 
         case Types.UPDATE_CART_ITEM_QUANTITY:
-            let indexUpdate = state.findIndex(item => item.product.id === action.item.product.id);
-            let q = state[indexUpdate].quantity;
-            if (indexUpdate !== -1) {
-                state[indexUpdate].quantity = (q + action.quantity) <= 1 ? 1 : q + action.quantity;
+            index = state.findIndex(item => item.product.id === action.item.product.id);
+            let q = state[index].quantity + action.quantity;
+            if (index !== -1) {
+                state[index].quantity = q <= 1 ? 1 : q;
             }
             return [...state];
 

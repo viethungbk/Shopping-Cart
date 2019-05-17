@@ -27,7 +27,7 @@ export default class Navbar extends Component {
                     <li className="dropdown"> <Link to="/">LG</Link> </li>
                     <li className="dropdown"> <Link to="/">Asus</Link> </li>
                     <li className="dropdown"> <Link to="/">Nokia</Link> </li>
-                    <li className="dropdown"> <Link to="#" className="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Pages</Link>
+                    {/* <li className="dropdown"> <Link to="#" className="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Pages</Link>
                       <ul className="dropdown-menu pages">
                         <li>
                           <div className="yamm-content">
@@ -35,10 +35,10 @@ export default class Navbar extends Component {
                               <div className="col-xs-12 col-menu">
                                 <ul className="links">
                                   <li><Link to="/">Home</Link></li>
-                                  <li><Link to="/">Category</Link></li>
+                                  <li><Link to="/">Thể loại</Link></li>
                                   <li><Link to="/">Detail</Link></li>
                                   <li><Link to="/shopping-cart">Shopping Cart Summary</Link></li>
-                                  <li><Link to="/checkout">Checkout</Link></li>
+                                  <li><Link to="/ordersCheck">Checkout</Link></li>
                                   <li><Link to="/blog">Blog</Link></li>
                                   <li><Link to="/blog-details">Blog Detail</Link></li>
                                   <li><Link to="/contact">Contact</Link></li>
@@ -55,8 +55,12 @@ export default class Navbar extends Component {
                           </div>
                         </li>
                       </ul>
+                    </li> */}
+                    <li className="dropdown  navbar-right special-menu">
+                      <Link to="">
+                        Giảm 30% cho các mặt hàng được chọn
+                      </Link>
                     </li>
-                    <li className="dropdown  navbar-right special-menu"> <Link to="">Get 30% off on selected items</Link> </li>
                   </ul>
                   <div className="clearfix" />
                 </div>

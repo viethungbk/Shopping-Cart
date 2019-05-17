@@ -9,7 +9,7 @@ const router = express.Router();
 // @route   GET api/cart//
 // @desc    Get user's cart
 // @access  private
-router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/', (req, res) => {
   // console.log(req.user);
   let error = null;
   Cart.find({ user: req.user })
@@ -21,6 +21,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
       return res.status(400).json(cart);
     })
 });
+
 
 // @route   POST api/cart/add
 // @desc    Add a product to cart

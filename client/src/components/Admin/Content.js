@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
-import Products from './Product/Products';
+import Products from "./Product/Products";
 import Users from './User/Users';
 
 export default class Content extends Component {

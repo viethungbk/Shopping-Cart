@@ -8,7 +8,7 @@ class MessageWishListEmpty extends Component {
         return (
             <tr>
                 <td>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <h3 className="messageCartEmpty">
                             {MSG.MSG_WISH_LIST_EMPTY}
                         </h3>

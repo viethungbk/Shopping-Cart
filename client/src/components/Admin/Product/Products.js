@@ -1,99 +1,98 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-axios.defaults.headers.post['content-type'] = 'multipart/form-data';
 
 export default class Products extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     name: '',
-  //     price: '',
-  //     brand: '',
-  //     iventory: '',
-  //     os: '',
-  //     lnguage: '',
-  //     screen: '',
-  //     camera: '',
-  //     cpu: '',
-  //     memmory: '',
-  //     battery: '',
-  //     fileImages: [],
-  //     isShowMessage: false,
-  //     message: '',
-  //     isSubmit: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      price: '',
+      brand: '',
+      iventory: '',
+      os: '',
+      language: '',
+      screen: '',
+      camera: '',
+      cpu: '',
+      memmory: '',
+      battery: '',
+      fileImages: [],
+      isShowMessage: false,
+      message: '',
+      isSubmit: false
+    }
+  }
+
+  submitForm = (event) => {
+    event.preventDefault();
+    console.log('Submit');
+    let product = {};
+    product.name = this.state.name;
+    product.price = this.state.price;
+    product.brand = this.state.brand;
+    product.iventory = this.state.iventory;
+    product.os = this.state.os;
+    product.language = this.state.lnguage;
+    product.screen = this.state.screen;
+    product.camera = this.state.camera;
+    product.cpu = this.state.cpu;
+    product.memory = this.state.memmory;
+    product.battery = this.state.battery;
+    product.image = this.state.fileImages;
+    console.log(this.state);
+    console.log(product);
+
+    axios.post('/api/products/add', product)
+      .then(res => {
+        console.log(res);
+        // this.setState({
+        //   isLogin: true
+        // });
+      })
+      .catch(err => {
+        console.log(err.response);
+        // this.setState({
+        //   isShowMessage: true,
+        //   message: err.response.data
+        // });
+        // console.log(this.state)
+      });
+  }
+
+  // showMessage() {
+  //   if (!this.state.isShowMessage) {
+  //     return null;
   //   }
+  //   let message = this.state.message.email || this.state.message.password;
+  //   return (
+  //     <div className="alert alert-danger">
+  //       <h4>{ message }</h4>
+  //     </div>
+  //   );
   // }
 
-  // submitForm = (event) => {
-  //   event.preventDefault();
-  //   console.log('Submit');
-  //   let product = {};
-  //   product.name = this.state.name;
-  //   product.price = this.state.price;
-  //   product.brand = this.state.brand;
-  //   product.iventory = this.state.iventory;
-  //   product.os = this.state.os;
-  //   product.language = this.state.lnguage;
-  //   product.screen = this.state.screen;
-  //   product.camera = this.state.camera;
-  //   product.cpu = this.state.cpu;
-  //   product.memory = this.state.memmory;
-  //   product.battery = this.state.battery;
-  //   product.image = this.state.fileImages;
-  //   console.log(this.state);
-  //   console.log(product);
+  changeInput = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    console.log(name);
+    console.log(value);
 
-  //   axios.post('/api/products/add', product)
-  //     .then(res => {
-  //       console.log(res);
-  //       // this.setState({
-  //       //   isLogin: true
-  //       // });
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response);
-  //       // this.setState({
-  //       //   isShowMessage: true,
-  //       //   message: err.response.data
-  //       // });
-  //       // console.log(this.state)
-  //     });
-  // }
+    this.setState({
+      [name]: value
+    });
 
-  // // showMessage() {
-  // //   if (!this.state.isShowMessage) {
-  // //     return null;
-  // //   }
-  // //   let message = this.state.message.email || this.state.message.password;
-  // //   return (
-  // //     <div className="alert alert-danger">
-  // //       <h4>{ message }</h4>
-  // //     </div>
-  // //   );
-  // // }
-
-  // changeInput = (event) => {
-  //   const target = event.target;
-  //   const name = target.name;
-  //   const value = target.value;
-  //   console.log(name);
-  //   console.log(value);
-
-  //   this.setState({
-  //     [name]: value
-  //   });
-
-  //   // Handle for file upload
-  //   if (name === 'fileImages') {
-  //     const file = event.target.files[0];
-  //     console.log(file);
-  //     this.setState({
-  //       fileImages: file
-  //     });
-  //     console.log(this.state);
-  //   }
-  // }
+    // Handle for file upload
+    if (name === 'fileImages') {
+      const file = event.target.files[0];
+      console.log(file);
+      this.setState({
+        fileImages: file
+      });
+      console.log(this.state);
+    }
+  }
 
   render() {
     return (

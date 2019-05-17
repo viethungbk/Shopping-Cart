@@ -1,30 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Product from "./Product";
-import actAddToCart, {actDeleteWishItem} from "./../../actions/index";
+import actAddToCart, { actDeleteWishItem } from "./../../actions/index";
 import MessageWishListEmpty from "./MessageWishListEmpty";
-
+import { Redirect } from "react-router-dom";
 class MyWishList extends Component {
 
    showWishList = (wishList) => {
-      let result = [];
-      let { onAddToCart, onDeleteWishItem } = this.props;
-      if(wishList.length===0){
-         return <MessageWishListEmpty />;
+      const { user } = this.props;
+      if (typeof user.id === "undefined") {
+         if (window.confirm("Bạn phải đăng nhập để xem danh sách yêu thích!")) { //esline-disable-line
+            return <Redirect to='/login' />;
+         } else {
+            return <MessageWishListEmpty />;
+         }
       }
-      result = wishList.map((product, index) => {
-         return <Product
-            key={index}
-            product={product}
-            onAddToCart={onAddToCart}
-            onDeleteWishItem={onDeleteWishItem}
-         />
-      });
-      return result;
+      else {
+         if (wishList.length === 0) {
+            return <MessageWishListEmpty />;
+         }
+         let result = [];
+         let { onAddToCart, onDeleteWishItem } = this.props;
+         result = wishList.map((product, index) => {
+            return <Product
+               key={index}
+               product={product}
+               onAddToCart={onAddToCart}
+               onDeleteWishItem={onDeleteWishItem}
+            />
+         });
+         return result;
+      }
    }
 
    render() {
+
       let { wishList } = this.props;
+
       return (
          <div className="my-wishlist-page">
             <div className="row">
@@ -49,17 +61,18 @@ class MyWishList extends Component {
 }
 const mapStateToProps = state => {
    return {
-      wishList: state.wishList
+      wishList: state.wishList,
+      user: state.user
    }
 }
 
 
 const mapDispatchToProps = (dispatch, props) => {
    return {
-      onAddToCart: (product) => {
-         dispatch(actAddToCart(product, 1));
+      onAddToCart: (product, quantity) => {
+         dispatch(actAddToCart(product, quantity));
       },
-      onDeleteWishItem: (product)=> {
+      onDeleteWishItem: (product) => {
          dispatch(actDeleteWishItem(product));
       }
    }

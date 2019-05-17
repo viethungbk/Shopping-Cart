@@ -1,5 +1,5 @@
 const express = require('express');
-const multer  = require('multer');
+const multer = require('multer');
 const fs = require('fs');
 const passport = require('passport');
 
@@ -42,16 +42,16 @@ router.post('/add', passport.authenticate('jwt', { session: false }), upload.sin
   }
 
   // Create new product
-  const newProduct = new Product({...data});
+  const newProduct = new Product({ ...data });
   newProduct.image = fs.readFileSync(req.file.path);
 
   newProduct
-  .save()
-  .then(product => res.json(product))
-  .catch(err => {
-    console.log(err);
-    return res.status(400).json(err.message);
-  });
+    .save()
+    .then(product => res.json(product))
+    .catch(err => {
+      console.log(err);
+      return res.status(400).json(err.message);
+    });
 })
 
 
@@ -62,7 +62,7 @@ router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res
   const data = req.body;
 
   // Create new product
-  const newProduct = new Product({...data});
+  const newProduct = new Product({ ...data });
 
   Product.findByIdAndUpdate(req.params.id, newProduct)
     .exec()
@@ -84,11 +84,11 @@ router.post('/add-to-wishlist', passport.authenticate('jwt', { session: false })
 
   // Load user model
   const User = require('../../models/User');
-  
+
   user.wishlist.push(req.body);
   console.log(user);
 
-  
+
 
   User.findById(user.id, user)
     .exec()

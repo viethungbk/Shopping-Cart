@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import HeaderAdmin from './HeaderAdmin';
+import HeaderAdmin from './Product/HeaderAdmin';
 import SideBar from './SideBar';
 import Content from './Content';
 
@@ -9,9 +9,8 @@ export default class Layout extends Component {
     return (
       <Router>
         <div>
-          <HeaderAdmin></HeaderAdmin>
+          <HeaderAdmin />
         </div>
-
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-3 col-md-2 sidebar-dashboard">

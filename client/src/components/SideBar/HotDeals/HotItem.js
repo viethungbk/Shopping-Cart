@@ -32,7 +32,7 @@ export default class HotItem extends Component {
           </div>
           {/* /.hot-deal-wrapper */}
           <div className="product-info text-left m-t-20">
-            <h3 className="name"><Link to="/product-details">Floral Print Buttoned</Link></h3>
+            <h3 className="name"><Link to="/product-details">Iphone XS Max plus</Link></h3>
             <div className="rating rateit-small" />
             <div className="product-price"> <span className="price"> $600.00 </span> <span className="price-before-discount">$800.00</span> </div>
             {/* /.product-price */}
@@ -42,7 +42,7 @@ export default class HotItem extends Component {
             <div className="action">
               <div className="add-cart-button btn-group">
                 <button className="btn btn-primary icon" data-toggle="dropdown" type="button"> <i className="fa fa-shopping-cart" /> </button>
-                <button className="btn btn-primary cart-btn" type="button">Add to cart</button>
+                <button className="btn btn-primary cart-btn" type="button">Thêm vào giỏ hàng</button>
               </div>
             </div>
             {/* /.action */}

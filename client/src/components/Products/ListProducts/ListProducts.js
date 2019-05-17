@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Product from './Product';
 import ProductCategory from './ProductCategory';
 import { connect } from 'react-redux';
-import actAddToCart, { actAddToWishList, actFetchProductsRequest } from "./../../../actions/index";
+import actAddToCart, { actAddToWishList, actFetchProductsRequest, actFetchProductDetail } from "./../../../actions/index";
 
 
 class ListProducts extends Component {
@@ -20,7 +20,7 @@ class ListProducts extends Component {
 
     showProducts = (products) => {
         let sortBy = this.state.sortBy;
-        console.log(sortBy);
+        // console.log(sortBy);
         if (sortBy === 0) {
             products = products.sort((a, b) => {
                 return b.rating - a.rating;
@@ -34,27 +34,38 @@ class ListProducts extends Component {
                 return b.price - a.price;
             });
         }
-        let { onAddToCart, onAddToWishList } = this.props;
+        let { onAddToCart, onAddToWishList, seeProductDetail, user, keySearch, watchingProductDetail } = this.props;
         let listProducts = products.map((product, index) => {
             return <Product
                 key={index}
                 product={product}
                 onAddToCart={onAddToCart}
                 onAddToWishList={onAddToWishList}
+                seeProductDetail={seeProductDetail}
+                user={user}
+                keySearch={keySearch}
+                watchingProductDetail={watchingProductDetail}
             />
         });
         return listProducts;
     }
 
     onSort = (sortBy) => {
-        console.log(sortBy);
+        // console.log(sortBy);
         this.setState({
-            sortBy : sortBy
+            sortBy: sortBy
         })
     }
 
     render() {
-        let { products, children } = this.props;
+        let { products, children, keySearch } = this.props;
+
+        if (keySearch) {
+            products = products.filter((product) => {
+                return (product.name.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1) ||
+                    product.brand.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1
+            })
+        }
 
         return (
             <div className="container">
@@ -73,7 +84,9 @@ class ListProducts extends Component {
 
 const mapStateToProps = state => {
     return {
-        products: state.products
+        products: state.products,
+        user: state.user,
+        keySearch: state.keySearch
     }
 }
 
@@ -82,11 +95,14 @@ const mapDispatchToProps = (dispatch, props) => {
         fetchAllProducts: () => {
             dispatch(actFetchProductsRequest());
         },
-        onAddToCart: (product) => {
-            dispatch(actAddToCart(product, 1));
+        onAddToCart: (product, quantity) => {
+            dispatch(actAddToCart(product, quantity));
         },
         onAddToWishList: (product) => {
             dispatch(actAddToWishList(product));
+        },
+        watchingProductDetail: (product) => {
+            dispatch(actFetchProductDetail(product));
         }
     }
 }

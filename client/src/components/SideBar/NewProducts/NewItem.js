@@ -24,7 +24,7 @@ export default class NewItem extends Component {
                                 {/* Thong tin Item */}
                                 <div className="col col-xs-7">
                                     <div className="product-info">
-                                        <h3 className="name"><Link to="">Tên sản phẩm</Link></h3>
+                                        <h3 className="name"><Link to="">Iphone 10</Link></h3>
                                         <div className="rating rateit-small" />
                                         <div className="product-price">
                                             <span className="price">

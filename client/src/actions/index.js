@@ -2,12 +2,23 @@ import * as Types from './../constants/ActionTypes';
 import callApi from "./../utils/apiCaller";
 // import axios from 'axios';
 
+export const actFetchUserData = (user) => {
+    return {
+        type: Types.FETCH_USER_DATA,
+        user
+    }
+}
+export const actRemoveUser = () => {
+    return {
+        type: Types.REMOVE_USER,
+    }
+}
 
 const actAddToCart = (product, quantity) => {
     return {
         type: Types.ADD_TO_CART,
-        product: product,
-        quantity: quantity
+        product,
+        quantity
     }
 }
 
@@ -40,12 +51,40 @@ export function actDeleteWishItem(product) {
     }
 }
 
+export function actFetchKeySearch(keySearch) {
+    return {
+        type: Types.FETCH_KEY_SEARCH,
+        keySearch: keySearch
+    }
+}
 
+export function actFetchProductDetail(productDetail) {
+    return {
+        type: Types.FETCH_PRODUCT_DETAIL,
+        productDetail: productDetail
+    }
+}
+
+export function actAddToOrders(cart, info, status) {
+    return {
+        type: Types.ADD_TO_ORDERS,
+        cart,
+        info,
+        status
+    }
+}
+
+export function actDeleteOrder(index){
+    return{
+        type: Types.DELETE_ORDER,
+        index
+    }
+}
 // Redux thunk
 // Lấy dữ liệu products từ server sử dụng Redux Thunk
 export const actFetchProductsRequest = () => {
     return dispatch => {
-        return callApi('api/products', 'GET', null).then(res => {
+        return callApi('/products', 'GET', null).then(res => {
             dispatch(actFetchProducts(res.data));
         });
     };
@@ -57,43 +96,5 @@ export const actFetchProducts = (products) => {
     }
 }
 // Redux thunk
-
-// Get data Cart items
-export const actFetchCartItemsRequest = () => {
-    return dispatch => {
-        return callApi('api/cart', 'GET', null).then(res => {
-            console.log(res.data);
-            dispatch(actFetchProducts(res.data));
-        });
-        // return axios.get('http://localhost:5000/api/cart')
-        //     .then(res => {
-        //         console.log(res.data);
-        //         dispatch(actFetchCartItems(res.data));
-        //     });
-    };
-}
-// ông tự viết cái hàm callApi cũng được , nó lấy dữ liệu trên server xong cái dispatch kìa mới đc thực hiện 
-export const actFetchCartItems = (cart) => {
-    return {
-        type: Types.FETCH_CART_ITEMS,
-        cart
-    }
-}
-
-// Get data Wish list
-export const actFetchWishListRequest = () => {
-    return dispatch => {
-        return callApi('/api/wishList', 'GET', null).then(res => {
-            dispatch(actFetchWishList(res.data));
-        });
-    };
-}
-
-export const actFetchWishList = (wishList) => {
-    return {
-        type: Types.FETCH_WISH_LIST,
-        wishList
-    }
-}
 
 export default actAddToCart;
