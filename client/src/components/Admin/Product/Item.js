@@ -13,9 +13,10 @@ export default class Item extends Component {
       <img src={'data:image/jpeg;base64,' + arrayBufferToBase64(images[0].data)} alt="product thumnail" className="img-thumbnail" width="64" />
     );
   }
+
   render() {
     const { product, index } = this.props;
-    console.log(product);
+
     return (
       <tr>
         <td>{index + 1}</td>
@@ -25,8 +26,8 @@ export default class Item extends Component {
         <td>{product.name}</td>
         <td>{product.price}</td>
         <td>{product.pricebefore}</td>
-        <td><i className="glyphicon glyphicon-edit"></i></td>
-        <td><i className="glyphicon glyphicon-remove-circle"></i></td>
+        <td><button type="button" className="btn btn-primary" onClick={ () => this.props.onEditItem(product._id) }>Sửa</button></td>
+        <td><button type="button" className="btn btn-danger" onClick={ () => this.props.onDeleteItem(product._id) }>Xóa</button></td>
       </tr>
     )
   }

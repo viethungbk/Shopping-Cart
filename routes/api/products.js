@@ -56,6 +56,20 @@ router.get('/:id', (req, res) => {
 });
 
 
+// @route   DELETE api/products/:id
+// @desc    Get a product by id
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Product.findOneAndRemove({ _id: req.params.id })
+    .exec()
+    .then(result => {
+      if (result == null) {
+        return res.status(400).json('Not Found Product');
+      }
+      return res.json('Deleted')
+    })
+    .catch(err => res.json(err.message));
+});
+
 // @route   POST api/products/add
 // @desc    Add a product
 // @access  Private

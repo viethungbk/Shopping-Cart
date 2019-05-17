@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Item extends Component {
   render() {
     const { user, index } = this.props;
-    console.log(index);
+
     return (
       <tr>
         <td>{ index + 1 }</td>

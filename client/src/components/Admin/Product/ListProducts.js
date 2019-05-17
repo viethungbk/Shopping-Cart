@@ -7,7 +7,10 @@ export default class ListProducts extends Component {
     super(props);
 
     this.state = {
-      products: []
+      products: [],
+      isFailed: false,
+      isSuccess: false,
+      message: ''
     }
   }
   componentDidMount() {
@@ -26,17 +29,58 @@ export default class ListProducts extends Component {
     const { products } = this.state;
 
     let listProducts = products.map((product, index) => {
-      console.log(index);
-      return <Item key={ index } index= { index } product={ product }></Item>;
+      return <Item key={index} index={index} product={product} onDeleteItem={this.onDeleteItem}></Item>;
     });
 
     return listProducts;
+  }
+
+  showMessage() {
+    if (this.state.isFailed) {
+      return (
+        <div className="alert alert-danger">
+          <h4>{this.state.message}</h4>
+        </div>
+      );
+    }
+    if (this.state.isSuccess) {
+      return (
+        <div className="alert alert-success">
+          <h4>{this.state.message}</h4>
+        </div>
+      );
+    }
+    return null;
+  }
+
+  onDeleteItem(productId) {
+    const headers = {
+      'Authorization': localStorage.getItem("token")
+    }
+
+    callApi(`api/products/${productId}`, 'delete', null, headers)
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          isSuccess: true,
+          message: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          isFailed: true,
+          message: err.message
+        })
+      });
   }
 
   render() {
     return (
       <div className="">
         <h1 className="page-header">Product</h1>
+
+        {this.showMessage()}
 
         <h2 className="sub-header">Porduct</h2>
         <div className="table-responsive">
@@ -53,7 +97,7 @@ export default class ListProducts extends Component {
               </tr>
             </thead>
             <tbody>
-              { this.showProducts() }
+              {this.showProducts()}
             </tbody>
           </table>
         </div>
