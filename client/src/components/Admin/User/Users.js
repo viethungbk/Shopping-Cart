@@ -47,7 +47,6 @@ export default class Users extends Component {
                 <th>Tên</th>
                 <th>Email</th>
                 <th>Số Điện Thoại</th>
-                <th>Sửa</th>
                 <th>Xóa</th>
               </tr>
             </thead>

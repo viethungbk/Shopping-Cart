@@ -6,22 +6,28 @@ export default class SideBar extends Component {
     return (
       <div>
         <ul className="nav nav-sidebar-dashboard">
-          <li className="active"><Link to="">Overview</Link></li>
-          <li><Link to="/admin/add-products">Add Product</Link></li>
+          <li className="bg-info"><Link to="/admin">Overview</Link></li>
+          <li><Link to="/admin/add-product">Add Product</Link></li>
           <li><Link to="/admin/list-products">List Products</Link></li>
           <li><Link to="/admin/users">Users</Link></li>
         </ul>
+
         <ul className="nav nav-sidebar-dashboard">
+          <li className="bg-info"><Link to="/admin/list-products">Products</Link></li>
+          <li><Link to="/admin/list-products">List Products</Link></li>
           <li><Link to="/admin/add-product">Add Product</Link></li>
-          <li><Link to="">Nav item again</Link></li>
-          <li><Link to="">One more nav</Link></li>
-          <li><Link to="">Another nav item</Link></li>
-          <li><Link to="">More navigation</Link></li>
+
         </ul>
         <ul className="nav nav-sidebar-dashboard">
-          <li><Link to="">Nav item again</Link></li>
+          <li className="bg-info"><Link to="/admin/users">Users</Link></li>
           <li><Link to="">One more nav</Link></li>
           <li><Link to="">Another nav item</Link></li>
+        </ul>
+
+        <ul className="nav nav-sidebar-dashboard">
+          <li className="bg-info"><Link to="/admin">Blogs</Link></li>
+          <li><Link to="">Quản lý bài viết</Link></li>
+          <li><Link to="">Thêm bài viết</Link></li>
         </ul>
       </div>
     );
