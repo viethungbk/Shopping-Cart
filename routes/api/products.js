@@ -84,7 +84,7 @@ router.post('/add', productUpload, (req, res) => {
 
   newProduct
     .save()
-    .then(product => res.json(product))
+    .then(product => res.json("Add Success"))
     .catch(err => {
       console.log(err);
       return res.status(400).json(err.message);

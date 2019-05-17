@@ -21,9 +21,30 @@ export default class Product extends Component {
 		return window.btoa(binary);
 	};
 
+	showImage(images) {
+		const numberImages = images.length;
+
+		if (numberImages === 0) {
+			return null;
+		}
+
+		if (numberImages === 1) {
+			return (
+				<img src={'data:image/jpeg;base64,' + this.arrayBufferToBase64(images[0].data)} alt="product"/>
+			);
+		}
+
+		return (
+			<div>
+				<img src={'data:image/jpeg;base64,' + this.arrayBufferToBase64(images[0].data)} alt="main product img" />
+				<img src={'data:image/jpeg;base64,' + this.arrayBufferToBase64(images[1].data)} alt="product hover" className="hover-image" />
+			</div>
+		);
+	}
+
 	render() {
 		const { product } = this.props;
-		console.log(btoa(product.image.data.toString('base64')));
+		console.log(product.image);
 
 		return (
 			<div className="col-md-3">
@@ -35,8 +56,7 @@ export default class Product extends Component {
 							<div className="product-image">
 								<div className="image">
 									<Link to="/product-details">
-										<img src="/assets/images/products/samsung-note-9.jpg" alt={product.name} />
-										<img src={'data:image/jpeg;base64,' + this.arrayBufferToBase64(product.image.data)} alt="product hover" className="hover-image" />
+										{ this.showImage(product.image) }
 									</Link>
 								</div>
 								<div className="tag new"><span>new</span></div>
