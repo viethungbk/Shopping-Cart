@@ -103,7 +103,7 @@ router.post('/add', productUpload, (req, res) => {
 })
 
 
-// @route   PUT api/products/:id
+// @route   PATcH api/products/:id
 // @desc    Update a product
 // @access  Private
 router.patch('/:id', productUpload, (req, res) => {
