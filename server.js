@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
 
-const users = require('./routes/api/users.js');
-const products = require('./routes/api/products.js');
+const users = require('./routes/api/users');
+const admin = require('./routes/api/admin');
+const products = require('./routes/api/products');
 const cart = require('./routes/api/cart');
 const blog = require('./routes/api/blog');
 
@@ -38,6 +39,7 @@ require('./config/passport')(passport);
 
 // Use Routes
 app.use('/api/users', users);
+app.use('/api/admin', admin);
 app.use('/api/products', products);
 app.use('/api/cart', cart);
 app.use('/api/blogs', blog);

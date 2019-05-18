@@ -71,7 +71,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 // @route   POST api/products/add
 // @desc    Add a product
 // @access  Private
-router.post('/add', productUpload, (req, res) => {
+router.post('/add', passport.authenticate('jwt-admin', { session: false }), productUpload, (req, res) => {
   const data = req.body;
 
   const { errors, isValid } = validateProductInput(data);
