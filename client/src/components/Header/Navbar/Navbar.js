@@ -56,7 +56,7 @@ export default class Navbar extends Component {
                         </li>
                       </ul>
                     </li>
-                    <li className="dropdown  navbar-right special-menu"> <Link to="">Get 30% off on selected items</Link> </li>
+                    <li className="dropdown  navbar-right special-menu"> <Link to="/contact">CONTACT US</Link> </li>
                   </ul>
                   <div className="clearfix" />
                 </div>
