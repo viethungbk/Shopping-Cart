@@ -1,4 +1,4 @@
-import * as Types from '../constants/ActionTypes';
+import * as Types from '../contants/ActionTypes';
 
 let initialState = {};
 
@@ -9,6 +9,7 @@ const productDetails = (state = initialState, action) => {
 
       state = action.productDetails;
       return state;
+
     default:
       return state;
   }

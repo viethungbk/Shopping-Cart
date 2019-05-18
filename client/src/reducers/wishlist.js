@@ -1,4 +1,4 @@
-import * as Types from "../constants/ActionTypes";
+import * as Types from '../contants/ActionTypes';
 
 let initialState = [];
 
@@ -8,15 +8,18 @@ const wishList = (state = initialState, action) => {
     case Types.REMOVE_USER:
       state = [];
       return [...state];
+
     case Types.FETCH_USER_DATA:
       state = action.user.wishList;
       return [...state];
+
     case Types.ADD_TO_WISH_LIST:
       index = state.findIndex(item => item.id === action.product.id);
       if (index === -1) {
         state.push(action.product);
       }
       return [...state];
+
     case Types.DELETE_WISH_ITEM:
       index = state.findIndex(item => item.id === action.product.id);
       state.splice(index, 1);

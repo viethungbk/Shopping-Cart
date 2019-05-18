@@ -1,4 +1,4 @@
-import * as  Types from '../contants/ActionType';
+import * as  Types from '../contants/ActionTypes';
 
 let initial = '';
 
@@ -7,6 +7,7 @@ const keySearch = (state = initial, action) => {
     case Types.FETCH_KEY_SEARCH:
       state = action.keySearch;
       return state;
+
     default:
       return state;
   }

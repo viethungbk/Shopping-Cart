@@ -1,4 +1,4 @@
-import * as Types from '../constants/ActionTypes';
+import * as Types from '../contants/ActionTypes';
 
 let initialState = [];
 
@@ -11,9 +11,11 @@ const orders = (state = initialState, action) => {
         status: action.status
       });
       return [...state];
+
     case Types.DELETE_ORDER:
       state.splice(action.index, 1);
       return [...state];
+
     default:
       return [...state];
   }
