@@ -144,6 +144,21 @@ router.get('/current', passport.authenticate('jwt-user', { session: false }), (r
   });
 });
 
+// @route   DELETE api/users/:id
+// @desc    Delete a user by id
+// @access  Private
+router.delete('/:id', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
+  User.findOneAndRemove({ _id: req.params.id })
+    .exec()
+    .then(result => {
+      if (result == null) {
+        return res.status(400).json('Not Found User');
+      }
+      return res.json('Deleted')
+    })
+    .catch(err => res.json(err.message));
+});
+
 // @route   GET api/users/wishlist
 // @desc    Return current user wishlist
 // @access  Private

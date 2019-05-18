@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
 // @route   POST api/blogs/add
 // @desc    Add a blog
 // @access  Private
-router.post('/add', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/add', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
   const data = req.body;
 
   // Create new blog
@@ -58,7 +58,7 @@ router.post('/add', passport.authenticate('jwt', { session: false }), (req, res)
 // @route   PUT api/blogs/:id
 // @desc    Update a blog
 // @access  Private
-router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.put('/:id', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
   const data = req.body;
 
   // Create new blog
@@ -79,7 +79,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 // @route   DELETE api/blogs/:id
 // @desc    Delete a blog
 // @access  Private
-router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.delete('/:id', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
   Blog.findOneAndRemove({ _id: req.params.id })
     .exec()
     .then(result => {

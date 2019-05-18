@@ -136,4 +136,19 @@ router.get('/current', passport.authenticate('jwt-admin', { session: false }), (
   });
 });
 
+// @route   DELETE api/admin/:id
+// @desc    Delete a product by id
+// @access  Private
+router.delete('/:id', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
+  Admin.findOneAndRemove({ _id: req.params.id })
+    .exec()
+    .then(result => {
+      if (result == null) {
+        return res.status(400).json('Not Found Admin');
+      }
+      return res.json('Deleted')
+    })
+    .catch(err => res.json(err.message));
+});
+
 module.exports = router;

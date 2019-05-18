@@ -8,8 +8,8 @@ const router = express.Router();
 
 // @route   GET api/cart/
 // @desc    Get user's cart
-// @access  private
-router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+// @access  Public
+router.get('/', (req, res) => {
   // console.log(req.user);
   let error = null;
   Cart.find({ user: req.user })
@@ -25,7 +25,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 // @route   POST api/cart/add
 // @desc    Add a product to cart
 // @access  Private
-router.post('/add', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/add', (req, res) => {
   const user = req.user;
   // item: {
   //   product,
@@ -82,7 +82,7 @@ router.post('/add', passport.authenticate('jwt', { session: false }), (req, res)
 // @route   DELETE api/cart/
 // @desc    Empty the cart
 // @access  Private
-router.delete('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.delete('/', passport.authenticate('jwt-user', { session: false }), (req, res) => {
   const user = req.user;
 
   Cart.findOneAndRemove({ user: user })

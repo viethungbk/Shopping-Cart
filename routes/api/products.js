@@ -55,8 +55,9 @@ router.get('/:id', (req, res) => {
 
 
 // @route   DELETE api/products/:id
-// @desc    Get a product by id
-router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+// @desc    Delete a product by id
+// @access  Private
+router.delete('/:id', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
   Product.findOneAndRemove({ _id: req.params.id })
     .exec()
     .then(result => {
@@ -106,7 +107,7 @@ router.post('/add', passport.authenticate('jwt-admin', { session: false }), prod
 // @route   PATcH api/products/:id
 // @desc    Update a product
 // @access  Private
-router.patch('/:id', productUpload, (req, res) => {
+router.patch('/:id', passport.authenticate('jwt-admin', { session: false }), productUpload, (req, res) => {
   const data = req.body;
 
   // Create new product with older product id
@@ -146,8 +147,6 @@ router.post('/add-to-wishlist', (req, res) => {
 
   user.wishlist.push(req.body);
   console.log(user);
-
-
 
   User.findById(user.id, user)
     .exec()
