@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actDeleteOrder } from "./../../actions/index";
+import { actDeleteOrder } from '../../actions/index';
 
 class Order extends Component {
 	showProductName = (order) => {
-		let result = "";
+		let result = '';
 		if (order.cart.length > 0) {
 			result = order.cart.map((item, index) => {
 				return (
@@ -15,7 +15,7 @@ class Order extends Component {
 		return result;
 	}
 	showProductQuantity = (order) => {
-		let result = "";
+		let result = '';
 		if (order) {
 			result = order.cart.map((item, index) => {
 				return (
@@ -26,7 +26,7 @@ class Order extends Component {
 		return result;
 	}
 	showProductPrice = (order) => {
-		let result = "";
+		let result = '';
 		if (order) {
 			result = order.cart.map((item, index) => {
 				return (

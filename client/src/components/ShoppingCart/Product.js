@@ -29,25 +29,27 @@ class Product extends Component {
 
     return (
       <tr>
-        <td className="romove-item"
-          onClick={() => this.onDeleteCartItem(item)}
-        >
+        <td className="romove-item" onClick={() => this.onDeleteCartItem(item)}>
           <span>
             <i className="fa fa-trash-o" />
           </span>
         </td>
         <td className="cart-image">
-          <Link className="entry-thumbnail" to="/product-details"
-            onClick={() => this.props.watchingProductDetail(item.product)}
-          >
+          <Link
+            className="entry-thumbnail"
+            to="/product-details"
+            onClick={() => this.props.watchingProductDetail(item.product)}>
             <img src={this.showImage(item.product.image)} alt="product thumb" />
           </Link>
         </td>
         <td className="cart-product-name-info">
           <h4 className="cart-product-description">
-            <Link to="/product-details"
-              onClick={() => this.props.watchingProductDetail(item.product)}
-            >{item.product.name}</Link></h4>
+            <Link
+              to="/product-details"
+              onClick={() => this.props.watchingProductDetail(item.product)}>
+              {item.product.name}
+            </Link>
+          </h4>
           <div className="row">
             <div className="col-sm-12">
               <div className="rating rateit-small" />
@@ -55,14 +57,14 @@ class Product extends Component {
             <div className="col-sm-12">
               <div className="reviews">
                 (16 Đánh giá)
-                            </div>
+              </div>
             </div>
           </div>
           {/* /.row */}
           <div className="cart-product-info">
             <span className="product-color">
               COLOR:
-                            <span>
+            <span>
                 {item.product.color}
               </span>
             </span>
@@ -71,29 +73,24 @@ class Product extends Component {
         <td className="cart-product-quantity">
           <div className="quant-input">
             <div className="arrows">
-              <div className="arrow plus gradient"
-
-              >
-                <span className="ir"
-                  onClick={() => { this.onUpdateCartItemQuantity(item, 1) }}
-                >
+              <div className="arrow plus gradient">
+                <span
+                  className="ir"
+                  onClick={() => { this.onUpdateCartItemQuantity(item, 1) }}>
                   <i className="icon fa fa-sort-asc" />
                 </span>
               </div>
-              <div className="arrow minus gradient"
-
-              >
-                <span className="ir"
-                  onClick={() => { this.onUpdateCartItemQuantity(item, -1) }}
-                >
+              <div className="arrow minus gradient">
+                <span
+                  className="ir"
+                  onClick={() => { this.onUpdateCartItemQuantity(item, -1) }}>
                   <i className="icon fa fa-sort-desc" />
                 </span>
               </div>
             </div>
             <input type="text"
               value={item.quantity}
-              onChange={() => { }}
-            />
+              onChange={() => { }} />
           </div>
         </td>
         <td className="cart-product-sub-total">

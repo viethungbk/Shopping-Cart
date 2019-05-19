@@ -8,6 +8,7 @@ const productDetail = (state = initialState, action) => {
       console.log(action);
       state = action.productDetail;
       return state;
+
     default:
       return state;
   }

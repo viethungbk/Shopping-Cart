@@ -7,9 +7,11 @@ const user = (state = initialState, action) => {
     case Types.FETCH_USER_DATA:
       state = action.user;
       return state;
+
     case Types.REMOVE_USER_DATA:
       state = {};
       return state;
+
     default: return state;
   }
 }

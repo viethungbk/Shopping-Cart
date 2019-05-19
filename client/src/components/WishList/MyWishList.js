@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import Product from "./Product";
 import actAddToCart, { actDeleteWishItem } from "./../../actions/index";
 import MessageWishListEmpty from "./MessageWishListEmpty";
-import { Redirect } from "react-router-dom";
+
 class MyWishList extends Component {
 
 	showWishList = (wishList) => {
-		const { user } = this.props;
 		let result = [];
 		if (typeof wishList === undefined) {
 			return <MessageWishListEmpty />;
@@ -58,7 +57,6 @@ class MyWishList extends Component {
 const mapStateToProps = state => {
 	return {
 		wishList: state.wishList,
-		user: state.user
 	}
 }
 

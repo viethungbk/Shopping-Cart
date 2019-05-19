@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Product from './Product';
 import { actDeleteCartItem, actUpdateCartItemQuantity, actAddToOrders } from '../../actions/index';
 import MessageCartEmpty from "./MessageCartEmpty";
-import { Redirect } from "react-router-dom";
 import { actFetchProductDetail } from '../../actions/index';
 
 class ShoppingCart extends Component {
@@ -26,7 +25,7 @@ class ShoppingCart extends Component {
 
 	showCartItem = (cart) => {
 		let result = [];
-		let { onDeleteCartItem, onUpdateCartItemQuantity, user, watchingProductDetail } = this.props;
+		let { onDeleteCartItem, onUpdateCartItemQuantity, watchingProductDetail } = this.props;
 
 		if (cart.length === 0) {
 			return <MessageCartEmpty />;
@@ -128,10 +127,10 @@ class ShoppingCart extends Component {
 													<span >
 														<Link to="/" className="btn btn-upper btn-primary outer-left-xs">
 															Tiếp tục mua hàng
-                                                    </Link>
+                            </Link>
 														<Link to="" className="btn btn-upper btn-primary pull-right outer-right-xs">
 															Cập nhật giỏ hàng
-                                                    </Link>
+                            </Link>
 													</span>
 												</div>
 												{/* /.shopping-cart-btn */}
@@ -148,10 +147,10 @@ class ShoppingCart extends Component {
 										<th>
 											<span className="estimate-title">
 												Tiến hành thanh toán
-                                        </span>
+                      </span>
 											<p>
 												Chọn địa chỉ giao hàng
-                                        </p>
+                      </p>
 										</th>
 									</tr>
 								</thead>{/* /thead */}
@@ -191,7 +190,7 @@ class ShoppingCart extends Component {
 													// onClick={this.onSubmit}
 													>
 														Thanh toán
-                                                    </button>
+                          </button>
 												</div>
 											</form>
 										</td>
