@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { actFetchProductDetail } from '../../../actions/index';
+import { connect } from 'react-redux';
 
 import arrayBufferToBase64 from '../../../arrayBufferToBase64';
 
-export default class Product extends Component {
+class Product extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -77,7 +79,6 @@ export default class Product extends Component {
 
 	render() {
 		const { product } = this.props;
-		// console.log(product.image);
 
 		return (
 			<div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -98,11 +99,18 @@ export default class Product extends Component {
 							{/* Thong tin San Pham */}
 							<div className="product-info text-left">
 								<h3 className="name" onClick={() => this.watchingProductDetail(product)}>
-									<Link to="/product-details"
-									>
+									<Link to="/product-details">
 										{product.name}
 									</Link></h3>
 								{/* {this.showRating(product.rating)} */}
+								<div className="rating-product">
+									<div className="fa fa-star star"></div>
+									<div className="fa fa-star star"></div>
+									<div className="fa fa-star star"></div>
+									<div className="fa fa-star star"></div>
+									<div className="fa fa-star-o"></div>
+								</div>
+
 								<div className="description" />
 								<div className="product-price">
 									<span className="price">
@@ -122,8 +130,7 @@ export default class Product extends Component {
 											<button data-toggle="tooltip" className="btn btn-primary icon"
 												type="button"
 												title="Add Cart"
-												onClick={() => this.onAddToCart(product, 1)}
-											>
+												onClick={() => this.onAddToCart(product, 1)} >
 												<i className="fa fa-shopping-cart" />
 											</button>
 										</li>
@@ -131,8 +138,7 @@ export default class Product extends Component {
 											<button data-toggle="tooltip"
 												className="btn btn-primary icon"
 												title="Wishlist"
-												onClick={() => { this.onAddToWishList(product) }}
-											>
+												onClick={() => { this.onAddToWishList(product) }} >
 												<i className="icon fa fa-heart" />
 											</button>
 										</li>
@@ -155,3 +161,13 @@ export default class Product extends Component {
 		);
 	}
 }
+
+const mapDispatchToProps = (dispatch, props) => {
+	return {
+			watchingProductDetail: (productDetail) => {
+					dispatch(actFetchProductDetail(productDetail));
+			}
+	}
+}
+
+export default connect(null, mapDispatchToProps)(Product);

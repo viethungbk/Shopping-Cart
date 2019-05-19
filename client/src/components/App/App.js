@@ -10,6 +10,7 @@ import MyWishList from '../WishList/MyWishList';
 import NotFound from '../NotFound/NotFound';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import Content from '../Content/Content';
+import Orders from '../Orders/Orders';
 
 class App extends Component {
     render() {
@@ -24,6 +25,7 @@ class App extends Component {
                             <Route path="/contact" exact component={Contact} />
                             <Route path="/product-details" exact component={ProductDetails} />
                             <Route path="/wishlist" exact component={MyWishList} />
+                            <Route path="/orders" exact component={Orders} />
                             <Route path="/not-found" exact component={NotFound} />
                             <Route path="/shopping-cart" exact component={ShoppingCart} />
                         </Switch>

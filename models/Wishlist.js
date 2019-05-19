@@ -10,8 +10,7 @@ const WishlistSchema = new Schema({
       product: {
         type: ObjectId,
         ref: 'products'
-      },
-      quantity: Number
+      }
     }
   ]
 });

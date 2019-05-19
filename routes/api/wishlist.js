@@ -25,11 +25,8 @@ router.get('/', passport.authenticate('jwt-user', { session: false }), (req, res
 // @access  Private
 router.post('/add', passport.authenticate('jwt-user', { session: false }), (req, res) => {
   const wishlistId = req.user.wishlist;
-  // item: {
-  //   product,
-  //   quantity
-  // }
-  const item = req.body;
+
+  const { product } = req.body;
 
   // Check input ???
 
@@ -43,27 +40,16 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
         let productIds = foundWishlist.listItems.map(wishlistItem => wishlistItem.product).join(' ');
 
         // If there is product in wishlist
-        if (productIds.includes(item.product._id)) {
-          Wishlist.findOneAndUpdate({
-            listItems: {
-              $elemMatch: { product: item.product }
-            }
-          },
-            {
-              $inc: { 'listItems.$.quantity': item.quantity }
-            })
-            .exec()
-            .then(wishlist => res.json(wishlist))
-            .catch(err => {
-              console.log(err);
-              return res.status(501).json('Can not add to wishlist');
-            });
+        if (productIds.includes(product._id)) {
+          return res.status(400).json('This product was in your wishlist');
         } else {
           // If there is not product in wishlist
-          foundWishlist.listItems.push(item);
+          foundWishlist.listItems.push(product);
           foundWishlist
             .save()
-            .then(wishlist => res.json(wishlist))
+            .then(() => {
+              return res.status(200).json('Successfull to add this product to your wishlist');
+            })
             .catch(err => {
               console.log(err);
               return res.status(501).json('Can not add to wishlist');

@@ -20,7 +20,7 @@ const cart = (state = initialState, action) => {
       return [...state];
 
     case Types.ADD_TO_CART:
-      index = state.findIndex(item => item.product.id === action.product.id);
+      index = state.findIndex(item => item.product._id === action.product._id);
 
       if (index !== -1) {
         state[index].quantity += action.quantity;
@@ -30,7 +30,7 @@ const cart = (state = initialState, action) => {
       return [...state];
 
     case Types.DELETE_CART_ITEM:
-      index = state.findIndex(item => item.product.id === action.item.product.id);
+      index = state.findIndex(item => item.product._id === action.item.product._id);
 
       if (index !== -1) {
         state.splice(index, 1);
@@ -38,7 +38,7 @@ const cart = (state = initialState, action) => {
       return [...state];
 
     case Types.UPDATE_CART_ITEM_QUANTITY:
-      index = state.findIndex(item => item.product.id === action.item.product.id);
+      index = state.findIndex(item => item.product._id === action.item.product._id);
 
       let q = state[index].quantity + action.quantity;
 

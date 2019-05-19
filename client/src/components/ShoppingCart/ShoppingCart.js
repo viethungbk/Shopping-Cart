@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Product from './Product';
 import { actDeleteCartItem, actUpdateCartItemQuantity, actAddToOrders } from '../../actions/index';
-import MessageCartEmpty from "./MessageCartEmpty";
+import MessageCartEmpty from './MessageCartEmpty';
 import { actFetchProductDetail } from '../../actions/index';
 
 class ShoppingCart extends Component {
@@ -40,7 +40,6 @@ class ShoppingCart extends Component {
 				/>;
 			});
 			return result;
-
 		}
 	}
 
@@ -63,9 +62,10 @@ class ShoppingCart extends Component {
 		let target = event.target;
 		let name = target.name;
 		let value = target.value;
+
 		this.setState({
 			[name]: value
-		})
+		});
 	}
 
 	onSubmit = async event => {
@@ -94,8 +94,6 @@ class ShoppingCart extends Component {
 	render() {
 		let { cart } = this.props;
 		let { diaChi, hoTen, SDT, ghiChu } = this.state;
-
-		// console.log('cart', cart);
 
 		return (
 			<div>
@@ -128,6 +126,9 @@ class ShoppingCart extends Component {
 														<Link to="/" className="btn btn-upper btn-primary outer-left-xs">
 															Tiếp tục mua hàng
                             </Link>
+
+
+														{/* Button callApi Update Cart */}
 														<Link to="" className="btn btn-upper btn-primary pull-right outer-right-xs">
 															Cập nhật giỏ hàng
                             </Link>

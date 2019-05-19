@@ -54,12 +54,12 @@ class MyWishList extends Component {
 		);
 	}
 }
+
 const mapStateToProps = state => {
 	return {
-		wishList: state.wishList,
+		wishList: state.wishList
 	}
 }
-
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
@@ -71,6 +71,5 @@ const mapDispatchToProps = (dispatch, props) => {
 		}
 	}
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyWishList);

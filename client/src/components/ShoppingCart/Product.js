@@ -25,7 +25,6 @@ class Product extends Component {
 
   render() {
     let { item } = this.props;
-    console.log('item', item);
 
     return (
       <tr>
@@ -63,9 +62,9 @@ class Product extends Component {
           {/* /.row */}
           <div className="cart-product-info">
             <span className="product-color">
-              COLOR:
+              Hãng:
             <span>
-                {item.product.color}
+                {item.product.brand}
               </span>
             </span>
           </div>
