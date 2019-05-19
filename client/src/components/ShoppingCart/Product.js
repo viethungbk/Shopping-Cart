@@ -1,30 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import callApi from '../../apiCaller';
+import arrayBufferToBase64 from '../../arrayBufferToBase64';
+
 class Product extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      product: {
-        name: '',
-        price: null,
-        pricebefore: null,
-        brand: '',
-        inventory: '',
-        details: '',
-        rate: null
-      }
-    }
-  }
-
-  componentDidMount() {
-    console.log(this.props.item);
-    callApi('api/products/:id', 'get', this.props.item)
-      .then(rs => console.log(rs))
-      .catch(err => console.log(err));
-
-  }
 
   onDeleteCartItem = (item) => {
     this.props.onDeleteCartItem(item);
@@ -34,32 +12,49 @@ class Product extends Component {
     this.props.onUpdateCartItemQuantity(item, quantity);
   }
 
+  showImage(images) {
+    const numberImages = images.length;
+
+    if (numberImages === 0) {
+      return null;
+    }
+
+    return ('data:image/jpeg;base64,' + arrayBufferToBase64(images[0].data));
+  }
+
 
   render() {
-    var { item } = this.props;
+    let { item } = this.props;
+    console.log('item', item);
 
     return (
       <tr>
-        <td className="romove-item" onClick={() => this.onDeleteCartItem(item)}>
+        <td className="romove-item"
+          onClick={() => this.onDeleteCartItem(item)}
+        >
           <span>
             <i className="fa fa-trash-o" />
           </span>
         </td>
         <td className="cart-image">
-          <Link className="entry-thumbnail" to="/product-details">
-            <img src="" alt="product thumb" />
+          <Link className="entry-thumbnail" to="/product-details"
+            onClick={() => this.props.watchingProductDetail(item.product)}
+          >
+            <img src={this.showImage(item.product.image)} alt="product thumb" />
           </Link>
         </td>
         <td className="cart-product-name-info">
           <h4 className="cart-product-description">
-            <Link to="/product-details">Iphone 9 </Link></h4>
+            <Link to="/product-details"
+              onClick={() => this.props.watchingProductDetail(item.product)}
+            >{item.product.name}</Link></h4>
           <div className="row">
             <div className="col-sm-12">
               <div className="rating rateit-small" />
             </div>
             <div className="col-sm-12">
               <div className="reviews">
-                (06 Reviews)
+                (16 Đánh giá)
                             </div>
             </div>
           </div>
@@ -68,8 +63,8 @@ class Product extends Component {
             <span className="product-color">
               COLOR:
                             <span>
-                Blue
-                            </span>
+                {item.product.color}
+              </span>
             </span>
           </div>
         </td>
@@ -77,16 +72,20 @@ class Product extends Component {
           <div className="quant-input">
             <div className="arrows">
               <div className="arrow plus gradient"
-                onClick={() => { this.onUpdateCartItemQuantity(item, 1) }}
+
               >
-                <span className="ir">
+                <span className="ir"
+                  onClick={() => { this.onUpdateCartItemQuantity(item, 1) }}
+                >
                   <i className="icon fa fa-sort-asc" />
                 </span>
               </div>
               <div className="arrow minus gradient"
-                onClick={() => { this.onUpdateCartItemQuantity(item, -1) }}
+
               >
-                <span className="ir">
+                <span className="ir"
+                  onClick={() => { this.onUpdateCartItemQuantity(item, -1) }}
+                >
                   <i className="icon fa fa-sort-desc" />
                 </span>
               </div>
@@ -99,12 +98,12 @@ class Product extends Component {
         </td>
         <td className="cart-product-sub-total">
           <span className="cart-sub-total-price">
-            1000000
+            ${item.product.price}
           </span>
         </td>
         <td className="cart-product-grand-total">
           <span className="cart-grand-total-price">
-            30000000
+            ${item.product.price * item.quantity}
           </span>
         </td>
       </tr>

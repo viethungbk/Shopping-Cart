@@ -53,7 +53,8 @@ export default class AddProduct extends Component {
     });
 
     const headers = {
-      'Content-Type': 'multipart/form-data'
+      'Content-Type': 'multipart/form-data',
+      'Authorization': localStorage.getItem('token')
     }
 
     callApi('api/products/add','post', product, headers)

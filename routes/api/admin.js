@@ -13,11 +13,6 @@ const validateLoginInput = require('../../validation/user/login');
 // Load user model
 const Admin = require('../../models/Admin');
 
-// @route   GET api/admin/test
-// @desc    Tests admin route
-// @access  Public
-router.get('/test', (req, res) => res.json({ msg: "Admin Works" }));
-
 // @route   GET api/admin/
 // @desc    Get all admins
 // @access  Private

@@ -29,20 +29,13 @@ const UserSchema = new Schema({
     ref: 'products',
     required: true
   }],
-  rate: [{
-    product: {
-      type: ObjectId,
-      required: true,
-      ref: 'products'
-    },
-    rating: {
-      type: Number,
-      required: true
-    },
-    date: {
-      type: Date,
-      default: Date.now
-    }
+  cart: {
+    type: ObjectId,
+    ref: 'carts'
+  },
+  orders: [{
+    type: ObjectId,
+    ref: 'orders'
   }]
 });
 

@@ -27,20 +27,9 @@ const ProductSchema = new Schema({
   },
   image: [Buffer],
   details: String,
-  rate: [{
-    rating: {
-      type: Number,
-      required: true
-    },
-    rateduser: {
-      type: ObjectId,
-      ref: 'users',
-      required: true
-    },
-    date: {
-      type: Date,
-      default: Date.now
-    }
+  rates: [{
+    type: ObjectId,
+    ref: 'rates'
   }]
 });
 

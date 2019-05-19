@@ -1,4 +1,5 @@
 import * as Types from '../contants/ActionTypes';
+import callApi from '../apiCaller';
 
 export const actFetchUserData = (user) => {
   return {
@@ -7,9 +8,9 @@ export const actFetchUserData = (user) => {
   }
 }
 
-export const actRemoveUser = () => {
+export const actRemoveUserData = () => {
   return {
-    type: Types.REMOVE_USER,
+    type: Types.REMOVE_USER_DATA,
   }
 }
 
@@ -83,11 +84,11 @@ export function actDeleteOrder(index) {
 // Redux thunk
 // Lấy dữ liệu products từ server sử dụng Redux Thunk
 export const actFetchProductsRequest = () => {
-  // return dispatch => {
-  //   return callApi('/products', 'GET', null).then(res => {
-  //     dispatch(actFetchProducts(res.data));
-  //   });
-  // };
+  return dispatch => {
+    return callApi('api/products/', 'GET', null, null).then(res => {
+      dispatch(actFetchProducts(res.data));
+    });
+  };
 }
 
 export const actFetchProducts = (products) => {

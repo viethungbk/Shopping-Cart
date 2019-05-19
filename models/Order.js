@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create Schema
-const WishlistSchema = new Schema({
-  listItems: [
+const OrderSchema = new Schema({
+  listOrders: [
     {
       product: {
         type: ObjectId,
@@ -16,4 +16,4 @@ const WishlistSchema = new Schema({
   ]
 });
 
-module.exports = Wishlist = mongoose.model('wishlist', WishlistSchema);
+module.exports = Order = mongoose.model('orders', OrderSchema);

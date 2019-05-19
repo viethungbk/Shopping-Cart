@@ -5,7 +5,7 @@ let initialState = [];
 const wishList = (state = initialState, action) => {
   let index = -1;
   switch (action.type) {
-    case Types.REMOVE_USER:
+    case Types.REMOVE_USER_DATA:
       state = [];
       return [...state];
 

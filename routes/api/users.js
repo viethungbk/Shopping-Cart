@@ -13,6 +13,9 @@ const validateLoginInput = require('../../validation/user/login');
 
 // Load user model
 const User = require('../../models/User');
+const Wishlist = require('../../models/Wishlist');
+const Cart = require('../../models/Cart');
+const Order = require('../../models/Order');
 
 // @route   GET api/users/test
 // @desc    Tests users route
@@ -23,6 +26,7 @@ router.get('/test', (req, res) => res.json({ msg: "Users Works" }));
 // @desc    Get all users
 // @access  Private
 router.get('/', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
+  console.log(req.headers)
   let error = null;
   User.find({})
     .then(users => {
@@ -58,13 +62,28 @@ router.post('/register', (req, res) => {
           d: 'mm'     // Default
         });
 
+        const wishlist = new Wishlist();
+        const cart = new Cart();
+        const orders = new Order();
+
         // Create new user
         const newUser = new User({
           name: req.body.name,
           email: req.body.email,
           avatar,
-          password: req.body.password
+          password: req.body.password,
+          wishlist,
+          cart,
+          orders
         });
+
+        try {
+          wishlist.save();
+          cart.save();
+          orders.save();
+        } catch (error) {
+          res.json(error.message);
+        }
 
         // Hash password
         bcrypt.genSalt(10, (err, salt) => {
@@ -121,6 +140,7 @@ router.post('/login', (req, res) => {
               (err, token) => {
                 res.json({
                   success: true,
+                  user: user,
                   token: 'Bearer ' + token
                 })
               });
@@ -137,10 +157,7 @@ router.post('/login', (req, res) => {
 // @access  Private
 router.get('/current', passport.authenticate('jwt-user', { session: false }), (req, res) => {
   res.json({
-    id: req.user.id,
-    name: req.user.name,
-    email: req.user.email,
-    avatar: req.user.avatar
+    user: req.user
   });
 });
 

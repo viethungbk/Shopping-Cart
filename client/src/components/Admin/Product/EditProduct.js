@@ -67,7 +67,8 @@ export default class EditProduct extends Component {
     });
 
     const headers = {
-      'Content-Type': 'multipart/form-data'
+      'Content-Type': 'multipart/form-data',
+      'Authorization': localStorage.getItem('token')
     }
 
     const productId = this.props.match.params.id;

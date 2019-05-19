@@ -5,10 +5,6 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create Schema
 const CartSchema = new Schema({
-  user: {
-    type: ObjectId,
-    ref: 'users'
-  },
   listItems: [
     {
       product: {

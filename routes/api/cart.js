@@ -8,25 +8,23 @@ const router = express.Router();
 
 // @route   GET api/cart/
 // @desc    Get user's cart
-// @access  Public
-router.get('/', (req, res) => {
-  // console.log(req.user);
-  let error = null;
-  Cart.find({ user: req.user })
-    .then(cart => {
-      if (!cart) {
-        error = 'Not Found';
-        return res.status(404).json(error);
-      }
-      return res.json(cart);
+// @access  Private
+router.get('/', passport.authenticate('jwt-user', { session: false }), (req, res) => {
+  const cartId = req.user.cart;
+
+  Cart.findById(cartId)
+    .exec()
+    .then(rs => {
+      res.json(rs.listItems);
     })
+    .catch(err => res.status(400).json(err.message));
 });
 
 // @route   POST api/cart/add
 // @desc    Add a product to cart
 // @access  Private
-router.post('/add', (req, res) => {
-  const user = req.user;
+router.post('/add', passport.authenticate('jwt-user', { session: false }), (req, res) => {
+  const cartId = req.user.cart;
   // item: {
   //   product,
   //   quantity
@@ -35,19 +33,11 @@ router.post('/add', (req, res) => {
 
   // Check input ???
 
-  Cart.findOne({ user: user })
+  Cart.findById(cartId)
     .then((foundCart) => {
       if (!foundCart) {
         // Not found cart
-        // Create new Cart
-        const newCart = new Cart({
-          user: user,
-          listItems: [item]
-        });
-        newCart
-          .save()
-          .then(cart => res.json(cart))
-          .catch(err => console.log(err));
+        return res.status(404).json('Not Found Cart');
       } else {
         // Found cart
         let productIds = foundCart.listItems.map(cartItem => cartItem.product).join(' ');
@@ -55,41 +45,52 @@ router.post('/add', (req, res) => {
         // If there is product in cart
         if (productIds.includes(item.product._id)) {
           Cart.findOneAndUpdate({
-            user: user,
             listItems: {
               $elemMatch: { product: item.product }
             }
           },
-          {
-            $inc: { 'listItems.$.quantity': item.quantity }
-          })
+            {
+              $inc: { 'listItems.$.quantity': item.quantity }
+            })
             .exec()
             .then(cart => res.json(cart))
-            .catch(err => console.log(err));
+            .catch(err => {
+              console.log(err);
+              return res.status(501).json('Can not add to cart');
+            });
         } else {
           // If there is not product in cart
           foundCart.listItems.push(item);
           foundCart
             .save()
             .then(cart => res.json(cart))
-            .catch(err => console.log(err));
+            .catch(err => {
+              console.log(err);
+              return res.status(501).json('Can not add to cart');
+            });
         }
       }
     })
-      .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err.message);
+      return res.status(404).json('Not Found Cart');
+    });
 });
 
 // @route   DELETE api/cart/
 // @desc    Empty the cart
 // @access  Private
-router.delete('/', passport.authenticate('jwt-user', { session: false }), (req, res) => {
-  const user = req.user;
+// router.delete('/', passport.authenticate('jwt-user', { session: false }), (req, res) => {
+//   const cartId = req.user.cart;
 
-  Cart.findOneAndRemove({ user: user })
-    .exec()
-    .then(cart => res.json(cart))
-    .catch(err => console.log(err));
+//   Cart.findByIdAndRemove(cartId)
+//     .exec()
+//     .then(cart => res.json(cart))
+//     .catch(err => {
+//       console.log(err.message);
+//       return res.status(500).json(err.message);
+//     });
 
-});
+// });
 
 module.exports = router;

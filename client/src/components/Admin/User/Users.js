@@ -11,7 +11,11 @@ export default class Users extends Component {
     }
   }
   componentDidMount() {
-    callApi('api/users', 'get', null, null)
+    const headers = {
+      'Authorization': localStorage.getItem('token')
+    }
+
+    callApi('api/users', 'get', headers, null)
       .then(res => {
         console.log(res.data);
         this.setState({

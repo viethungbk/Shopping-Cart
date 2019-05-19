@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import callApi from '../../apiCaller';
+import { actFetchUserData,actRemoveUserData} from '../../actions/index';
+import { connect } from 'react-redux';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +16,10 @@ export default class Login extends Component {
     }
   }
 
+  componentWillMount(){
+    this.props.onRemoveUserData();
+  }
+
   submitForm = (event) => {
     event.preventDefault();
     console.log('Submit');
@@ -23,7 +29,8 @@ export default class Login extends Component {
 
     callApi('api/users/login', 'post', user)
       .then(res => {
-        console.log(res);
+        this.props.onFetchUserData(res.data.user);
+        console.log(res.data.user);
         this.setState({
           isLogin: true
         });
@@ -45,7 +52,7 @@ export default class Login extends Component {
     let message = this.state.message.email || this.state.message.password;
     return (
       <div className="alert alert-danger">
-        <h4>{ message }</h4>
+        <h4>{message}</h4>
       </div>
     );
   }
@@ -72,7 +79,7 @@ export default class Login extends Component {
   render() {
     return (
       <div className="container sign-in-page">
-        { this.redirect() }
+        {this.redirect()}
 
         <div className="col-md-6 col-sm-6 col-md-push-3 sign-in">
           <h4>Login</h4>
@@ -85,7 +92,7 @@ export default class Login extends Component {
           </div>
 
           <hr />
-          { this.showMessage() }
+          {this.showMessage()}
 
           {/* User Input */}
           <form className="register-form outer-top-xs" action="/api/user/login" method="POST">
@@ -112,9 +119,9 @@ export default class Login extends Component {
             <div className="radio outer-xs">
               <label>
                 <input type="checkbox"
-                name="checkOption"
-                id="checkOption"
-                defaultValue="" />
+                  name="checkOption"
+                  id="checkOption"
+                  defaultValue="" />
                 Remember me!
               </label>
               <Link to="" className="forgot-password pull-right">Forgot your Password?</Link>
@@ -137,3 +144,18 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchUserData: (user) => {
+      dispatch(actFetchUserData(user));
+    },
+    onRemoveUserData: () => {
+      dispatch(actRemoveUserData());
+    }
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(Login);
+
