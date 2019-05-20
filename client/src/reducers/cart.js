@@ -8,11 +8,10 @@ const cart = (state = initialState, action) => {
 
   switch (action.type) {
     case Types.REMOVE_USER_DATA:
-      state = [];
-      return [...state];
+      return [];
 
-    case Types.FETCH_USER_DATA:
-      state = action.user.cart;
+    case Types.FETCH_CART:
+      state = action.cart;
       return [...state];
 
     case Types.FETCH_CART_ITEMS:

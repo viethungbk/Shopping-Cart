@@ -2,27 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Product from './Product';
-import { actDeleteCartItem, actUpdateCartItemQuantity, actAddToOrders } from '../../actions/index';
+import { actDeleteCartItem, actUpdateCartItemQuantity, actAddToOrders, actFetchCart } from '../../actions/index';
 import MessageCartEmpty from './MessageCartEmpty';
 import { actFetchProductDetail } from '../../actions/index';
 
 class ShoppingCart extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			diaChi: "",
-			hoTen: "",
-			SDT: "",
-			ghiChu: "",
-			date: null
-		}
-	}
-
-
-	componentWillReceiveProps(nextProps) {
-		// console.log(nextProps);
-	}
-
 	showCartItem = (cart) => {
 		let result = [];
 		let { onDeleteCartItem, onUpdateCartItemQuantity, watchingProductDetail } = this.props;
@@ -58,16 +42,6 @@ class ShoppingCart extends Component {
 		}
 	}
 
-	onChange = (event) => {
-		let target = event.target;
-		let name = target.name;
-		let value = target.value;
-
-		this.setState({
-			[name]: value
-		});
-	}
-
 	onSubmit = async event => {
 		event.preventDefault();
 		let { cart, onAddToOrders } = this.props;
@@ -81,19 +55,23 @@ class ShoppingCart extends Component {
 		this.onClear();
 	}
 
-	onClear = () => {
-		this.setState({
-			diaChi: "",
-			hoTen: "",
-			SDT: "",
-			ghiChu: "",
-			date: ""
-		})
-	}
-
 	render() {
-		let { cart } = this.props;
-		let { diaChi, hoTen, SDT, ghiChu } = this.state;
+		let { cart, user, products } = this.props;
+		console.log(products);
+
+		if (user._id !== undefined) {
+			let newCart = [];
+
+			cart.forEach(item => {
+				products.forEach(product => {
+					if (product._id === item.product) {
+						newCart.push(product);
+					}
+				})
+			});
+			this.props.onFetchCart(newCart);
+			console.log(newCart);
+		}
 
 		return (
 			<div>
@@ -115,7 +93,7 @@ class ShoppingCart extends Component {
 
 									{/* Đổ dữ liệu từ trong cart */}
 									<tbody>
-										{this.showCartItem(cart)}
+										{/* {this.showCartItem(cart)} */}
 									</tbody>{/* /tbody */}
 
 									<tfoot>
@@ -141,100 +119,16 @@ class ShoppingCart extends Component {
 								</table>{/* /table */}
 							</div>
 						</div>{/* /.shopping-cart-table */}
-						<div className="col-md-4 col-sm-12 estimate-ship-tax">
-							<table className="table">
-								<thead>
-									<tr>
-										<th>
-											<span className="estimate-title">
-												Tiến hành thanh toán
-                      </span>
-											<p>
-												Chọn địa chỉ giao hàng
-                      </p>
-										</th>
-									</tr>
-								</thead>{/* /thead */}
-								<tbody>
-									<tr>
-										<td>
-											<form onSubmit={this.onSubmit} >
-												<div className="form-group">
-													<label className="info-title control-label">
-														Tỉnh/Thành Phố  - Quận/Huyện - Xã/Phường<span>*</span>
-													</label>
-													<input name="diaChi" id="" type="text" value={diaChi}
-														onChange={this.onChange} />
-													<br />
-													<label className="info-title control-label">
-														Họ Tên<span>*</span>
-													</label>
-													<br />
-													<input name="hoTen" id="" type="text" value={hoTen}
-														onChange={this.onChange} />
-													<br />
-													<label className="info-title control-label">
-														SĐT<span>*</span>
-													</label>
-													<br />
-													<input name="SDT" id="" type="text" value={SDT}
-														onChange={this.onChange} />
-													<br />
-													<label className="info-title control-label">
-														Ghi chú<span>*</span>
-													</label>
-													<br />
-													<textarea rows="4" cols="50" name="ghiChu" form="usrform"
-														value={ghiChu} onChange={this.onChange} placeholder="...">
-													</textarea>
-													<button type="submit" className="btn-upper btn btn-primary pull-right"
-													// onClick={this.onSubmit}
-													>
-														Thanh toán
-                          </button>
-												</div>
-											</form>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>{/* /.estimate-ship-tax */}
-						<div className="col-md-4 col-sm-12 estimate-ship-tax">
-							<table className="table">
-								<thead>
-									<tr>
-										<th>
-											<span className="estimate-title">Mã giảm giá</span>
-											<p>Nhập mã giảm giá của bạn (nếu có)</p>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<div className="form-group">
-												<input type="text" className="form-control unicase-form-control text-input" placeholder="Mã giảm giá.." />
-											</div>
-											<div className="clearfix pull-right">
-												<button type="submit" className="btn-upper btn btn-primary">Áp dụng</button>
-											</div>
-										</td>
-									</tr>
-								</tbody>{/* /tbody */}
-							</table>{/* /table */}
-						</div>{/* /.estimate-ship-tax */}
+
 						<div className="col-md-4 col-sm-12 cart-shopping-total">
 							<table className="table">
 								<thead>
 									<tr>
 										<th>
-											{/* <div className="cart-sub-total">
-                                            Subtotal<span className="inner-left-md">$600.00</span>
-                                        </div> */}
 											<div className="cart-grand-total">
 												Grand Total:
-                                                <span className="inner-left-md">
-													${this.grandTotal(cart)}
+                        <span className="inner-left-md">
+													{/* ${this.grandTotal(cart)} */}
 												</span>
 											</div>
 										</th>
@@ -244,8 +138,7 @@ class ShoppingCart extends Component {
 									<tr>
 										<td>
 											<div className="cart-checkout-btn pull-right">
-												<button type="submit" className="btn btn-primary checkout-btn">Kiểm tra đơn hàng</button>
-												<span className="">Thanh toán với nhiều địa chỉ!</span>
+												<button type="submit" className="btn btn-primary checkout-btn">Đặt hàng</button>
 											</div>
 										</td>
 									</tr>
@@ -257,15 +150,13 @@ class ShoppingCart extends Component {
 			</div>
 		);
 	}
-
 }
-
-
 
 const mapStateToProps = state => {
 	return {
 		cart: state.cart,
-		user: state.user
+		user: state.user,
+		products: state.products
 	}
 }
 
@@ -282,6 +173,9 @@ const mapDispatchToProps = (dispatch, props) => {
 		},
 		watchingProductDetail: (product) => {
 			dispatch(actFetchProductDetail(product));
+		},
+		onFetchCart: (cart) => {
+			dispatch(actFetchCart(cart));
 		}
 	}
 }

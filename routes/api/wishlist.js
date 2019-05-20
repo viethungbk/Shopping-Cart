@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 
 // Load Cart model
-const Wishlist = require('../../models/Wishlist');
+const WishList = require('../../models/WishList');
 
 const router = express.Router();
 
@@ -10,9 +10,9 @@ const router = express.Router();
 // @desc    Get user's wishlist
 // @access  Private
 router.get('/', passport.authenticate('jwt-user', { session: false }), (req, res) => {
-  const wishlistId = req.user.wishlist;
+  const wishListId = req.user.wishList;
 
-  Wishlist.findById(wishlistId)
+  WishList.findById(wishListId)
     .exec()
     .then(rs => {
       res.json(rs.listItems);
@@ -24,28 +24,26 @@ router.get('/', passport.authenticate('jwt-user', { session: false }), (req, res
 // @desc    Add a product to wishlist
 // @access  Private
 router.post('/add', passport.authenticate('jwt-user', { session: false }), (req, res) => {
-  const wishlistId = req.user.wishlist;
+  const wishListId = req.user.wishList;
 
   const { product } = req.body;
 
-  // Check input ???
-
-  Wishlist.findById(wishlistId)
-    .then((foundWishlist) => {
-      if (!foundWishlist) {
+  WishList.findById(wishListId)
+    .then((foundWishList) => {
+      if (!foundWishList) {
         // Not found wishlist
-        return res.status(404).json('Not Found Wishlist');
+        return res.status(404).json('Not Found WishList');
       } else {
         // Found wishlist
-        let productIds = foundWishlist.listItems.map(wishlistItem => wishlistItem.product).join(' ');
+        let productIds = foundWishList.listItems.map(item => item._id).join(' ');
 
         // If there is product in wishlist
         if (productIds.includes(product._id)) {
           return res.status(400).json('This product was in your wishlist');
         } else {
           // If there is not product in wishlist
-          foundWishlist.listItems.push(product);
-          foundWishlist
+          foundWishList.listItems.push(product);
+          foundWishList
             .save()
             .then(() => {
               return res.status(200).json('Successfull to add this product to your wishlist');
@@ -59,7 +57,7 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
     })
     .catch(err => {
       console.log(err.message);
-      return res.status(404).json('Not Found Wishlist');
+      return res.status(404).json('Not Found WishList');
     });
 });
 

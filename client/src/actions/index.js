@@ -82,6 +82,78 @@ export function actDeleteOrder(index) {
   }
 }
 
+// =====================
+
+export const actFetchCartRequest = () => {
+  console.log('cart')
+  const headers = {
+    'Authorization': localStorage.getItem('token')
+  }
+
+  return dispatch => {
+    return callApi('api/cart/', 'GET', null, headers).then(res => {
+      console.log(res.data);
+      dispatch(actFetchCart(res.data));
+    })
+  }
+}
+
+export const actFetchCart = (cart) => {
+  return {
+    type: Types.FETCH_CART,
+    cart
+  }
+}
+
+
+// ========================================
+
+export const actFetchWishListRequest = () => {
+  console.log('wishlist')
+  const headers = {
+    'Authorization': localStorage.getItem('token')
+  }
+
+  return dispatch => {
+    return callApi('api/wishlist/', 'GET', null, headers).then(res => {
+      console.log(res.data);
+      dispatch(actFetchWishList(res.data));
+    })
+  }
+}
+
+export const actFetchWishList = (wishList) => {
+  return {
+    type: Types.FETCH_WISHLIST,
+    wishList
+  }
+}
+
+// ==========================================
+
+// export const onFetchOrdersRequest = () => {
+//   console.log('orders')
+//   const headers = {
+//     'Authorization': localStorage.getItem('token')
+//   }
+
+//   return dispatch => {
+//     return callApi('api/orders/', 'GET', null, headers).then(res => {
+//       console.log(res.data);
+//       dispatch(actFetchWishList(res.data));
+//     })
+//   }
+// }
+
+// export const actFetchWishList = (wishList) => {
+//   return {
+//     type: Types.FETCH_WISHLIST,
+//     wishList
+//   }
+// }
+
+// ==========================================
+
 // Redux thunk
 // Lấy dữ liệu products từ server sử dụng Redux Thunk
 export const actFetchProductsRequest = () => {

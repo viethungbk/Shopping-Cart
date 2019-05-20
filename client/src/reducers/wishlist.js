@@ -9,8 +9,8 @@ const wishList = (state = initialState, action) => {
       state = [];
       return [...state];
 
-    case Types.FETCH_USER_DATA:
-      state = action.user.wishList;
+    case Types.FETCH_WISHLIST:
+      state = action.wishList;
       return [...state];
 
     case Types.ADD_TO_WISH_LIST:

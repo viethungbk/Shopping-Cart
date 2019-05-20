@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import callApi from '../../apiCaller';
-import { actFetchUserData,actRemoveUserData} from '../../actions/index';
+import { actFetchUserData,actRemoveUserData, actFetchCartRequest, actFetchWishListRequest} from '../../actions/index';
 import { connect } from 'react-redux';
 
 class Login extends Component {
@@ -17,12 +17,14 @@ class Login extends Component {
   }
 
   componentWillMount(){
-    this.props.onRemoveUserData();
+    this.setState({
+      txtEmail: localStorage.getItem('email') || ''
+    })
   }
 
   submitForm = (event) => {
     event.preventDefault();
-    console.log('Submit');
+
     let user = {};
     user.email = this.state.txtEmail;
     user.password = this.state.txtPassword;
@@ -30,17 +32,22 @@ class Login extends Component {
     callApi('api/users/login', 'post', user)
       .then(res => {
         this.props.onFetchUserData(res.data.user);
+        this.props.onFetchCartRequest();
+        this.props.onFetchWishListRequest();
+
         console.log(res.data.user);
         this.setState({
           isLogin: true
         });
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('email', res.data.user.email);
       })
       .catch(err => {
         console.log(err.response);
         this.setState({
           isShowMessage: true,
-          message: err.response.data
+          // message: err.response.data
+          message: err.response
         });
       });
   }
@@ -77,6 +84,8 @@ class Login extends Component {
   }
 
   render() {
+    const { txtEmail } = this.state;
+
     return (
       <div className="container sign-in-page">
         {this.redirect()}
@@ -103,6 +112,7 @@ class Login extends Component {
                 className="form-control unicase-form-control text-input"
                 id="txtEmail"
                 name="txtEmail"
+                value={ txtEmail }
                 onChange={(event) => this.changeInput(event)} />
             </div>
 
@@ -150,6 +160,15 @@ const mapDispatchToProps = dispatch => {
     onFetchUserData: (user) => {
       dispatch(actFetchUserData(user));
     },
+    onFetchCartRequest: () => {
+      dispatch(actFetchCartRequest());
+    },
+    onFetchWishListRequest: () => {
+      dispatch(actFetchWishListRequest());
+    },
+    // onFetchOrdersRequest: () => {
+    //   dispatch(actFetchOrdersRequest());
+    // },
     onRemoveUserData: () => {
       dispatch(actRemoveUserData());
     }

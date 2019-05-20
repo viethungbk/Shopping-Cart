@@ -136,22 +136,4 @@ router.patch('/:id', passport.authenticate('jwt-admin', { session: false }), pro
     .catch(err => res.json(err.message));
 });
 
-// @route   POST api/products/
-// @desc    Add a product to wishlist
-// @access  Public
-router.post('/add-to-wishlist', (req, res) => {
-  let user = req.user;
-
-  // Load user model
-  const User = require('../../models/User');
-
-  user.wishlist.push(req.body);
-  console.log(user);
-
-  User.findById(user.id, user)
-    .exec()
-    .then(rs => res.json(rs))
-    .catch(err => res.status(400).json(err.message));
-});
-
 module.exports = router;

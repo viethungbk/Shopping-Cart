@@ -24,11 +24,10 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  wishlist: [{
+  wishList: {
     type: ObjectId,
-    ref: 'products',
-    required: true
-  }],
+    ref: 'wishlist'
+  },
   cart: {
     type: ObjectId,
     ref: 'carts'

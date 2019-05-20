@@ -13,7 +13,7 @@ const validateLoginInput = require('../../validation/user/login');
 
 // Load user model
 const User = require('../../models/User');
-const Wishlist = require('../../models/Wishlist');
+const WishList = require('../../models/WishList');
 const Cart = require('../../models/Cart');
 const Order = require('../../models/Order');
 
@@ -62,9 +62,10 @@ router.post('/register', (req, res) => {
           d: 'mm'     // Default
         });
 
-        const wishlist = new Wishlist();
+        const wishList = new WishList();
         const cart = new Cart();
         const orders = new Order();
+
 
         // Create new user
         const newUser = new User({
@@ -72,13 +73,13 @@ router.post('/register', (req, res) => {
           email: req.body.email,
           avatar,
           password: req.body.password,
-          wishlist,
-          cart,
-          orders
+          wishList: wishList,
+          cart: cart,
+          orders: orders,
         });
 
         try {
-          wishlist.save();
+          wishList.save();
           cart.save();
           orders.save();
         } catch (error) {
@@ -180,7 +181,7 @@ router.delete('/:id', passport.authenticate('jwt-admin', { session: false }), (r
 // @desc    Return current user wishlist
 // @access  Private
 router.get('/wishlist', (req, res) => {
-  res.json(req.user.wishlist);
+  res.json(req.user.wishList);
 });
 
 module.exports = router;
