@@ -57,21 +57,7 @@ class ShoppingCart extends Component {
 
 	render() {
 		let { cart, user, products } = this.props;
-		console.log(products);
-
-		if (user._id !== undefined) {
-			let newCart = [];
-
-			cart.forEach(item => {
-				products.forEach(product => {
-					if (product._id === item.product) {
-						newCart.push(product);
-					}
-				})
-			});
-			this.props.onFetchCart(newCart);
-			console.log(newCart);
-		}
+	
 
 		return (
 			<div>
@@ -93,7 +79,7 @@ class ShoppingCart extends Component {
 
 									{/* Đổ dữ liệu từ trong cart */}
 									<tbody>
-										{/* {this.showCartItem(cart)} */}
+										{this.showCartItem(cart)}
 									</tbody>{/* /tbody */}
 
 									<tfoot>
@@ -128,7 +114,7 @@ class ShoppingCart extends Component {
 											<div className="cart-grand-total">
 												Grand Total:
                         <span className="inner-left-md">
-													{/* ${this.grandTotal(cart)} */}
+													${this.grandTotal(cart)}
 												</span>
 											</div>
 										</th>

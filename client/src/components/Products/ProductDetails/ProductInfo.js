@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from "react-redux";
-import actAddToCart, { actAddToWishList } from "./../../../actions/index";
+import { connect } from 'react-redux';
+import actAddToCart, { actAddToWishList } from '../../../actions/index';
+import formatMoney from '../../../utils/formatMoney';
 
 class ProductInfo extends Component {
 	constructor(props) {
@@ -63,8 +64,8 @@ class ProductInfo extends Component {
 						<div className="row">
 							<div className="col-sm-6 col-xs-6">
 								<div className="price-box">
-									<span className="price">${product.price}</span>
-									<span className="price-strike">${product.pricebefore}</span>
+									<span className="price">{formatMoney(product.price)} VNĐ</span>
+									<span className="price-strike">{formatMoney(product.pricebefore)} VNĐ</span>
 								</div>
 							</div>
 							<div className="col-sm-6 col-xs-6">

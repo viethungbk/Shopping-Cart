@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ProductInfo from './ProductInfo';
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import arrayBufferToBase64 from '../../../arrayBufferToBase64';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import arrayBufferToBase64 from '../../../utils/arrayBufferToBase64';
 class ProductDetails extends Component {
   showImage(images) {
     const numberImages = images.length;
@@ -30,13 +30,6 @@ class ProductDetails extends Component {
                         <img className="img-responsive" alt="product" src={this.showImage(product.image)} />
                       </Link>
                     </div>
-                  </div>
-                  <div className="item">
-                    <Link className="horizontal-thumb active" data-target="#owl-single-product" data-slide={1} to="">
-                      <img className="img-responsive"
-                        alt="product thumb" src="assets/images/blank.gif"
-                        data-echo="assets/images/products/p1.jpg" />
-                    </Link>
                   </div>
                 </div>
               </div>

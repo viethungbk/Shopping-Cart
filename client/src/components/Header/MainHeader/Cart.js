@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import formatMoney from '../../../utils/formatMoney';
+
 class Cart extends Component {
 
 	getTotalPrice = (cart) => {
 		if (cart.length === 0) {
 			return 0;
 		}
+
 		let totalPrice = 0;
-		// cart.forEach(item => {
-		// 	totalPrice += item.product.price * item.quantity;
-		// });
-		console.log(cart);
+
+		cart.forEach(item => {
+			totalPrice += item.product.price * item.quantity;
+		});
 		return totalPrice;
 	}
 
@@ -39,7 +42,7 @@ class Cart extends Component {
 								<div className="basket-item-count"><span className="count">{cart.length}</span></div>
 								<div className="total-price-basket"> <span className="lbl">Giỏ hàng</span>
 									<span className="value">
-										${this.getTotalPrice(cart)}
+										{formatMoney(this.getTotalPrice(cart))} VNĐ
 									</span> </div>
 							</div>
 						</div>

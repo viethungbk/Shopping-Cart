@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { actFetchProductDetail } from '../../../actions/index';
 import { connect } from 'react-redux';
 
-import arrayBufferToBase64 from '../../../arrayBufferToBase64';
+import arrayBufferToBase64 from '../../../utils/arrayBufferToBase64';
+import formatMoney from '../../../utils/formatMoney';
 
 class Product extends Component {
 	constructor(props) {
@@ -24,34 +25,14 @@ class Product extends Component {
 	// 	return result;
 	// }
 
-	// Phải dispath 1 cái action để thêm vào reducer cart
 	onAddToCart = (product, quantity) => {
-		// if (!this.props.user) {
-		// 	window.confirm("Bạn phải đăng nhập để thêm sản phẩm vào giỏ hàng!");
-		// 	this.setState({
-		// 		isLogin: true
-		// 	});
-		// } else {
-			this.props.onAddToCart(product, quantity);
-		// }
+		this.props.onAddToCart(product, quantity);
 	}
 
 	onAddToWishList = (product) => {
-		// if (!this.props.user) {
-		// 	window.confirm("Bạn phải đăng nhập để thêm sản phẩm yêu thích!");
-		// 	this.setState({
-		// 		isLogin: true
-		// 	});
-		// } else {
-			this.props.onAddToWishList(product);
-		// }
+		this.props.onAddToWishList(product);
 	}
 
-	// showRedirect = () => {
-	// 	if (this.state.isLogin) {
-	// 		return <Redirect to="/login" />
-	// 	}
-	// }
 	watchingProductDetail = (product) => {
 		this.props.watchingProductDetail(product);
 	}
@@ -114,10 +95,10 @@ class Product extends Component {
 								<div className="description" />
 								<div className="product-price">
 									<span className="price">
-										${product.price}
+										{formatMoney(product.price)} VNĐ
 									</span>
 									<span className="price-before-discount">
-										$ {product.pricebefore}
+										{formatMoney(product.pricebefore)} VNĐ
 									</span>
 								</div>
 							</div>
@@ -164,9 +145,9 @@ class Product extends Component {
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-			watchingProductDetail: (productDetail) => {
-					dispatch(actFetchProductDetail(productDetail));
-			}
+		watchingProductDetail: (productDetail) => {
+			dispatch(actFetchProductDetail(productDetail));
+		}
 	}
 }
 

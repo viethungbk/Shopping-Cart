@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import callApi from '../../apiCaller';
-import { actFetchUserData,actRemoveUserData, actFetchCartRequest, actFetchWishListRequest} from '../../actions/index';
+import { actFetchUserData, actRemoveUserData, actFetchCartRequest, actFetchWishListRequest, actFetchCart } from '../../actions/index';
 import { connect } from 'react-redux';
 
 class Login extends Component {
@@ -16,7 +16,7 @@ class Login extends Component {
     }
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.setState({
       txtEmail: localStorage.getItem('email') || ''
     })
@@ -24,10 +24,12 @@ class Login extends Component {
 
   submitForm = (event) => {
     event.preventDefault();
+    const { txtEmail, txtPassword } = this.state;
 
-    let user = {};
-    user.email = this.state.txtEmail;
-    user.password = this.state.txtPassword;
+    let user = {
+      email: txtEmail,
+      password: txtPassword
+    };
 
     callApi('api/users/login', 'post', user)
       .then(res => {
@@ -35,19 +37,37 @@ class Login extends Component {
         this.props.onFetchCartRequest();
         this.props.onFetchWishListRequest();
 
-        console.log(res.data.user);
+        let newCart = [];
+
+        const { products, cart } = this.props;
+
+        cart.forEach(item => {
+          products.forEach(product => {
+            if (product._id === item.product) {
+              newCart.push({
+                product: product,
+                quantity: product.quantity
+              });
+            }
+          })
+        });
+
+        this.props.onFetchCart(newCart);
+
+
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('email', res.data.user.email);
+
         this.setState({
           isLogin: true
         });
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('email', res.data.user.email);
       })
       .catch(err => {
         console.log(err.response);
+
         this.setState({
           isShowMessage: true,
-          // message: err.response.data
-          message: err.response
+          message: err.response.data
         });
       });
   }
@@ -104,7 +124,7 @@ class Login extends Component {
           {this.showMessage()}
 
           {/* User Input */}
-          <form className="register-form outer-top-xs" action="/api/user/login" method="POST">
+          <form className="register-form outer-top-xs">
             <div className="form-group">
               <label className="info-title" htmlFor="txtEmail">Email Address <span>*</span></label>
               <input
@@ -112,7 +132,7 @@ class Login extends Component {
                 className="form-control unicase-form-control text-input"
                 id="txtEmail"
                 name="txtEmail"
-                value={ txtEmail }
+                value={txtEmail}
                 onChange={(event) => this.changeInput(event)} />
             </div>
 
@@ -155,6 +175,13 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    products: state.products,
+    cart: state.cart
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     onFetchUserData: (user) => {
@@ -166,9 +193,9 @@ const mapDispatchToProps = dispatch => {
     onFetchWishListRequest: () => {
       dispatch(actFetchWishListRequest());
     },
-    // onFetchOrdersRequest: () => {
-    //   dispatch(actFetchOrdersRequest());
-    // },
+    onFetchCart: (cart) => {
+      dispatch(actFetchCart(cart));
+    },
     onRemoveUserData: () => {
       dispatch(actRemoveUserData());
     }
@@ -176,5 +203,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(null, mapDispatchToProps)(Login);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

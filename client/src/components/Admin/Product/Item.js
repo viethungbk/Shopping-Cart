@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import arrayBufferToBase64 from '../../../arrayBufferToBase64';
+import arrayBufferToBase64 from '../../../utils/arrayBufferToBase64';
 
 export default class Item extends Component {
   showImage(images) {
