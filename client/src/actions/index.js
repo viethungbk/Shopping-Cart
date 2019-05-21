@@ -15,7 +15,6 @@ export const actRemoveUserData = () => {
 }
 
 const actAddToCart = (product, quantity) => {
-  console.log(product)
   return {
     type: Types.ADD_TO_CART,
     product,
@@ -92,8 +91,6 @@ export const actFetchCartRequest = products => {
   return dispatch => {
     return callApi('api/cart/', 'GET', null, headers).then(res => {
       let newCart = [];
-      console.log(res.data)
-
 
       res.data.forEach(item => {
         let index = products.findIndex(product => {
@@ -106,10 +103,6 @@ export const actFetchCartRequest = products => {
           })
         }
       });
-
-
-
-      console.log(newCart);
 
       dispatch(actFetchCart(newCart));
     })

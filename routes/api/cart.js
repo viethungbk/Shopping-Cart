@@ -43,15 +43,15 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
         let productIds = foundCart.listItems.map(cartItem => cartItem.product).join(' ');
 
         // If there is product in cart
-        if (productIds.includes(item.product._id)) {
+        if (productIds.includes(item.product)) {
           Cart.findOneAndUpdate({
             listItems: {
               $elemMatch: { product: item.product }
             }
           },
-            {
-              $inc: { 'listItems.$.quantity': item.quantity }
-            })
+          {
+            $inc: { 'listItems.$.quantity': item.quantity }
+          })
             .exec()
             .then(cart => res.json(cart))
             .catch(err => {

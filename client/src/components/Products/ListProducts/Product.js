@@ -5,14 +5,9 @@ import { connect } from 'react-redux';
 
 import arrayBufferToBase64 from '../../../utils/arrayBufferToBase64';
 import formatMoney from '../../../utils/formatMoney';
+import callApi from '../../../apiCaller';
 
 class Product extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isLogin: false
-		}
-	}
 
 	// showRating = (avarageRating) => {
 	// 	var result = [];
@@ -26,11 +21,47 @@ class Product extends Component {
 	// }
 
 	onAddToCart = (product, quantity) => {
+		const { user } = this.props;
+
 		this.props.onAddToCart(product, quantity);
+
+		if (user._id !== undefined) {
+
+			const headers = {
+				'Authorization': localStorage.getItem('token')
+			}
+
+			const item = {
+				product: product._id,
+				quantity: quantity
+			}
+
+			callApi('api/cart/add', 'post', item, headers)
+				.then(rs => console.log(rs))
+				.catch(err => console.log(err));
+		}
 	}
 
 	onAddToWishList = (product) => {
+		const { user } = this.props;
+
 		this.props.onAddToWishList(product);
+
+		if (user._id !== undefined) {
+			console.log(product);
+
+			const headers = {
+				'Authorization': localStorage.getItem('token')
+			}
+
+			const item = {
+				product: product._id
+			}
+
+			callApi('api/wishlist/add', 'post', item, headers)
+				.then(rs => console.log(rs))
+				.catch(err => console.log(err));
+		}
 	}
 
 	watchingProductDetail = (product) => {
@@ -143,7 +174,13 @@ class Product extends Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapStateToProps = state => {
+	return {
+		user: state.user
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
 	return {
 		watchingProductDetail: (productDetail) => {
 			dispatch(actFetchProductDetail(productDetail));
@@ -151,4 +188,4 @@ const mapDispatchToProps = (dispatch, props) => {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
