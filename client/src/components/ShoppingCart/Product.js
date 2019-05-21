@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import arrayBufferToBase64 from '../../utils/arrayBufferToBase64';
+import formatMoney from '../../utils/formatMoney';
 
 class Product extends Component {
 
@@ -25,6 +26,7 @@ class Product extends Component {
 
   render() {
     let { item } = this.props;
+    console.log(item)
 
     return (
       <tr>
@@ -38,7 +40,7 @@ class Product extends Component {
             className="entry-thumbnail"
             to="/product-details"
             onClick={() => this.props.watchingProductDetail(item.product)}>
-            <img src={this.showImage(item.product.image)} alt="product thumb" />
+            {/* <img src={this.showImage(item.product.image)} alt="product thumb" /> */}
           </Link>
         </td>
         <td className="cart-product-name-info">
@@ -94,12 +96,12 @@ class Product extends Component {
         </td>
         <td className="cart-product-sub-total">
           <span className="cart-sub-total-price">
-            ${item.product.price}
+            {formatMoney(item.product.price)} VNĐ
           </span>
         </td>
         <td className="cart-product-grand-total">
           <span className="cart-grand-total-price">
-            ${item.product.price * item.quantity}
+            {formatMoney(item.product.price * item.quantity)} VNĐ
           </span>
         </td>
       </tr>

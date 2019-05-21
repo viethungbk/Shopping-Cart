@@ -5,6 +5,7 @@ import Product from './Product';
 import { actDeleteCartItem, actUpdateCartItemQuantity, actAddToOrders, actFetchCart } from '../../actions/index';
 import MessageCartEmpty from './MessageCartEmpty';
 import { actFetchProductDetail } from '../../actions/index';
+import formatMoney from '../../utils/formatMoney';
 
 class ShoppingCart extends Component {
 	showCartItem = (cart) => {
@@ -50,13 +51,13 @@ class ShoppingCart extends Component {
 				date: await (() => { return new Date() })()
 			}
 		);
-		onAddToOrders(cart, this.state, "Đang xử lý")
-		window.confirm("Đơn hàng của bạn đang được xử lý! ");
+		onAddToOrders(cart, this.state, 'Đang xử lý')
+		window.confirm('Đơn hàng của bạn đang được xử lý!');
 		this.onClear();
 	}
 
 	render() {
-		let { cart, user, products } = this.props;
+		let { cart } = this.props;
 	
 
 		return (
@@ -114,7 +115,7 @@ class ShoppingCart extends Component {
 											<div className="cart-grand-total">
 												Grand Total:
                         <span className="inner-left-md">
-													${this.grandTotal(cart)}
+													{formatMoney(this.grandTotal(cart))} VNĐ
 												</span>
 											</div>
 										</th>

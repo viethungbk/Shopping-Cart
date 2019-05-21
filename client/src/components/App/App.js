@@ -13,27 +13,27 @@ import Content from '../Content/Content';
 import Orders from '../Orders/Orders';
 
 class App extends Component {
-    render() {
-        return (
-            <HashRouter>
-                <div className="App">
-                    <Layout>
-                        <Switch>
-                            <Route path="/" exact component={Content} />
-                            <Route path="/login" exact component={Login} />
-                            <Route path="/register" exact component={Register} />
-                            <Route path="/contact" exact component={Contact} />
-                            <Route path="/product-details" exact component={ProductDetails} />
-                            <Route path="/wishlist" exact component={MyWishList} />
-                            <Route path="/orders" exact component={Orders} />
-                            <Route path="/not-found" exact component={NotFound} />
-                            <Route path="/shopping-cart" exact component={ShoppingCart} />
-                        </Switch>
-                    </Layout>
-                </div>
-            </HashRouter>
-        );
-    }
+	render() {
+		return (
+			<HashRouter>
+				<div className="App">
+					<Layout>
+						<Switch>
+							<Route path="/" exact component={Content} />
+							<Route path="/login" exact component={Login} />
+							<Route path="/register" exact component={Register} />
+							<Route path="/contact" exact component={Contact} />
+							<Route path="/product-details" exact component={ProductDetails} />
+							<Route path="/wishlist" exact component={MyWishList} />
+							<Route path="/orders" exact component={Orders} />
+							<Route path="/not-found" exact component={NotFound} />
+							<Route path="/shopping-cart" exact component={ShoppingCart} />
+						</Switch>
+					</Layout>
+				</div>
+			</HashRouter>
+		);
+	}
 }
 
 export default App;

@@ -85,14 +85,12 @@ export function actDeleteOrder(index) {
 // =====================
 
 export const actFetchCartRequest = () => {
-  console.log('cart')
   const headers = {
     'Authorization': localStorage.getItem('token')
   }
 
   return dispatch => {
     return callApi('api/cart/', 'GET', null, headers).then(res => {
-      console.log(res.data);
       dispatch(actFetchCart(res.data));
     })
   }
@@ -116,7 +114,6 @@ export const actFetchWishListRequest = () => {
 
   return dispatch => {
     return callApi('api/wishlist/', 'GET', null, headers).then(res => {
-      console.log(res.data);
       dispatch(actFetchWishList(res.data));
     })
   }

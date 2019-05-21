@@ -37,22 +37,27 @@ class Login extends Component {
         this.props.onFetchCartRequest();
         this.props.onFetchWishListRequest();
 
-        let newCart = [];
 
         const { products, cart } = this.props;
+        console.log(products);
+        console.log(cart)
 
-        cart.forEach(item => {
-          products.forEach(product => {
-            if (product._id === item.product) {
-              newCart.push({
-                product: product,
-                quantity: product.quantity
-              });
-            }
-          })
-        });
+        // let newCart = [];
+        // cart.forEach(item => {
+        //   console.log(item)
+        //   products.forEach(product => {
+        //     console.log(product)
+        //     if (product._id === item.product) {
+        //       newCart.push({
+        //         product: product,
+        //         quantity: product.quantity
+        //       });
+        //     }
+        //   })
+        // });
 
-        this.props.onFetchCart(newCart);
+        // this.props.onFetchCart(newCart);
+        // console.log(newCart)
 
 
         localStorage.setItem('token', res.data.token);
