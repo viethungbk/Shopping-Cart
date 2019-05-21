@@ -9,8 +9,7 @@ const user = (state = initialState, action) => {
       return state;
 
     case Types.REMOVE_USER_DATA:
-      state = {};
-      return state;
+      return {};
 
     default: return state;
   }

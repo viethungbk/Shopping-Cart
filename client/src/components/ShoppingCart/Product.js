@@ -40,7 +40,7 @@ class Product extends Component {
             className="entry-thumbnail"
             to="/product-details"
             onClick={() => this.props.watchingProductDetail(item.product)}>
-            {/* <img src={this.showImage(item.product.image)} alt="product thumb" /> */}
+            <img src={this.showImage(item.product.image)} alt="product thumb" />
           </Link>
         </td>
         <td className="cart-product-name-info">

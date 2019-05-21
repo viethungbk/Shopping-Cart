@@ -84,14 +84,34 @@ export function actDeleteOrder(index) {
 
 // =====================
 
-export const actFetchCartRequest = () => {
+export const actFetchCartRequest = products => {
   const headers = {
     'Authorization': localStorage.getItem('token')
   }
 
   return dispatch => {
     return callApi('api/cart/', 'GET', null, headers).then(res => {
-      dispatch(actFetchCart(res.data));
+      let newCart = [];
+      console.log(res.data)
+
+
+      res.data.forEach(item => {
+        let index = products.findIndex(product => {
+          return product._id === item.product;
+        })
+        if (index !== -1) {
+          newCart.push({
+            product: products[index],
+            quantity: item.quantity
+          })
+        }
+      });
+
+
+
+      console.log(newCart);
+
+      dispatch(actFetchCart(newCart));
     })
   }
 }
@@ -106,15 +126,26 @@ export const actFetchCart = (cart) => {
 
 // ========================================
 
-export const actFetchWishListRequest = () => {
-  console.log('wishlist')
+export const actFetchWishListRequest = (products) => {
   const headers = {
     'Authorization': localStorage.getItem('token')
   }
 
   return dispatch => {
     return callApi('api/wishlist/', 'GET', null, headers).then(res => {
-      dispatch(actFetchWishList(res.data));
+      let newWishList = [];
+
+      res.data.forEach(productId => {
+        let index = products.findIndex(product => {
+          return product._id === productId
+        })
+        if (index !== -1) {
+          newWishList.push(products[index]);
+        }
+      });
+
+
+      dispatch(actFetchWishList(newWishList));
     })
   }
 }

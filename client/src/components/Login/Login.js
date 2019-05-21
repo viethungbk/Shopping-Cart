@@ -9,14 +9,16 @@ class Login extends Component {
     super(props);
     this.state = {
       txtEmail: '',
-      txtPassword: '',
+      txtPassword: '111111',
       isShowMessage: false,
       message: '',
-      isLogin: false
+      isLogin: false,
     }
   }
 
   componentWillMount() {
+
+    this.props.onRemoveUserData();
     this.setState({
       txtEmail: localStorage.getItem('email') || ''
     })
@@ -33,35 +35,16 @@ class Login extends Component {
 
     callApi('api/users/login', 'post', user)
       .then(res => {
-        this.props.onFetchUserData(res.data.user);
-        this.props.onFetchCartRequest();
-        this.props.onFetchWishListRequest();
-
-
-        const { products, cart } = this.props;
-        console.log(products);
-        console.log(cart)
-
-        // let newCart = [];
-        // cart.forEach(item => {
-        //   console.log(item)
-        //   products.forEach(product => {
-        //     console.log(product)
-        //     if (product._id === item.product) {
-        //       newCart.push({
-        //         product: product,
-        //         quantity: product.quantity
-        //       });
-        //     }
-        //   })
-        // });
-
-        // this.props.onFetchCart(newCart);
-        // console.log(newCart)
-
+        const { products } = this.props;
 
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('email', res.data.user.email);
+
+        this.props.onFetchUserData(res.data.user);
+        this.props.onFetchCartRequest(products);
+        this.props.onFetchWishListRequest(products);
+
+
 
         this.setState({
           isLogin: true
@@ -109,7 +92,7 @@ class Login extends Component {
   }
 
   render() {
-    const { txtEmail } = this.state;
+    const { txtEmail,txtPassword } = this.state;
 
     return (
       <div className="container sign-in-page">
@@ -148,6 +131,7 @@ class Login extends Component {
                 className="form-control unicase-form-control text-input"
                 id="txtPassword"
                 name="txtPassword"
+                value={txtPassword}
                 onChange={(event) => this.changeInput(event)} />
             </div>
 
@@ -192,11 +176,11 @@ const mapDispatchToProps = dispatch => {
     onFetchUserData: (user) => {
       dispatch(actFetchUserData(user));
     },
-    onFetchCartRequest: () => {
-      dispatch(actFetchCartRequest());
+    onFetchCartRequest: (products) => {
+      dispatch(actFetchCartRequest(products));
     },
-    onFetchWishListRequest: () => {
-      dispatch(actFetchWishListRequest());
+    onFetchWishListRequest: (products) => {
+      dispatch(actFetchWishListRequest(products));
     },
     onFetchCart: (cart) => {
       dispatch(actFetchCart(cart));

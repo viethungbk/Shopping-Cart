@@ -30,7 +30,8 @@ class MyWishList extends Component {
 
 	render() {
 
-		let { wishList } = this.props;
+		const { wishList } = this.props;
+		console.log(wishList);
 
 		return (
 			<div className="my-wishlist-page">
