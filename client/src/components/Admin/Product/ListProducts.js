@@ -29,7 +29,7 @@ export default class ListProducts extends Component {
     const { products } = this.state;
 
     let listProducts = products.map((product, index) => {
-      return <Item key={index} index={index} product={product} onDeleteItem={this.onDeleteItem}></Item>;
+      return <Item key={index} index={index} product={product} onDeleteItem={(index) => this.onDeleteItem(index)}></Item>;
     });
 
     return listProducts;
@@ -53,7 +53,18 @@ export default class ListProducts extends Component {
     return null;
   }
 
-  onDeleteItem(productId) {
+  onDeleteItem(index) {
+    let { products } = this.state;
+    const productId = products[index]._id;
+
+    console.log(productId);
+
+    products.splice(index, 1);
+
+    this.setState({
+      products: products
+    });
+
     const headers = {
       'Authorization': localStorage.getItem("token")
     }
@@ -61,17 +72,18 @@ export default class ListProducts extends Component {
     callApi(`api/products/${productId}`, 'delete', null, headers)
       .then(res => {
         console.log(res.data);
-        this.setState({
-          isSuccess: true,
-          message: res.data
-        });
+        window.alert('Delete ', productId);
+        // this.setState({
+        //   isSuccess: true,
+        //   message: res.data
+        // });
       })
       .catch(err => {
         console.log(err);
-        this.setState({
-          isFailed: true,
-          message: err.message
-        })
+        // this.setState({
+        //   isFailed: true,
+        //   message: err.message
+        // })
       });
   }
 

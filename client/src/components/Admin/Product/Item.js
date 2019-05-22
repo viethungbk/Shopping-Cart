@@ -30,7 +30,7 @@ export default class Item extends Component {
         <td>
           <Link to={`/admin/edit-product/${product._id}`}><button type="button" className="btn btn-primary">Sửa</button></Link>
         </td>
-        <td><button type="button" className="btn btn-danger" onClick={ () => this.props.onDeleteItem(product._id) }>Xóa</button></td>
+        <td><button type="button" className="btn btn-danger" onClick={ () => this.props.onDeleteItem(index) }>Xóa</button></td>
       </tr>
     )
   }
