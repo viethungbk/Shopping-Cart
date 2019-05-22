@@ -64,8 +64,6 @@ router.post('/register', (req, res) => {
 
         const wishList = new WishList();
         const cart = new Cart();
-        const orders = new Order();
-
 
         // Create new user
         const newUser = new User({
@@ -75,13 +73,12 @@ router.post('/register', (req, res) => {
           password: req.body.password,
           wishList: wishList,
           cart: cart,
-          orders: orders,
+          orders: [],
         });
 
         try {
           wishList.save();
           cart.save();
-          orders.save();
         } catch (error) {
           res.json(error.message);
         }

@@ -49,9 +49,9 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
               $elemMatch: { product: item.product }
             }
           },
-          {
-            $inc: { 'listItems.$.quantity': item.quantity }
-          })
+            {
+              $inc: { 'listItems.$.quantity': item.quantity }
+            })
             .exec()
             .then(() => {
               res.json('Added to cart');
@@ -100,11 +100,7 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
 // @access  Private
 router.delete('/delete/item/:id', passport.authenticate('jwt-user', { session: false }), (req, res) => {
   const cartId = req.user.cart;
-  console.log('cart id: ', cartId)
-  console.log('params: ', req.params.id);
-
   const productId = req.params.id
-  console.log(productId);
 
   Cart.findById(cartId)
     .then((foundCart) => {
@@ -113,37 +109,26 @@ router.delete('/delete/item/:id', passport.authenticate('jwt-user', { session: f
         return res.status(404).json('Not Found Cart');
       } else {
         // Found cart
-        let productIds = foundCart.listItems.map(cartItem => cartItem.product).join(' ');
+        let productIds = foundCart.listItems.map(cartItem => cartItem.product.toString());
+        let index = productIds.indexOf(productId);
 
-        // If there is product in cart
-        if (!productIds.includes(productId)) {
-          return res.status(400).json('This product was NOT in your Cart');
-        } else {
-          // If there is product in cart
-          console.log(foundCart)
-          WishList.findOneAndUpdate({
-            _id: cartId
-          },
-          {
-            $pull: {
-              listItems: { product: productId }
-            }
-          })
-            .exec()
-            .then((rs) => {
-              console.log(rs)
-              res.json('Deleted');
-            })
-            .catch(err => {
-              console.log(err);
-              return res.status(501).json('Can not delete item');
-            });
+        if (index === -1) {
+          return res.status(404).json('Not found product in your cart');
         }
+
+        try {
+          foundCart.listItems.splice(index, 1);
+          foundCart.save();
+        } catch (error) {
+          return res.status(500).json(error.message);
+        }
+
+        return res.status(200).json('Removed item');
       }
     })
     .catch(err => {
       console.log(err.message);
-      return res.status(404).json('Error to delete product from your Cart');
+      return res.status(404).json('Error to remove product from your Cart');
     });
 });
 

@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import arrayBufferToBase64 from '../../utils/arrayBufferToBase64';
 import formatMoney from '../../utils/formatMoney';
+import callApi from '../../apiCaller';
 
 class Product extends Component {
 
   onDeleteCartItem = (item) => {
+    const { user } = this.props;
+
     this.props.onDeleteCartItem(item);
+
+    if (user._id !== undefined) {
+      const productId = item.product._id;
+      const headers = {
+        'Authorization': localStorage.getItem('token')
+      };
+
+      callApi(`api/cart/delete/item/${productId}`, 'delete', null, headers)
+        .then(result => {
+          console.log(result);
+          window.alert(result);
+        })
+        .catch(error => {
+          console.log(error);
+        })
+    }
   }
 
   onUpdateCartItemQuantity = (item, quantity) => {
@@ -26,7 +47,6 @@ class Product extends Component {
 
   render() {
     let { item } = this.props;
-    console.log(item)
 
     return (
       <tr>
@@ -109,4 +129,10 @@ class Product extends Component {
   }
 }
 
-export default Product;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(Product);

@@ -10,6 +10,7 @@ const products = require('./routes/api/products');
 const cart = require('./routes/api/cart');
 const blog = require('./routes/api/blog');
 const wishlist = require('./routes/api/wishlist');
+const orders = require('./routes/api/orders');
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use('/api/products', products);
 app.use('/api/cart', cart);
 app.use('/api/blogs', blog);
 app.use('/api/wishlist', wishlist);
+app.use('/api/orders', orders);
 
 const port = process.env.PORT || 5000;
 

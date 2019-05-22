@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import actAddToCart, { actAddToWishList } from '../../../actions/index';
 import formatMoney from '../../../utils/formatMoney';
+import callApi from '../../../apiCaller';
 
 class ProductInfo extends Component {
 	constructor(props) {
@@ -18,10 +20,54 @@ class ProductInfo extends Component {
 		})
 	}
 
+	onAddToCart = (product, quantity) => {
+		const { user } = this.props;
+
+		this.props.onAddToCart(product, quantity);
+
+		if (user._id !== undefined) {
+
+			const headers = {
+				'Authorization': localStorage.getItem('token')
+			}
+
+			const item = {
+				product: product._id,
+				quantity: quantity
+			}
+
+			callApi('api/cart/add', 'post', item, headers)
+				.then(rs => console.log(rs))
+				.catch(err => console.log(err));
+		}
+	}
+
+	onAddToWishList = (product) => {
+		const { user } = this.props;
+
+		this.props.onAddToWishList(product);
+
+		if (user._id !== undefined) {
+			console.log(product);
+
+			const headers = {
+				'Authorization': localStorage.getItem('token')
+			}
+
+			const item = {
+				product: product._id
+			}
+
+			callApi('api/wishlist/add', 'post', item, headers)
+				.then(rs => console.log(rs))
+				.catch(err => console.log(err));
+		}
+	}
+
 	render() {
-		const { product, onAddToWishList, onAddToCart } = this.props;
+		const { product } = this.props;
 		const { quantity } = this.state;
-		console.log(product);
+
 		return (
 			<div className="col-sm-12 col-md-8 col-lg-8 product-info-block">
 				<div className="product-info">
@@ -73,21 +119,17 @@ class ProductInfo extends Component {
 									<Link className="btn btn-primary icon"
 										data-toggle="tooltip" data-placement="right"
 										title="Wishlist" to="/wishList"
-										onClick={() => onAddToWishList(product)}
-									>
+										onClick={() => this.onAddToWishList(product)} >
 										<i className="fa fa-heart" />
 									</Link>
 									<Link className="btn btn-primary"
 										data-toggle="tooltip" data-placement="right"
-										title="Add to Compare" to=""
-
-									>
+										title="Add to Compare" to="" >
 										<i className="fa fa-signal" />
 									</Link>
 									<Link className="btn btn-primary"
 										data-toggle="tooltip" data-placement="right"
-										title="E-mail" to=""
-									>
+										title="E-mail" to="" >
 										<i className="fa fa-envelope" />
 									</Link>
 								</div>
@@ -113,7 +155,8 @@ class ProductInfo extends Component {
 													<i className="icon fa fa-sort-asc"
 														onClick={() => this.onChangeQuantity(1, product.iventory)}
 													/>
-												</span></div>
+												</span>
+											</div>
 											<div className="arrow minus gradient">
 												<span className="ir">
 													<i className="icon fa fa-sort-desc"
@@ -128,10 +171,10 @@ class ProductInfo extends Component {
 							</div>
 							<div className="add-btn">
 								<Link to="/shopping-cart" className="btn btn-primary"
-									onClick={() => onAddToCart(product, quantity)}>
+									onClick={() => this.onAddToCart(product, quantity)}>
 									<i className="fa fa-shopping-cart inner-right-vs" />
 									ADD TO CART
-                                </Link>
+                </Link>
 							</div>
 						</div>{/* /.row */}
 					</div>{/* /.quantity-container */}
@@ -142,7 +185,8 @@ class ProductInfo extends Component {
 }
 const mapStateToProps = state => {
 	return {
-		productDetails: state.productDetails
+		productDetails: state.productDetails,
+		user: state.user
 	}
 }
 const mapDisPatchToProps = (dispatch, props) => {
