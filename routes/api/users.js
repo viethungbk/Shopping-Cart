@@ -26,8 +26,8 @@ router.get('/test', (req, res) => res.json({ msg: "Users Works" }));
 // @desc    Get all users
 // @access  Private
 router.get('/', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
-  console.log(req.headers)
   let error = null;
+
   User.find({})
     .then(users => {
       if (!users) {
@@ -162,10 +162,10 @@ router.get('/current', passport.authenticate('jwt-user', { session: false }), (r
   });
 });
 
-// @route   DELETE api/users/:id
+// @route   DELETE api/users/delete/:id
 // @desc    Delete a user by id
 // @access  Private
-router.delete('/:id', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
+router.delete('/delete/:id', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
   User.findOneAndRemove({ _id: req.params.id })
     .exec()
     .then(result => {

@@ -9,7 +9,7 @@ class MessageCartEmpty extends Component {
     return (
       <tr>
         <td>
-          <h3 className="messageCartEmpty">
+          <h3 className="alert alert-warning">
             {MSG.MSG_CART_EMPTY}
           </h3>
         </td>

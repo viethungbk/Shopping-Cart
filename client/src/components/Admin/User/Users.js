@@ -10,27 +10,71 @@ export default class Users extends Component {
       users: []
     }
   }
+
   componentDidMount() {
     const headers = {
       'Authorization': localStorage.getItem('token')
     }
 
-    callApi('api/users', 'get', headers, null)
+    callApi('api/users', 'get', null, headers)
       .then(res => {
-        console.log(res.data);
         this.setState({
           users: res.data
         });
-        console.log(this.state);
       })
       .catch(err => console.log(err));
+  }
+
+  onDeleteUser = (index) => {
+    let { users } = this.state;
+    const userId = users[index]._id;
+
+    console.log(userId);
+
+    users.splice(index, 1);
+
+    this.setState({
+      users: users
+    });
+
+    const headers = {
+      'Authorization': localStorage.getItem('token')
+    }
+
+    callApi(`api/users/delete/${userId}`, 'delete', null, headers)
+      .then(res => {
+        window.alert(res);
+        console.log('Deleted User');
+      })
+      .catch(err => {
+        window.alert(err.message);
+        console.log(err);
+      });
   }
 
   showUsers() {
     const { users } = this.state;
 
+    if (users.length === 0) {
+      return (
+        <tr>
+          <td>
+            <h3 className="alert alert-warning">
+              Danh sách người dùng trống
+            </h3>
+          </td>
+        </tr>
+      );
+    }
+
     let listUsers = users.map((user, index) => {
-      return <Item key={ index } index={ index } user={ user }></Item>;
+      return (
+        <Item
+          key={index}
+          index={index}
+          user={user}
+          onDeleteUser={(index) => this.onDeleteUser(index)} >
+        </Item>);
     });
 
     return listUsers;
@@ -55,7 +99,7 @@ export default class Users extends Component {
               </tr>
             </thead>
             <tbody>
-              { this.showUsers() }
+              {this.showUsers()}
             </tbody>
           </table>
         </div>

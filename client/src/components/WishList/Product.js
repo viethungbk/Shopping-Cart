@@ -26,7 +26,7 @@ class Product extends Component {
 			}
 
 			callApi('api/cart/add', 'post', item, headers)
-				.then(rs => console.log(rs))
+				.then(rs => console.log(rs.data))
 				.catch(err => console.log(err));
 		}
 	}
@@ -60,7 +60,7 @@ class Product extends Component {
 
 	render() {
 		let { product } = this.props;
-		console.log(product)
+
 		return (
 			<tr>
 				<td className="col-md-2 col-sm-6 col-xs-6"><img src={this.showImage(product.image)} alt="product" /></td>

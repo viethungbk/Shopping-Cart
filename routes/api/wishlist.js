@@ -65,11 +65,7 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
 // @access  Private
 router.delete('/delete/item/:id', passport.authenticate('jwt-user', { session: false }), (req, res) => {
   const wishListId = req.user.wishList;
-  console.log('wishlist id: ', wishListId)
-  console.log('params: ', req.params.id);
-
-  const productId = req.params.id
-  console.log(productId);
+  const productId = req.params.id;
 
   WishList.findById(wishListId)
     .then((foundWishList) => {
@@ -83,7 +79,6 @@ router.delete('/delete/item/:id', passport.authenticate('jwt-user', { session: f
           return res.status(400).json('This product was NOT in your WishList');
         } else {
           // If there is product in wishlist
-          console.log(foundWishList)
           WishList.findOneAndUpdate({
             _id: wishListId
           },

@@ -17,10 +17,12 @@ export default class Login extends Component {
 
   submitForm = (event) => {
     event.preventDefault();
-    console.log('Submit');
-    let admin = {};
-    admin.email = this.state.txtEmail;
-    admin.password = this.state.txtPassword;
+
+    const { txtEmail, txtPassword } = this.state;
+    let admin = {
+      email: txtEmail,
+      password: txtPassword
+    };
 
     callApi('api/admin/login', 'post', admin)
       .then(res => {

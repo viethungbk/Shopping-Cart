@@ -13,7 +13,7 @@ export default class Item extends Component {
         <td>{ user.name }</td>
         <td>{ user.email }</td>
         <td>Phone number</td>
-        <td><button type="button" className="btn btn-danger">Xóa</button></td>
+        <td><button type="button" className="btn btn-danger" onClick={() => this.props.onDeleteUser(index)}>Xóa</button></td>
       </tr>
     )
   }

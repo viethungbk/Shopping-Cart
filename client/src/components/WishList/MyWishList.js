@@ -29,9 +29,7 @@ class MyWishList extends Component {
 	}
 
 	render() {
-
 		const { wishList } = this.props;
-		console.log(wishList);
 
 		return (
 			<div className="my-wishlist-page">

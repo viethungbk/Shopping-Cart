@@ -53,7 +53,9 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
             $inc: { 'listItems.$.quantity': item.quantity }
           })
             .exec()
-            .then(cart => res.json(cart))
+            .then(() => {
+              res.json('Added to cart');
+            })
             .catch(err => {
               console.log(err);
               return res.status(501).json('Can not add to cart');
@@ -92,5 +94,57 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
 //     });
 
 // });
+
+// @route   DELETE api/cart/delete/item/:id
+// @desc    Delete a product in cart
+// @access  Private
+router.delete('/delete/item/:id', passport.authenticate('jwt-user', { session: false }), (req, res) => {
+  const cartId = req.user.cart;
+  console.log('cart id: ', cartId)
+  console.log('params: ', req.params.id);
+
+  const productId = req.params.id
+  console.log(productId);
+
+  Cart.findById(cartId)
+    .then((foundCart) => {
+      if (!foundCart) {
+        // Not found cart
+        return res.status(404).json('Not Found Cart');
+      } else {
+        // Found cart
+        let productIds = foundCart.listItems.map(cartItem => cartItem.product).join(' ');
+
+        // If there is product in cart
+        if (!productIds.includes(productId)) {
+          return res.status(400).json('This product was NOT in your Cart');
+        } else {
+          // If there is product in cart
+          console.log(foundCart)
+          WishList.findOneAndUpdate({
+            _id: cartId
+          },
+          {
+            $pull: {
+              listItems: { product: productId }
+            }
+          })
+            .exec()
+            .then((rs) => {
+              console.log(rs)
+              res.json('Deleted');
+            })
+            .catch(err => {
+              console.log(err);
+              return res.status(501).json('Can not delete item');
+            });
+        }
+      }
+    })
+    .catch(err => {
+      console.log(err.message);
+      return res.status(404).json('Error to delete product from your Cart');
+    });
+});
 
 module.exports = router;
