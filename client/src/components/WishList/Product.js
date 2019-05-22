@@ -1,16 +1,51 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import arrayBufferToBase64 from '../../utils/arrayBufferToBase64';
 import formatMoney from '../../utils/formatMoney';
+import callApi from '../../apiCaller';
 
 class Product extends Component {
 
 	onAddToCart = (product, quantity) => {
+		const { user } = this.props;
+
 		this.props.onAddToCart(product, quantity);
+
+		if (user._id !== undefined) {
+			console.log(product);
+
+			const headers = {
+				'Authorization': localStorage.getItem('token')
+			}
+
+			const item = {
+				product: product._id,
+				quantity: quantity
+			}
+
+			callApi('api/cart/add', 'post', item, headers)
+				.then(rs => console.log(rs))
+				.catch(err => console.log(err));
+		}
 	}
+
 	onDeleteWishItem = (product) => {
+		const { user } = this.props;
+
 		this.props.onDeleteWishItem(product);
+
+		if (user._id !== undefined) {
+
+			const headers = {
+				'Authorization': localStorage.getItem('token')
+			}
+
+			callApi(`api/wishlist/delete/item/${product._id}`, 'delete', null, headers)
+				.then(rs => console.log(rs))
+				.catch(err => console.log(err));
+		}
 	}
 
 	showImage(images) {
@@ -55,5 +90,10 @@ class Product extends Component {
 	}
 }
 
+const mapStateToProps = state => {
+	return {
+		user: state.user
+	}
+}
 
-export default Product;
+export default connect(mapStateToProps, null)(Product);

@@ -91,7 +91,9 @@ router.delete('/delete/item/:id', passport.authenticate('jwt-user', { session: f
             $pull: { listItems: productId }
           })
             .exec()
-            .then(cart => res.json(cart))
+            .then(() => {
+              res.json('Deleted');
+            })
             .catch(err => {
               console.log(err);
               return res.status(501).json('Can not delete item');
