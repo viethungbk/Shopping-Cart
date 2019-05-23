@@ -7,8 +7,7 @@ const orders = (state = initialState, action) => {
     case Types.ADD_TO_ORDERS:
       state.push({
         cart: action.cart,
-        info: action.info,
-        status: action.status
+        address: action.address
       });
       return [...state];
 

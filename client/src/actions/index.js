@@ -65,12 +65,11 @@ export function actFetchProductDetail(productDetail) {
   }
 }
 
-export function actAddToOrders(cart, info, status) {
+export function actAddToOrders(cart, address) {
   return {
     type: Types.ADD_TO_ORDERS,
     cart,
-    info,
-    status
+    address
   }
 }
 

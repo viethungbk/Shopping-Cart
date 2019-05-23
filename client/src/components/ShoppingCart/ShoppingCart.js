@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import Product from './Product';
 import { actDeleteCartItem, actUpdateCartItemQuantity, actAddToOrders, actFetchCart } from '../../actions/index';
 import MessageCartEmpty from './MessageCartEmpty';
 import { actFetchProductDetail } from '../../actions/index';
 import formatMoney from '../../utils/formatMoney';
+import callApi from '../../apiCaller';
 
 class ShoppingCart extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			txtAddress: '',
+			redirect: false
+		}
+	}
 	showCartItem = (cart) => {
 		let result = [];
 		let { onDeleteCartItem, onUpdateCartItemQuantity, watchingProductDetail } = this.props;
@@ -43,97 +52,180 @@ class ShoppingCart extends Component {
 		}
 	}
 
-	onSubmit = async event => {
+	changeInput = (event) => {
+		const target = event.target;
+		const name = target.name;
+		const value = target.value;
+
+		this.setState({
+			[name]: value
+		});
+	}
+
+	onSubmitOrder = (event) => {
 		event.preventDefault();
-		let { cart, onAddToOrders } = this.props;
-		this.setState(
-			{
-				date: await (() => { return new Date() })()
-			}
-		);
-		onAddToOrders(cart, this.state, 'Đang xử lý')
-		window.confirm('Đơn hàng của bạn đang được xử lý!');
-		this.onClear();
+		let { cart, user, onAddToOrders } = this.props;
+		const address = this.state.txtAddress;
+
+		if (user._id === undefined) {
+			window.alert('Bạn hãy đăng nhập để đặt hàng');
+			this.setState({
+				redirect: true
+			})
+			return;
+		}
+
+		if (cart.length === 0) {
+			window.alert('Gio hang trong');
+			return;
+		}
+
+		if (address.trim() === '') {
+			window.alert('Hãy nhập địa chỉ giao hàng');
+			return;
+		}
+
+		onAddToOrders(cart, address);
+
+		const headers = {
+			'Authorization': localStorage.getItem('token')
+		};
+
+		const data = {
+			address: address
+		}
+
+		callApi('api/orders/create', 'post', data, headers)
+			.then(result => {
+				console.log(result);
+				window.alert(result);
+			})
+			.catch(error => {
+				console.log(error);
+				window.alert(error.message);
+			})
 	}
 
 	render() {
 		let { cart } = this.props;
-	
+		const { redirect } = this.state;
+
+		if (redirect) {
+			return <Redirect to="/login" />;
+		}
 
 		return (
 			<div>
-				< div className="row " >
-					<div className="shopping-cart">
-						<div className="shopping-cart-table ">
-							<div className="table-responsive">
-								<table className="table">
-									<thead>
-										<tr>
-											<th className="cart-romove item">Xóa</th>
-											<th className="cart-description item">Hình ảnh</th>
-											<th className="cart-product-name item">Tên sản phẩm</th>
-											<th className="cart-qty item">Số lượng</th>
-											<th className="cart-sub-total item">Giá</th>
-											<th className="cart-total last-item">Tổng cổng</th>
-										</tr>
-									</thead>{/* /thead */}
+				<div className="row " >
+					<div className="container">
+						<div className="shopping-cart">
 
-									{/* Đổ dữ liệu từ trong cart */}
-									<tbody>
-										{this.showCartItem(cart)}
-									</tbody>{/* /tbody */}
+							<div className="row">
+								<div className="shopping-cart-table ">
+									<div className="table-responsive">
+										<table className="table">
+											<thead>
+												<tr>
+													<th className="cart-romove item">Xóa</th>
+													<th className="cart-description item">Hình ảnh</th>
+													<th className="cart-product-name item">Tên sản phẩm</th>
+													<th className="cart-qty item">Số lượng</th>
+													<th className="cart-sub-total item">Giá</th>
+													<th className="cart-total last-item">Tổng cổng</th>
+												</tr>
+											</thead>{/* /thead */}
 
-									<tfoot>
-										<tr>
-											<td colSpan={7}>
-												<div className="shopping-cart-btn">
-													<span >
-														<Link to="/" className="btn btn-upper btn-primary outer-left-xs">
-															Tiếp tục mua hàng
-                            </Link>
+											{/* Đổ dữ liệu từ trong cart */}
+											<tbody>
+												{this.showCartItem(cart)}
+											</tbody>{/* /tbody */}
+
+											<tfoot>
+												<tr>
+													<td colSpan={7}>
+														<div className="shopping-cart-btn">
+															<span >
+																<Link to="/" className="btn btn-upper btn-primary outer-left-xs">
+																	Tiếp tục mua hàng
+                            		</Link>
 
 
-														{/* Button callApi Update Cart */}
-														<Link to="" className="btn btn-upper btn-primary pull-right outer-right-xs">
-															Cập nhật giỏ hàng
-                            </Link>
-													</span>
-												</div>
-												{/* /.shopping-cart-btn */}
-											</td>
-										</tr>
-									</tfoot>
-								</table>{/* /table */}
+																{/* Button callApi Update Cart */}
+																<Link to="" className="btn btn-upper btn-primary pull-right outer-right-xs">
+																	Cập nhật giỏ hàng
+                            		</Link>
+															</span>
+														</div>
+														{/* /.shopping-cart-btn */}
+													</td>
+												</tr>
+											</tfoot>
+										</table>{/* /table */}
+									</div>
+								</div>{/* /.shopping-cart-table */}
 							</div>
-						</div>{/* /.shopping-cart-table */}
 
-						<div className="col-md-4 col-sm-12 cart-shopping-total">
-							<table className="table">
-								<thead>
-									<tr>
-										<th>
-											<div className="cart-grand-total">
-												Grand Total:
-                        <span className="inner-left-md">
-													{formatMoney(this.grandTotal(cart))} VNĐ
-												</span>
-											</div>
-										</th>
-									</tr>
-								</thead>{/* /thead */}
-								<tbody>
-									<tr>
-										<td>
-											<div className="cart-checkout-btn pull-right">
-												<button type="submit" className="btn btn-primary checkout-btn">Đặt hàng</button>
-											</div>
-										</td>
-									</tr>
-								</tbody>{/* /tbody */}
-							</table>{/* /table */}
-						</div>{/* /.cart-shopping-total */}
-					</div>{/* /.shopping-cart */}
-				</div >
+							<div className="row">
+								<div className="col-md-6 col-sm-12 estimate-ship-tax">
+									<table className="table">
+
+										<thead>
+											<tr>
+												<th>
+													<span className="estimate-title">Nhập địa chỉ giao hàng:</span>
+													{/* <p>Chọn địa chỉ giao hàng</p> */}
+												</th>
+											</tr>
+										</thead>{/* /thead */}
+
+										<tbody>
+											<tr>
+												<td>
+													<form>
+														<div className="form-group">
+															<textarea rows="5" cols="70" name="txtAddress" form="usrform"
+																value={this.state.txtAddress} onChange={(event) => this.changeInput(event)} placeholder="Địa chỉ" >
+															</textarea>
+														</div>
+													</form>
+												</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</div>{/* /.estimate-ship-tax */}
+
+								<div className="col-md-4 col-sm-12 col-md-push-2 cart-shopping-total">
+									<table className="table">
+										<thead>
+											<tr>
+												<th>
+													<div className="cart-grand-total">
+														Tổng tiền:
+														<span className="inner-left-md">
+															{formatMoney(this.grandTotal(cart))} VNĐ
+														</span>
+													</div>
+												</th>
+											</tr>
+										</thead>{/* /thead */}
+										<tbody>
+											<tr>
+												<td>
+													<div className="cart-checkout-btn pull-right">
+														<button type="submit" className="btn btn-primary checkout-btn" onClick={(event) => this.onSubmitOrder(event)}>Đặt hàng</button>
+													</div>
+												</td>
+											</tr>
+										</tbody>{/* /tbody */}
+									</table>{/* /table */}
+								</div>{/* /.cart-shopping-total */}
+							</div>
+
+						</div>
+
+					</div >
+				</div>
 			</div>
 		);
 	}
@@ -147,7 +239,7 @@ const mapStateToProps = state => {
 	}
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = dispatch => {
 	return {
 		onDeleteCartItem: (item) => {
 			dispatch(actDeleteCartItem(item));
@@ -155,8 +247,8 @@ const mapDispatchToProps = (dispatch, props) => {
 		onUpdateCartItemQuantity: (item, quantity) => {
 			dispatch(actUpdateCartItemQuantity(item, quantity));
 		},
-		onAddToOrders: (cart, info, status) => {
-			dispatch(actAddToOrders(cart, info, status));
+		onAddToOrders: (cart, address) => {
+			dispatch(actAddToOrders(cart, address));
 		},
 		watchingProductDetail: (product) => {
 			dispatch(actFetchProductDetail(product));

@@ -32,6 +32,26 @@ class Product extends Component {
 
   onUpdateCartItemQuantity = (item, quantity) => {
     this.props.onUpdateCartItemQuantity(item, quantity);
+
+    const { user } = this.props;
+
+    if (user._id !== undefined) {
+
+			const headers = {
+				'Authorization': localStorage.getItem('token')
+			}
+
+			const data = {
+				product: item.product._id,
+				quantity: quantity
+      }
+      
+      console.log(data);
+
+			callApi('api/cart/add', 'post', data, headers)
+				.then(rs => console.log(rs))
+				.catch(err => console.log(err));
+		}
   }
 
   showImage(images) {

@@ -79,6 +79,65 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
     });
 });
 
+// @route   POST api/cart/add
+// @desc    Add a product to cart
+// @access  Private
+router.patch('/add', passport.authenticate('jwt-user', { session: false }), (req, res) => {
+  const cartId = req.user.cart;
+  // item: {
+  //   product,
+  //   quantity
+  // }
+  const item = req.body;
+
+  // Check input ???
+
+  Cart.findById(cartId)
+    .then((foundCart) => {
+      if (!foundCart) {
+        // Not found cart
+        return res.status(404).json('Not Found Cart');
+      } else {
+        // Found cart
+        let productIds = foundCart.listItems.map(cartItem => cartItem.product).join(' ');
+
+        // If there is product in cart
+        if (productIds.includes(item.product)) {
+          Cart.findOneAndUpdate({
+            listItems: {
+              $elemMatch: { product: item.product }
+            }
+          },
+            {
+              $inc: { 'listItems.$.quantity': item.quantity }
+            })
+            .exec()
+            .then(() => {
+              res.json('Added to cart');
+            })
+            .catch(err => {
+              console.log(err);
+              return res.status(501).json('Can not add to cart');
+            });
+        } else {
+          // If there is not product in cart
+          foundCart.listItems.push(item);
+          foundCart
+            .save()
+            .then(cart => res.json(cart))
+            .catch(err => {
+              console.log(err);
+              return res.status(501).json('Can not add to cart');
+            });
+        }
+      }
+    })
+    .catch(err => {
+      console.log(err.message);
+      return res.status(404).json('Not Found Cart');
+    });
+});
+
 // @route   DELETE api/cart/
 // @desc    Empty the cart
 // @access  Private
@@ -100,7 +159,7 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
 // @access  Private
 router.delete('/delete/item/:id', passport.authenticate('jwt-user', { session: false }), (req, res) => {
   const cartId = req.user.cart;
-  const productId = req.params.id
+  const productId = req.params.id;
 
   Cart.findById(cartId)
     .then((foundCart) => {

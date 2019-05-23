@@ -55,6 +55,8 @@ router.post('/create', passport.authenticate('jwt-user', { session: false }), (r
   const user = req.user;
   const cartId = user.cart;
   const userId = user._id;
+  const { address } = req.body;
+  console.log(address)
 
   Cart.findById(cartId)
     .then(cart => {
@@ -70,7 +72,7 @@ router.post('/create', passport.authenticate('jwt-user', { session: false }), (r
           let order = {
             user: user._id,
             listItems: cart.listItems,
-            shipaddress: '',
+            shipaddress: address,
             status: 'Cho xac nhan'
           };
 
@@ -81,19 +83,39 @@ router.post('/create', passport.authenticate('jwt-user', { session: false }), (r
             newOrder.save();
             user.save();
           } catch (error) {
-            res.status(500).json(error.message);
+            return res.status(500).json(error.message);
           }
+
+          return res.status(200).json('Order Successfull. Check in your Orders');
         })
         .catch(err => res.status(400).json(err.message));
     })
     .catch(err => res.status(400).json(err.message));
 });
 
-// @route   PATCH api/orders/update/:id
+// @route   PATCH api/orders/update/status/:id
 // @desc    Update order status
 // @access  Private
-router.delete('/delete/:id', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
-  
+router.patch('/update/status/:id', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
+  const orderId = req.params.id;
+  const { orderStatus } = req.body;
+
+  Order.findById(orderId)
+    .then(order => {
+      if (order === null) {
+        return res.status(404).json('Not Found Order');
+      }
+
+      order.status = orderStatus;
+
+      try {
+        order.save();
+      } catch (error) {
+        return res.status(500).json(error.message);
+      }
+
+      return res.status(200).json('Updated order status');
+    });
 });
 
 module.exports = router;
