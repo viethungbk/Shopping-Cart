@@ -5,6 +5,7 @@ import Users from './User/Users';
 import ListProducts from './Product/ListProducts';
 import EditProduct from './Product/EditProduct';
 import Login from './Login';
+import ListOrders from './Order/ListOrders';
 
 export default class Content extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class Content extends Component {
         <Route path="/admin/list-products" exact component={ListProducts} />
         <Route path="/admin/edit-product/:id" component={EditProduct} />
         <Route path="/admin/users" exact component={Users} />
+        <Route path="/admin/orders" exact component={ListOrders} />
       </Switch>
     );
   }

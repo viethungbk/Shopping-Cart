@@ -6,10 +6,14 @@ export default class SideBar extends Component {
     return (
       <div>
         <ul className="nav nav-sidebar-dashboard">
-          <li className="bg-info"><Link to="/admin">Overview</Link></li>
-          <li><Link to="/admin/add-product">Add Product</Link></li>
-          <li><Link to="/admin/list-products">List Products</Link></li>
-          <li><Link to="/admin/users">Users</Link></li>
+          <li className="bg-info"><Link to="/admin">Accounts</Link></li>
+          <li><Link to="/admin/add-product">This Account</Link></li>
+          <li><Link to="/admin/list-products">Add Admin</Link></li>
+        </ul>
+
+        <ul className="nav nav-sidebar-dashboard">
+          <li className="bg-info"><Link to="/admin">Orders</Link></li>
+          <li><Link to="/admin/orders">List Ordersr</Link></li>
         </ul>
 
         <ul className="nav nav-sidebar-dashboard">
@@ -20,14 +24,13 @@ export default class SideBar extends Component {
         </ul>
         <ul className="nav nav-sidebar-dashboard">
           <li className="bg-info"><Link to="/admin/users">Users</Link></li>
-          <li><Link to="">One more nav</Link></li>
-          <li><Link to="">Another nav item</Link></li>
+          <li><Link to="/admin/users">Users</Link></li>
         </ul>
 
         <ul className="nav nav-sidebar-dashboard">
           <li className="bg-info"><Link to="/admin">Blogs</Link></li>
-          <li><Link to="">Quản lý bài viết</Link></li>
-          <li><Link to="">Thêm bài viết</Link></li>
+          <li><Link to="">Blogs Manager</Link></li>
+          <li><Link to="">Add a Blog</Link></li>
         </ul>
       </div>
     );

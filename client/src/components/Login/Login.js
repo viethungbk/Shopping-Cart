@@ -17,8 +17,8 @@ class Login extends Component {
   }
 
   componentWillMount() {
-
     this.props.onRemoveUserData();
+
     this.setState({
       txtEmail: localStorage.getItem('email') || ''
     })

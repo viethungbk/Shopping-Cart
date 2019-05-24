@@ -7,8 +7,8 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      txtEmail: '',
-      txtPassword: '',
+      txtEmail: 'hung@gmail.com',
+      txtPassword: '111111',
       isShowMessage: false,
       message: '',
       isLogin: false
@@ -92,14 +92,14 @@ export default class Login extends Component {
             <div className="form-group">
               <label htmlFor="txtEmail" className="col-sm-2 control-label">Email</label>
               <div className="col-sm-10">
-                <input type="email" className="form-control" id="txtEmail" name="txtEmail" placeholder="hung@gmail.com" onChange={event => this.changeInput(event)} />
+                <input type="email" className="form-control" id="txtEmail" name="txtEmail" placeholder="hung@gmail.com" value={ this.state.txtEmail} onChange={event => this.changeInput(event)} />
               </div>
             </div>
 
             <div className="form-group">
               <label htmlFor="txtPassword" className="col-sm-2 control-label">Mật khẩu</label>
               <div className="col-sm-10">
-                <input type="password" className="form-control" id="txtPassword" name="txtPassword" onChange={event => this.changeInput(event)} />
+                <input type="password" className="form-control" id="txtPassword" name="txtPassword" value={ this.state.txtPassword} onChange={event => this.changeInput(event)} />
               </div>
             </div>
 
