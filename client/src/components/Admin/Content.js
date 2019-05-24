@@ -6,6 +6,7 @@ import ListProducts from './Product/ListProducts';
 import EditProduct from './Product/EditProduct';
 import Login from './Login';
 import ListOrders from './Order/ListOrders';
+import OrderDetails from './Order/OrderDetails';
 
 export default class Content extends Component {
   render() {
@@ -17,6 +18,7 @@ export default class Content extends Component {
         <Route path="/admin/edit-product/:id" component={EditProduct} />
         <Route path="/admin/users" exact component={Users} />
         <Route path="/admin/orders" exact component={ListOrders} />
+        <Route path="/admin/order-details/:id" exact component={OrderDetails} />
       </Switch>
     );
   }

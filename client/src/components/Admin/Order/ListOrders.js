@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import callApi from '../../../apiCaller';
 
 class ListOrders extends Component {
@@ -30,7 +32,7 @@ class ListOrders extends Component {
       return (
         <tr key={ index }>
           <td>{ index + 1 }</td>
-          <td>{ order._id }</td>
+          <td><Link to={`/admin/order-details/${order._id}`}>{ order._id }</Link></td>
           <td>{ order.user }</td>
           <td>{ order.listItems.length }</td>
           <td>{ /* Tonng tien */ } Tong tien</td>

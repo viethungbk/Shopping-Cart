@@ -47,6 +47,22 @@ router.get('/', passport.authenticate('jwt-admin', { session: false }), (req, re
     .catch(err => res.status(500).json(err.message));
 });
 
+// @route   GET api/orders/:id
+// @desc    Get order by id
+// @access  Private
+router.get('/:id', passport.authenticate('jwt-admin', { session: false }), (req, res) => {
+  const orderId = req.params.id;
+
+  Order.findById(orderId)
+    .then(order => {
+      if (order === null) {
+        return res.status(404).json('Not Found Order');
+      }
+
+      return res.status(200).json(order);
+    });
+});
+
 // @route   POST api/orders/create
 // @desc    Take an order: create an order and add its to list
 // @access  Private
