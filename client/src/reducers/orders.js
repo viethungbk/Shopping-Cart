@@ -19,6 +19,9 @@ const orders = (state = initialState, action) => {
       state.splice(action.index, 1);
       return [...state];
 
+    case Types.REMOVE_USER_DATA:
+      return [];
+
     default:
       return [...state];
   }
