@@ -4,6 +4,10 @@ let initialState = [];
 
 const orders = (state = initialState, action) => {
   switch (action.type) {
+    case Types.FETCH_ORDERS:
+      state = action.orders;
+      return [...state];
+
     case Types.ADD_TO_ORDERS:
       state.push({
         cart: action.cart,

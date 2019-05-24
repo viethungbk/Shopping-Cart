@@ -12,7 +12,6 @@ const router = express.Router();
 // @access  Private
 router.get('/user', passport.authenticate('jwt-user', { session: false }), (req, res) => {
   const listOrderIds = req.user.orders;
-  console.log(listOrderIds)
 
   if (listOrderIds === null || listOrderIds === undefined) {
     return res.status(404).json('No Orders');

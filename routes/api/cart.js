@@ -31,8 +31,6 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
   // }
   const item = req.body;
 
-  // Check input ???
-
   Cart.findById(cartId)
     .then((foundCart) => {
       if (!foundCart) {
@@ -40,26 +38,22 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
         return res.status(404).json('Not Found Cart');
       } else {
         // Found cart
-        let productIds = foundCart.listItems.map(cartItem => cartItem.product).join(' ');
+        let productIds = foundCart.listItems.map(cartItem => cartItem.product.toString());
+        const index = productIds.indexOf(item.product);
 
         // If there is product in cart
-        if (productIds.includes(item.product)) {
-          Cart.findOneAndUpdate({
-            listItems: {
-              $elemMatch: { product: item.product }
-            }
-          },
-            {
-              $inc: { 'listItems.$.quantity': item.quantity }
-            })
-            .exec()
-            .then(() => {
-              res.json('Added to cart');
-            })
-            .catch(err => {
-              console.log(err);
-              return res.status(501).json('Can not add to cart');
-            });
+        if (index !== -1) {
+          foundCart.listItems[index].quantity += item.quantity;
+          try {
+            foundCart.save();
+          } catch (error) {
+            return res.status(500).json('Can not add this item');
+          }
+
+          return res.status(200).json({
+            cart: foundCart,
+            message: 'Product added to cart'
+          });
         } else {
           // If there is not product in cart
           foundCart.listItems.push(item);
@@ -79,18 +73,16 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
     });
 });
 
-// @route   POST api/cart/add
-// @desc    Add a product to cart
+// @route   PATCH api/cart/update
+// @desc    Update cart item
 // @access  Private
-router.patch('/add', passport.authenticate('jwt-user', { session: false }), (req, res) => {
+router.patch('/update', passport.authenticate('jwt-user', { session: false }), (req, res) => {
   const cartId = req.user.cart;
-  // item: {
+  // cart: [{
   //   product,
   //   quantity
-  // }
-  const item = req.body;
-
-  // Check input ???
+  // }]
+  const { cart } = req.body;
 
   Cart.findById(cartId)
     .then((foundCart) => {
@@ -99,37 +91,19 @@ router.patch('/add', passport.authenticate('jwt-user', { session: false }), (req
         return res.status(404).json('Not Found Cart');
       } else {
         // Found cart
-        let productIds = foundCart.listItems.map(cartItem => cartItem.product).join(' ');
 
-        // If there is product in cart
-        if (productIds.includes(item.product)) {
-          Cart.findOneAndUpdate({
-            listItems: {
-              $elemMatch: { product: item.product }
-            }
-          },
-            {
-              $inc: { 'listItems.$.quantity': item.quantity }
-            })
-            .exec()
-            .then(() => {
-              res.json('Added to cart');
-            })
-            .catch(err => {
-              console.log(err);
-              return res.status(501).json('Can not add to cart');
-            });
-        } else {
-          // If there is not product in cart
-          foundCart.listItems.push(item);
-          foundCart
-            .save()
-            .then(cart => res.json(cart))
-            .catch(err => {
-              console.log(err);
-              return res.status(501).json('Can not add to cart');
-            });
+        foundCart.listItems = cart;
+
+        try {
+          foundCart.save();
+        } catch (error) {
+          return res.status(500).json('Cant update cart');
         }
+
+        return res.status(200).json({
+          cart: foundCart,
+          message: 'Update cart successfull'
+        });
       }
     })
     .catch(err => {

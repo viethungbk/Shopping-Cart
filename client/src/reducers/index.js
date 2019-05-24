@@ -6,7 +6,9 @@ import cart from './cart';
 import wishList from './wishList';
 import keySearch from './keySearch';
 import orders from './orders';
-import user from "./user";
+import user from './user';
+import orderDetails from './orderDetails';
+
 const appReducers = combineReducers({
   products,
   productDetail,
@@ -14,7 +16,8 @@ const appReducers = combineReducers({
   wishList,
   keySearch,
   orders,
-  user
+  user,
+  orderDetails
 });
 
 export default appReducers;
