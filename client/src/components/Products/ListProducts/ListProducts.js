@@ -30,7 +30,7 @@ class ListProducts extends Component {
       });
     }
 
-    let { onAddToCart, onAddToWishList, seeProductDetail, keySearch, watchingProductDetail } = this.props;
+    const { onAddToCart, onAddToWishList, keySearch, watchingProductDetail } = this.props;
 
     let listProducts = products.map((product, index) => {
       return (
@@ -39,7 +39,6 @@ class ListProducts extends Component {
           product={product}
           onAddToCart={onAddToCart}
           onAddToWishList={onAddToWishList}
-          seeProductDetail={seeProductDetail}
           keySearch={keySearch}
           watchingProductDetail={watchingProductDetail}
         />

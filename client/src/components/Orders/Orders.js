@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
-// import { actFetchKeySearch } from "./../../actions/index";
+import { actFetchOrderDetails } from '../../actions/index';
+
 import { connect } from 'react-redux';
 import Order from './Order';
 
 class Orders extends Component {
   showOrders = (orders) => {
-    if (orders.length > 0) {
+    if (orders.length !== 0) {
+      const { showOrderDetails } = this.props;
+
       let result = orders.map((order, index) => {
         return (
           <Order key={index}
             order={order}
-            index={index} />
+            index={index}
+            showOrderDetails={showOrderDetails} />
         );
       });
       return result;
@@ -19,9 +22,9 @@ class Orders extends Component {
       return <tr>
         <td>
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h1 className="label label-warning">
+            <h3 className="alert alert-warning">
               Bạn chưa có đơn hàng nào !
-            </h1>
+            </h3>
           </div>
         </td>
       </tr>
@@ -29,6 +32,8 @@ class Orders extends Component {
   }
   render() {
     let { orders } = this.props;
+    console.log(orders);
+
     return (
       <div className="col-xs-9 col-sm-9 col-md-9 col-lg-9">
         <div className="container-fluid">
@@ -37,19 +42,16 @@ class Orders extends Component {
               <h1 className="panel-title">Kiểm tra đơn hàng</h1>
             </div>
             <div className="panel-body">
-              <table className="table table-hover">
+              <table className="table table-responsive table-bordered">
                 <thead>
                   <tr className="text-align-center">
-                    <th >STT</th>
+                    <th>STT</th>
                     <th>Mã đơn hàng</th>
+                    <th>Số lượng sản phẩm</th>
+                    <th>Tổng tiền</th>
                     <th>Địa chỉ</th>
-                    <th>Sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
                     <th>Ngày tạo</th>
                     <th>Trạng thái</th>
-                    <th>Hủy đơn hàng</th>
-
                   </tr>
                 </thead>
 
@@ -71,4 +73,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(Orders);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showOrderDetails: (order) => {
+      dispatch(actFetchOrderDetails(order));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);

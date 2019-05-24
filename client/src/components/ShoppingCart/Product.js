@@ -22,7 +22,7 @@ class Product extends Component {
       callApi(`api/cart/delete/item/${productId}`, 'delete', null, headers)
         .then(result => {
           console.log(result);
-          window.alert(result);
+          window.alert('Đã xóa sản phẩm khỏi giỏ hàng');
         })
         .catch(error => {
           console.log(error);
@@ -32,26 +32,6 @@ class Product extends Component {
 
   onUpdateCartItemQuantity = (item, quantity) => {
     this.props.onUpdateCartItemQuantity(item, quantity);
-
-    const { user } = this.props;
-
-    if (user._id !== undefined) {
-
-			const headers = {
-				'Authorization': localStorage.getItem('token')
-			}
-
-			const data = {
-				product: item.product._id,
-				quantity: quantity
-      }
-      
-      console.log(data);
-
-			callApi('api/cart/add', 'post', data, headers)
-				.then(rs => console.log(rs))
-				.catch(err => console.log(err));
-		}
   }
 
   showImage(images) {
@@ -104,9 +84,9 @@ class Product extends Component {
           {/* /.row */}
           <div className="cart-product-info">
             <span className="product-color">
-              Hãng:
+              Số lượng trong kho:
             <span>
-                {item.product.brand}
+                {item.product.iventory}
               </span>
             </span>
           </div>

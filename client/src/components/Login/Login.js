@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import callApi from '../../apiCaller';
-import { actFetchUserData, actRemoveUserData, actFetchCartRequest, actFetchWishListRequest, actFetchCart } from '../../actions/index';
+import { actFetchUserData, actRemoveUserData, actFetchCartRequest, actFetchWishListRequest, actFetchOrdersRequest } from '../../actions/index';
 import { connect } from 'react-redux';
 
 class Login extends Component {
@@ -40,11 +40,14 @@ class Login extends Component {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('email', res.data.user.email);
 
-        this.props.onFetchUserData(res.data.user);
-        this.props.onFetchCartRequest(products);
-        this.props.onFetchWishListRequest(products);
-
-
+        try {
+          this.props.onFetchUserData(res.data.user);
+          this.props.onFetchCartRequest(products);
+          this.props.onFetchWishListRequest(products);
+          this.props.onFetchOrdersRequest(products);
+        } catch (error) {
+          console.log(error);
+        }
 
         this.setState({
           isLogin: true
@@ -182,8 +185,8 @@ const mapDispatchToProps = dispatch => {
     onFetchWishListRequest: (products) => {
       dispatch(actFetchWishListRequest(products));
     },
-    onFetchCart: (cart) => {
-      dispatch(actFetchCart(cart));
+    onFetchOrdersRequest: (products) => {
+      dispatch(actFetchOrdersRequest(products));
     },
     onRemoveUserData: () => {
       dispatch(actRemoveUserData());

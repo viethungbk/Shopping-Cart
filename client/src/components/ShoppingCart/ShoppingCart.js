@@ -103,6 +103,51 @@ class ShoppingCart extends Component {
 			.catch(error => {
 				console.log(error);
 				window.alert(error.message);
+			});
+	}
+
+	showButtonUpdateCart() {
+		const { user, cart } = this.props;
+		console.log(cart.length);
+
+		if (user._id === undefined || cart.length === 0) {
+			return;
+		}
+
+		return (
+			<button className="btn btn-upper btn-primary pull-right outer-right-xs" onClick={() => this.onUpdateCart()}>
+				Cập nhật giỏ hàng
+      </button>
+		);
+	}
+
+	onUpdateCart = () => {
+		const { cart } = this.props;
+
+		let listItems = [];
+
+		cart.forEach(item => {
+			listItems.push({
+				product: item.product._id,
+				quantity: item.quantity
+			});
+		});
+
+		const headers = {
+			'Authorization': localStorage.getItem('token')
+		}
+
+		const data = {
+			cart: listItems
+		}
+
+		callApi('api/cart/update', 'patch', data, headers)
+			.then(result => {
+				window.alert(result.data.message);
+			})
+			.catch(error => {
+				console.log(error);
+				window.alert(error.message);
 			})
 	}
 
@@ -149,11 +194,8 @@ class ShoppingCart extends Component {
 																	Tiếp tục mua hàng
                             		</Link>
 
-
 																{/* Button callApi Update Cart */}
-																<Link to="" className="btn btn-upper btn-primary pull-right outer-right-xs">
-																	Cập nhật giỏ hàng
-                            		</Link>
+																{this.showButtonUpdateCart()}
 															</span>
 														</div>
 														{/* /.shopping-cart-btn */}

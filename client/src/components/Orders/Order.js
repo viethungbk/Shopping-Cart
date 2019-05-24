@@ -1,86 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import { actDeleteOrder } from '../../actions/index';
 
 class Order extends Component {
-	showProductName = (order) => {
-		let result = '';
-		if (order.cart.length > 0) {
-			result = order.cart.map((item, index) => {
-				return (
-					<li key={index} className="list-group-item">{item.product.name}</li>
-				);
-			});
-		}
-		return result;
+	showOrderDetails(order) {
+		this.props.showOrderDetails(order);
 	}
-	showProductQuantity = (order) => {
-		let result = '';
-		if (order) {
-			result = order.cart.map((item, index) => {
-				return (
-					<li key={index} className="list-group-item">{item.quantity}</li>
-				);
-			});
-		}
-		return result;
-	}
-	showProductPrice = (order) => {
-		let result = '';
-		if (order) {
-			result = order.cart.map((item, index) => {
-				return (
-					<li key={index} className="list-group-item">{item.product.price * item.quantity}</li>
-				);
-			});
-		}
-		return result;
-	}
+
 	render() {
-		let { order, index } = this.props;
+		const { order, index } = this.props;
+
 		return (
 
 			<tr>
 				<td>{index + 1}</td>
-				<td>{index + 1}</td>
-				<td>
-					<ul className="list-group">
-						<li>{`Họ tên: ${order.info.hoTen}`}</li>
-						<li>{`Địa chỉ: ${order.info.diaChi}`}</li>
-						<li>{`SĐT: ${order.info.SDT}`}</li>
-						<li>{`Ghi chú: ${order.info.ghiChu}`}</li>
-					</ul>
+				<td onClick={ () => this.showOrderDetails(order) }>
+					<Link to="/order-details">{ order._id }</Link>
 				</td>
 				<td>
-					<ul className="list-group">
-						{this.showProductName(order)}
-					</ul>
+					{ order.listItems.length }
 				</td>
 				<td>
-					<ul className="list-group">
-						{this.showProductQuantity(order)}
-					</ul>
+					1 000 000 000 VND
 				</td>
 				<td>
-					<ul className="list-group">
-						{this.showProductPrice(order)}
-					</ul>
+					{ order.shipaddress }
 				</td>
 				<td>
-					<ul className="list-group">
-						<li className="list-group-item">{`${order.info.date}`}</li>
-					</ul>
+					{ order.date }
 				</td>
 
 				<td>
-					<ul className="list-group">
-						<li className="alert alert-warning">{`${order.status}`}</li>
-					</ul>
-				</td>
-				<td>
-					<button type="button" className="btn btn-primary"
-						onClick={() => this.props.deleteOrder(index)}
-					>Hủy</button>
+					{ order.status }
 				</td>
 			</tr>
 

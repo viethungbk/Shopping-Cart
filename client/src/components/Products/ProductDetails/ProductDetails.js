@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import ProductInfo from './ProductInfo';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import ProductInfo from './ProductInfo';
 import arrayBufferToBase64 from '../../../utils/arrayBufferToBase64';
 class ProductDetails extends Component {
   showImage(images) {
@@ -16,7 +17,7 @@ class ProductDetails extends Component {
 
   render() {
     let { product } = this.props;
-    console.log(product);
+
     return (
       <div className="container">
         <div className="row single-product">
@@ -41,12 +42,11 @@ class ProductDetails extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     product: state.productDetail
   }
 }
-
-
 
 export default connect(mapStateToProps, null)(ProductDetails);

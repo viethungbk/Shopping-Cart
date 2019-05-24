@@ -33,6 +33,7 @@ class Cart extends Component {
 
 	render() {
 		let { cart } = this.props;
+
 		return (
 			<div className="col-lg-2 col-md-3 col-sm-4 col-xs-12 animate-dropdown top-cart-row">
 				<div className="dropdown dropdown-cart">
