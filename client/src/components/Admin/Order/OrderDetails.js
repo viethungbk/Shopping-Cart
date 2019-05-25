@@ -9,7 +9,8 @@ export default class OrderDetails extends Component {
     super(props);
 
     this.state = {
-      order: {}
+      order: {},
+      sltOrderStatus: 1
     }
   }
   componentDidMount() {
@@ -62,7 +63,6 @@ export default class OrderDetails extends Component {
     return <img src={ ('data:image/jpeg;base64,' + arrayBufferToBase64(images[0].data)) } alt="product" width="128" />;
   }
 
-
   showProducts = (orderedItems) => {
     if (orderedItems === undefined) {
       return;
@@ -84,6 +84,16 @@ export default class OrderDetails extends Component {
     return tableRow;
   }
 
+  changeInput = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
   render() {
     const { order } = this.state;
 
@@ -95,10 +105,29 @@ export default class OrderDetails extends Component {
           </div>
 
           <div className="panel-body">
-            <div>Mã đơn hàng: {order._id}</div>
-            <div>Trạng thái đơn hàng: <span className="text-warning">{order.status}</span></div>
-            <div>Địa chỉ nhận hàng: {order.shipaddress}</div>
-            <h4>Tổng tiền: <span className="text-primary">1 000 000 VND</span></h4>
+            <div className="col-md-6">
+              <h4>
+                Mã đơn hàng: <span className="text-primary">{order._id}</span>
+              </h4>
+            </div>
+            <div className="col-md-6">
+              <span className="text-warning">{ order.status }</span>
+              <div className="form-group col-md-3">
+              <label htmlFor="sltOrderStatus">Trạng thái đơn hàng</label>
+              <select className="form-control" value={ this.state.sltOrderStatus } name="sltOrderStatus" onChange={ (event) => this.changeInput(event) }>
+                <option value={1}>Chờ Xác Nhận</option>
+                <option value={2}>Đang Giao</option>
+                <option value={3}>Giao Thành Công</option>
+                <option value={4}>Đã Hủy</option>
+              </select>
+              <hr />
+              <button type="button" class="btn btn-primary px-2">Cập nhật</button>
+            </div>
+            </div>
+            <div className="col-md-12">
+             <h4> Địa chỉ nhận hàng:</h4> {order.shipaddress}
+            </div>
+            <h4 className="col-md-12">Tổng tiền: <span className="text-danger">1 000 000 VND</span></h4>
             <hr />
 
             <table className="table table-responsive table-striped">
