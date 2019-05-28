@@ -70,7 +70,7 @@ router.post('/create', passport.authenticate('jwt-user', { session: false }), (r
   const user = req.user;
   const cartId = user.cart;
   const userId = user._id;
-  const { address } = req.body;
+  const { address, grandtotal } = req.body;
   console.log(address)
 
   Cart.findById(cartId)
@@ -78,7 +78,7 @@ router.post('/create', passport.authenticate('jwt-user', { session: false }), (r
       if (cart === null || cart === undefined || cart.listItems === undefined) {
         return res.status(404).json('Nothing in your cart');
       }
-      if (cart.listItems.length === undefined) {
+      if (cart.listItems.length === 0) {
         return res.json('Nothing in your cart');
       }
 
@@ -88,7 +88,8 @@ router.post('/create', passport.authenticate('jwt-user', { session: false }), (r
             user: user._id,
             listItems: cart.listItems,
             shipaddress: address,
-            status: 'Cho xac nhan'
+            status: 1,
+            grandtotal: grandtotal
           };
 
           const newOrder = new Order(order);

@@ -42,21 +42,22 @@ router.get('/', passport.authenticate('jwt-admin', { session: false }), (req, re
 // @desc    Register user
 // @access  Public
 router.post('/register', (req, res) => {
-  const { errors, isValid } = validateRegisterInput(req.body);
+  const data = req.body;
+  const { errors, isValid } = validateRegisterInput(data);
 
   // Check Validation
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
-  User.findOne({ email: req.body.email })
+  User.findOne({ email: data.email })
     .then(user => {
       if (user) {
         errors.email = 'Email already exists.';
         return res.status(400).json(errors);
       } else {
         // Create or get an avatar
-        const avatar = gravatar.url(req.body.email, {
+        const avatar = gravatar.url(data.email, {
           s: '200',   // Size
           r: 'pg',    // Rating
           d: 'mm'     // Default
@@ -67,13 +68,14 @@ router.post('/register', (req, res) => {
 
         // Create new user
         const newUser = new User({
-          name: req.body.name,
-          email: req.body.email,
+          name: data.name,
+          email: data.email,
           avatar,
-          password: req.body.password,
+          password: data.password,
           wishList: wishList,
           cart: cart,
           orders: [],
+          address: data.address
         });
 
         try {

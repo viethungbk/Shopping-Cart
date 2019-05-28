@@ -121,7 +121,7 @@ export default class OrderDetails extends Component {
                 <option value={4}>Đã Hủy</option>
               </select>
               <hr />
-              <button type="button" class="btn btn-primary px-2">Cập nhật</button>
+              <button type="button" className="btn btn-primary px-2">Cập nhật</button>
             </div>
             </div>
             <div className="col-md-12">

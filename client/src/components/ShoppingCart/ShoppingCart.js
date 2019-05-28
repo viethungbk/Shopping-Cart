@@ -17,13 +17,22 @@ class ShoppingCart extends Component {
 			redirect: false
 		}
 	}
+
+	componentDidMount() {
+		const { user } = this.props;
+		if (user._id !== undefined) {
+			this.setState({
+				txtAddress: user.address
+			});
+		}
+	}
 	showCartItem = (cart) => {
-		let result = [];
+		let result = '';
 		let { onDeleteCartItem, onUpdateCartItemQuantity, watchingProductDetail } = this.props;
 
 		if (cart.length === 0) {
 			return <MessageCartEmpty />;
-		} else {
+		} 
 			result = cart.map((item, index) => {
 				return <Product
 					key={index}
@@ -34,7 +43,7 @@ class ShoppingCart extends Component {
 				/>;
 			});
 			return result;
-		}
+		
 	}
 
 	grandTotal = (cart) => {
@@ -92,7 +101,8 @@ class ShoppingCart extends Component {
 		};
 
 		const data = {
-			address: address
+			address: address,
+			grandtotal: this.grandTotal()
 		}
 
 		callApi('api/orders/create', 'post', data, headers)
@@ -108,7 +118,6 @@ class ShoppingCart extends Component {
 
 	showButtonUpdateCart() {
 		const { user, cart } = this.props;
-		console.log(cart.length);
 
 		if (user._id === undefined || cart.length === 0) {
 			return;
@@ -225,7 +234,7 @@ class ShoppingCart extends Component {
 												<td>
 													<form>
 														<div className="form-group">
-															<textarea rows="5" cols="70" name="txtAddress" form="usrform"
+															<textarea className="form-control" rows="5" cols="70" name="txtAddress" form="usrform"
 																value={this.state.txtAddress} onChange={(event) => this.changeInput(event)} placeholder="Địa chỉ" >
 															</textarea>
 														</div>

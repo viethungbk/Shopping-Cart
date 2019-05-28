@@ -69,9 +69,16 @@ class OrderDetails extends Component {
             </div>
 
             <div className="panel-body">
-              <div>Mã đơn hàng: {order._id}</div>
-              <div>Trạng thái đơn hàng: <span className="text-warning">{order.status}</span></div>
-              <div>Địa chỉ nhận hàng: {order.shipaddress}</div>
+              <div>
+                <h4>Mã đơn hàng: {order._id}</h4>
+              </div>
+              <div>
+                <h4>Trạng thái đơn hàng: <span className="text-warning">{order.status}</span></h4>
+              </div>
+              <div>
+                <h4>Địa chỉ nhận hàng: </h4>
+                {order.shipaddress}
+              </div>
               <h4>Tổng tiền: <span className="text-primary">1 000 000 VND</span></h4>
               <hr />
 

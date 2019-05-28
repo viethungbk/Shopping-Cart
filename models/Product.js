@@ -21,6 +21,10 @@ const ProductSchema = new Schema({
     type: String,
     required: true
   },
+  date: {
+    type: Date,
+    default: Date.now
+  },
   iventory: {
     type: Number,
     required: true

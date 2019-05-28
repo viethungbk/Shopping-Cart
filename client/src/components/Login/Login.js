@@ -20,7 +20,7 @@ class Login extends Component {
     this.props.onRemoveUserData();
 
     this.setState({
-      txtEmail: localStorage.getItem('email') || ''
+      txtEmail: JSON.parse(localStorage.getItem('email')) || ''
     })
   }
 
@@ -38,7 +38,7 @@ class Login extends Component {
         const { products } = this.props;
 
         localStorage.setItem('token', res.data.token);
-        localStorage.setItem('email', res.data.user.email);
+        localStorage.setItem('email', JSON.stringify(res.data.user.email));
 
         try {
           this.props.onFetchUserData(res.data.user);

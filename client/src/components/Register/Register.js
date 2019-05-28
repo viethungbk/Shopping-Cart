@@ -10,6 +10,7 @@ export default class Register extends Component {
       txtName: '',
       txtPassword: '',
       txtPassword2: '',
+      txtAddress: '',
       isShowMessage: false,
       message: '',
       isRegister: false
@@ -24,8 +25,9 @@ export default class Register extends Component {
     user.name = this.state.txtName;
     user.password = this.state.txtPassword;
     user.password2 = this.state.txtPassword2;
+    user.address = this.state.txtAddress;
 
-    callApi('api/users/register', 'post',user)
+    callApi('api/users/register', 'post', user)
       .then(res => {
         console.log(res);
         this.setState({
@@ -49,7 +51,7 @@ export default class Register extends Component {
     let message = msg.email || msg.name || msg.password || msg.password2;
     return (
       <div className="alert alert-danger">
-        <h4>{ message }</h4>
+        <h4>{message}</h4>
       </div>
     );
   }
@@ -76,14 +78,15 @@ export default class Register extends Component {
   render() {
     return (
       <div className="container">
-        { this.redirect() }
+        {this.redirect()}
         <div className="col-md-6 col-sm-6 col-md-push-3 create-new-account">
           <h4 className="text title-tag-line">Create your new account.</h4>
 
           <hr />
-          { this.showMessage() }
+          {this.showMessage()}
 
           <form className="register-form outer-top-xs">
+
             <div className="form-group">
               <label className="info-title" htmlFor="txtEmail">Email Address <span>*</span></label>
               <input
@@ -92,6 +95,7 @@ export default class Register extends Component {
                 name="txtEmail"
                 onChange={(event) => this.changeInput(event)} />
             </div>
+
             <div className="form-group">
               <label className="info-title" htmlFor="txtName">Name <span>*</span></label>
               <input
@@ -100,6 +104,7 @@ export default class Register extends Component {
                 name="txtName"
                 onChange={(event) => this.changeInput(event)} />
             </div>
+
             <div className="form-group">
               <label className="info-title" htmlFor="txtPassword">Password <span>*</span></label>
               <input
@@ -108,6 +113,7 @@ export default class Register extends Component {
                 name="txtPassword"
                 onChange={(event) => this.changeInput(event)} />
             </div>
+
             <div className="form-group">
               <label className="info-title" htmlFor="txtPassword2">Confirm Password <span>*</span></label>
               <input
@@ -116,12 +122,21 @@ export default class Register extends Component {
                 name="txtPassword2"
                 onChange={(event) => this.changeInput(event)} />
             </div>
+
+            <div className="form-group">
+              <div><label className="info-title" htmlFor="txtAddress">Address <span>*</span></label></div>
+              <textarea className="form-control" rows="5" cols="85" name="txtAddress" form="usrform"
+                value={this.state.txtAddress} onChange={(event) => this.changeInput(event)} >
+              </textarea>
+            </div>
+
             <button
               type="submit"
               className="btn-upper btn btn-primary checkout-page-button"
               onClick={(event) => this.submitForm(event)}>
               Sign Up
             </button>
+
           </form>
         </div>
       </div>

@@ -18,12 +18,19 @@ const OrderSchema = new Schema({
       quantity: Number
     }
   ],
+  grandtotal: Number,
   date: {
     type: Date,
     default: Date.now
   },
   shipaddress: String,
-  status: String
+  status: Number
+  /*
+  {1} -> Chờ Xác Nhận
+  {2} -> Đang Giao
+  {3} -> Giao Thành Công
+  {4} -> Đã Hủy
+  */
 });
 
 module.exports = Order = mongoose.model('orders', OrderSchema);

@@ -94,7 +94,6 @@ export default class ListProducts extends Component {
 
         {this.showMessage()}
 
-        <h2 className="sub-header">Porduct</h2>
         <div className="table-responsive">
           <table className="table table-striped">
             <thead>
