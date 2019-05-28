@@ -43,7 +43,8 @@ const cart = (state = initialState, action) => {
 
       if (index !== -1) {
         // state[index].quantity = q <= 1 ? 1 : q >= action.item.iventory ? action.item.iventory : q;
-        state[index].quantity = q <= 1 ? 1 : q;
+        const iventory = action.item.product.iventory;
+        state[index].quantity = q <= 1 ? 1 : q >= iventory ? iventory : q;
       }
       return [...state];
 

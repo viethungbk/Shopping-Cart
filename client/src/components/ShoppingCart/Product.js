@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import arrayBufferToBase64 from '../../utils/arrayBufferToBase64';
 import formatMoney from '../../utils/formatMoney';
@@ -133,10 +132,4 @@ class Product extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  }
-}
-
-export default connect(mapStateToProps, null)(Product);
+export default Product;

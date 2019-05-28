@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import arrayBufferToBase64 from '../../utils/arrayBufferToBase64';
 import formatMoney from '../../utils/formatMoney';
+import showOrderStatus from '../../utils/showOrderStatus';
 
 class OrderDetails extends Component {
   showImage(images) {
@@ -73,13 +74,13 @@ class OrderDetails extends Component {
                 <h4>Mã đơn hàng: {order._id}</h4>
               </div>
               <div>
-                <h4>Trạng thái đơn hàng: <span className="text-warning">{order.status}</span></h4>
+                <h4>Trạng thái đơn hàng: <span className="text-warning">{showOrderStatus(order.status)}</span></h4>
               </div>
               <div>
                 <h4>Địa chỉ nhận hàng: </h4>
                 {order.shipaddress}
               </div>
-              <h4>Tổng tiền: <span className="text-primary">1 000 000 VND</span></h4>
+              <h4>Tổng tiền: <span className="text-primary">{formatMoney(order.grandtotal)} VND</span></h4>
               <hr />
 
               <table className="table table-responsive table-striped">

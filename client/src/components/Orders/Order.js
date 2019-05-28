@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { actDeleteOrder } from '../../actions/index';
+import showOrderStatus from '../../utils/showOrderStatus';
+import formatMoney from '../../utils/formatMoney';
 
 class Order extends Component {
 	showOrderDetails(order) {
@@ -24,7 +26,7 @@ class Order extends Component {
 					{ order.listItems.length }
 				</td>
 				<td>
-					1 000 000 000 VND
+					{formatMoney(order.grandtotal)} VND
 				</td>
 				<td>
 					{ order.shipaddress }
@@ -34,7 +36,7 @@ class Order extends Component {
 				</td>
 
 				<td>
-					{ order.status }
+					{ showOrderStatus(order.status) }
 				</td>
 			</tr>
 

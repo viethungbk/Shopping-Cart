@@ -28,22 +28,23 @@ class ShoppingCart extends Component {
 	}
 	showCartItem = (cart) => {
 		let result = '';
-		let { onDeleteCartItem, onUpdateCartItemQuantity, watchingProductDetail } = this.props;
+		let { user, onDeleteCartItem, onUpdateCartItemQuantity, watchingProductDetail } = this.props;
 
 		if (cart.length === 0) {
 			return <MessageCartEmpty />;
-		} 
-			result = cart.map((item, index) => {
-				return <Product
-					key={index}
-					item={item}
-					onDeleteCartItem={onDeleteCartItem}
-					onUpdateCartItemQuantity={onUpdateCartItemQuantity}
-					watchingProductDetail={watchingProductDetail}
-				/>;
-			});
-			return result;
-		
+		}
+		result = cart.map((item, index) => {
+			return <Product
+				key={index}
+				item={item}
+				user={user}
+				onDeleteCartItem={onDeleteCartItem}
+				onUpdateCartItemQuantity={onUpdateCartItemQuantity}
+				watchingProductDetail={watchingProductDetail}
+			/>;
+		});
+		return result;
+
 	}
 
 	grandTotal = (cart) => {
@@ -102,7 +103,7 @@ class ShoppingCart extends Component {
 
 		const data = {
 			address: address,
-			grandtotal: this.grandTotal()
+			grandtotal: this.grandTotal(cart)
 		}
 
 		callApi('api/orders/create', 'post', data, headers)
