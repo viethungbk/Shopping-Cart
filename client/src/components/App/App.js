@@ -12,6 +12,7 @@ import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import Content from '../Content/Content';
 import Orders from '../Orders/Orders';
 import OrderDetails from '../Orders/OrderDetails';
+import Account from '../Account/Account';
 
 class App extends Component {
 	render() {
@@ -30,6 +31,7 @@ class App extends Component {
 							<Route path="/order-details" exact component={OrderDetails} />
 							<Route path="/not-found" exact component={NotFound} />
 							<Route path="/shopping-cart" exact component={ShoppingCart} />
+							<Route path="/account" exact component={Account} />
 						</Switch>
 					</Layout>
 				</div>

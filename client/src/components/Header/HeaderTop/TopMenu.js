@@ -31,7 +31,7 @@ class TopMenu extends Component {
             <div className="cnt-account">
               <ul className="list-unstyled">
                 <li className="myaccount">
-                  <Link to={user._id === undefined ? '/login/' : '/wishList/'}>
+                  <Link to={user._id === undefined ? '/login/' : '/account'}>
                   <span>{this.showNameAcount(user)}</span>
                 </Link>
                 </li>
