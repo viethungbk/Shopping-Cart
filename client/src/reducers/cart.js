@@ -48,6 +48,9 @@ const cart = (state = initialState, action) => {
       }
       return [...state];
 
+    case Types.REMOVE_ALL_CART_ITEM:
+      return [];
+
     default: return [...state];
   }
 }

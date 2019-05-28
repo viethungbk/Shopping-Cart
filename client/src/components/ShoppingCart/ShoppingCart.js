@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Product from './Product';
-import { actDeleteCartItem, actUpdateCartItemQuantity, actAddToOrders, actFetchCart } from '../../actions/index';
+import { actDeleteCartItem, actUpdateCartItemQuantity, actAddToOrdersRequest, actFetchCart } from '../../actions/index';
 import MessageCartEmpty from './MessageCartEmpty';
 import { actFetchProductDetail } from '../../actions/index';
 import formatMoney from '../../utils/formatMoney';
@@ -95,26 +95,12 @@ class ShoppingCart extends Component {
 			return;
 		}
 
-		onAddToOrders(cart, address);
-
-		const headers = {
-			'Authorization': localStorage.getItem('token')
-		};
-
 		const data = {
 			address: address,
 			grandtotal: this.grandTotal(cart)
 		}
 
-		callApi('api/orders/create', 'post', data, headers)
-			.then(result => {
-				console.log(result);
-				window.alert(result);
-			})
-			.catch(error => {
-				console.log(error);
-				window.alert(error.message);
-			});
+		onAddToOrders(data);
 	}
 
 	showButtonUpdateCart() {
@@ -299,8 +285,8 @@ const mapDispatchToProps = dispatch => {
 		onUpdateCartItemQuantity: (item, quantity) => {
 			dispatch(actUpdateCartItemQuantity(item, quantity));
 		},
-		onAddToOrders: (cart, address) => {
-			dispatch(actAddToOrders(cart, address));
+		onAddToOrders: (data) => {
+			dispatch(actAddToOrdersRequest(data));
 		},
 		watchingProductDetail: (product) => {
 			dispatch(actFetchProductDetail(product));
@@ -308,6 +294,10 @@ const mapDispatchToProps = dispatch => {
 		onFetchCart: (cart) => {
 			dispatch(actFetchCart(cart));
 		}
+		// ,
+		// onRemoveAllCartItem: cart => {
+		// 	dispatch(actRemoveAllCartItem(cart));
+		// }
 	}
 }
 

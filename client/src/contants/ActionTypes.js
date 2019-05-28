@@ -15,6 +15,7 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
 export const UPDATE_CART_ITEM_QUANTITY = 'UPDATE_CART_ITEM_QUANTITY';
 export const FETCH_CART_ITEMS = 'FETCH_CART_ITEMS';
+export const REMOVE_ALL_CART_ITEM = 'REMOVE_ALL_CART_ITEM';
 
 
 // ============================= WISHLIST ============================

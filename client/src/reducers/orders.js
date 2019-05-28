@@ -9,10 +9,7 @@ const orders = (state = initialState, action) => {
       return [...state];
 
     case Types.ADD_TO_ORDERS:
-      state.push({
-        cart: action.cart,
-        address: action.address
-      });
+      state.push(action.order);
       return [...state];
 
     case Types.DELETE_ORDER:

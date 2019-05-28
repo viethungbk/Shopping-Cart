@@ -103,6 +103,12 @@ export function actUpdateCartItemQuantity(item, quantity) {
   }
 }
 
+// export funcion actRemoveAllCartItem(cart) {
+//   return {
+
+//   }
+// }
+
 
 // ========================================== WISHLIST ==========================================
 
@@ -186,11 +192,31 @@ export function actFetchOrderDetails(orderDetails) {
   }
 }
 
-export function actAddToOrders(cart, address) {
+export const actAddToOrdersRequest = (data) => {
+  const headers = {
+    'Authorization': localStorage.getItem('token')
+  };
+
+  return dispatch => { callApi('api/orders/create', 'post', data, headers)
+    .then(result => {
+      console.log(result);
+      window.alert(result.data.message);
+      const order = result.data.order
+
+      dispatch(actAddToOrders(order))
+    })
+    .catch(error => {
+      console.log(error);
+      window.alert(error.message);
+    });
+
+  }
+}
+
+export const actAddToOrders= (order) => {
   return {
     type: Types.ADD_TO_ORDERS,
-    cart,
-    address
+    order
   }
 }
 

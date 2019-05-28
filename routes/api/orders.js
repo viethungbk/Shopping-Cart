@@ -102,7 +102,10 @@ router.post('/create', passport.authenticate('jwt-user', { session: false }), (r
             return res.status(500).json(error.message);
           }
 
-          return res.status(200).json('Order Successfull. Check in your Orders');
+          return res.status(200).json({
+            message: 'Order Successfull. Check in your Orders',
+            order: newOrder
+          });
         })
         .catch(err => res.status(400).json(err.message));
     })
