@@ -19,7 +19,8 @@ class Search extends Component {
       [name]: value
     });
   }
-  onSubmit = () => {
+  onSubmit = (event) => {
+    event.preventDefault();
     this.props.onFetchKeySearch(this.state.keySearch);
     this.setState({
       keySearch: ''
@@ -31,7 +32,7 @@ class Search extends Component {
     return (
       <div className="col-lg-7 col-md-6 col-sm-8 col-xs-12 top-search-holder">
         <div className="search-area">
-          <form >
+          <form onSubmit={this.onSubmit}>
             <div className="control-group">
               <ul className="categories-filter animate-dropdown">
                 <li className="dropdown"> <Link className="dropdown-toggle" data-toggle="dropdown" to="/">Thể loại <b className="caret" /></Link>
