@@ -11,6 +11,7 @@ const cart = require('./routes/api/cart');
 const blog = require('./routes/api/blog');
 const wishlist = require('./routes/api/wishlist');
 const orders = require('./routes/api/orders');
+const sliders = require('./routes/api/slider');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/api/cart', cart);
 app.use('/api/blogs', blog);
 app.use('/api/wishlist', wishlist);
 app.use('/api/orders', orders);
+app.use('/api/sliders', sliders);
 
 const port = process.env.PORT || 5000;
 

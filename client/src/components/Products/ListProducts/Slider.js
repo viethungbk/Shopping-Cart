@@ -11,10 +11,10 @@ export default class Slider extends Component {
 
               {/* caption */}
               <div className="caption bg-color vertical-center text-left">
-                <div className="slider-header fadeInDown-1">Top Brands</div>
-                <div className="big-text fadeInDown-1"> New Collections </div>
-                <div className="excerpt fadeInDown-2 hidden-xs"> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> </div>
-                <div className="button-holder fadeInDown-3"> <Link to="" className="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</Link> </div>
+                <div className="slider-header fadeInDown-1">Samsung Hot</div>
+                <div className="big-text fadeInDown-1"> SALE OFF 50 %</div>
+                <div className="excerpt fadeInDown-2 hidden-xs"> <span>Giảm ngay 300K khi thanh toán bằng Samsung Pay.</span> </div>
+                <div className="button-holder fadeInDown-3"> <Link to="/" className="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</Link> </div>
               </div>
             </div>
           </div>
