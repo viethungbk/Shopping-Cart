@@ -93,7 +93,7 @@ class Product extends Component {
 		const { product } = this.props;
 
 		return (
-			<div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<div className="col-xs-3 col-sm-3 col-md-3 col-lg-3" style={{minHeight:"450px"}}>
 				{/* {this.showRedirect()} */}
 				<div className="item item-carousel">
 					<div className="products">

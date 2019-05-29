@@ -1,15 +1,45 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class Slider extends Component {
+import { actFetchAllSlidersRequest } from '../../../actions/index';
+import arrayBufferToBase64 from '../../../utils/arrayBufferToBase64';
+
+class Slider extends Component {
+  componentDidMount() {
+    this.props.onFetchAllSliders();
+  }
+
+  showSliders(sliders) {
+    console.log(sliders);
+    let listSliders = sliders.map((slider, index) => {
+      return (
+        <div key={index} className="item" style={{ backgroundImage: 'url(/assets/images/sliders/01.jpg)' }} >
+          <div className="container-fluid">
+            <div className="caption bg-color vertical-center text-left">
+              <div className="slider-header fadeInDown-1">{slider.sliderheader}</div>
+              <div className="big-text fadeInDown-1">{slider.bigtext}</div>
+              <div className="excerpt fadeInDown-2 hidden-xs"> <span>{slider.detail}</span> </div>
+              <div className="button-holder fadeInDown-3"> <Link to="/" className="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</Link> </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
+    console.log(listSliders)
+
+    return listSliders;
+  }
+
   render() {
+    const { sliders } = this.props;
+
     return (
       <div id="hero">
         <div id="owl-main" className="owl-carousel owl-inner-nav owl-ui-sm">
+
           <div className="item" style={{ backgroundImage: 'url(/assets/images/sliders/01.jpg)' }}>
             <div className="container-fluid">
-
-              {/* caption */}
               <div className="caption bg-color vertical-center text-left">
                 <div className="slider-header fadeInDown-1">Samsung Hot</div>
                 <div className="big-text fadeInDown-1"> SALE OFF 50 %</div>
@@ -22,15 +52,32 @@ export default class Slider extends Component {
           <div className="item" style={{ backgroundImage: 'url(/assets/images/sliders/02.jpg)' }}>
             <div className="container-fluid">
               <div className="caption bg-color vertical-center text-left">
-                <div className="slider-header fadeInDown-1">Spring 2018</div>
-                <div className="big-text fadeInDown-1"> Women Fashion </div>
-                <div className="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span> </div>
+                <div className="slider-header fadeInDown-1">Samsung 2019</div>
+                <div className="big-text fadeInDown-1">Samsung Salaxy Note 9</div>
+                <div className="excerpt fadeInDown-2 hidden-xs"> <span>Nhận ngay quà tặng hấp dẫn</span> </div>
                 <div className="button-holder fadeInDown-3"> <Link to="" className="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</Link> </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    sliders: state.sliders
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchAllSliders: () => {
+      dispatch(actFetchAllSlidersRequest());
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Slider);

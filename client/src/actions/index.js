@@ -248,3 +248,23 @@ export function actFetchKeySearch(keySearch) {
     keySearch: keySearch
   }
 }
+
+// ========================================== SLIDERS ==========================================
+// ===================== Fetch Orders =====================
+
+export const actFetchAllSlidersRequest = () => {
+  return dispatch => {
+    return callApi('api/sliders', 'GET', null, null).then(res => {
+      const sliders = res.data;
+
+      dispatch(actFetchSlider(sliders));
+    })
+  }
+}
+
+export const actFetchSlider = (sliders) => {
+  return {
+    type: Types.FETCH_sLIDER,
+    sliders
+  }
+}

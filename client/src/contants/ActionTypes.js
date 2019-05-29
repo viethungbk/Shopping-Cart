@@ -34,3 +34,9 @@ export const DELETE_ORDER = 'DELETE_ORDER';
 
 // ============================= SEARCH =============================
 export const FETCH_KEY_SEARCH = 'FETCH_KEY_SEARCH';
+
+
+// ============================= SLIDER =============================
+export const FETCH_sLIDER = 'FETCH_sLIDER';
+export const ADD_TO_SLIDER = 'ADD_TO_SLIDER';
+export const DELETE_SLIDER = 'DELETE_SLIDER';

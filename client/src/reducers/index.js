@@ -8,6 +8,7 @@ import keySearch from './keySearch';
 import orders from './orders';
 import user from './user';
 import orderDetails from './orderDetails';
+import sliders from './slider';
 
 const appReducers = combineReducers({
   products,
@@ -17,7 +18,8 @@ const appReducers = combineReducers({
   keySearch,
   orders,
   user,
-  orderDetails
+  orderDetails,
+  sliders
 });
 
 export default appReducers;
