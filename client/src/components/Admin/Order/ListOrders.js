@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import callApi from '../../../apiCaller';
+import formatMoney from '../../../utils/formatMoney';
+import showOrderStatus from '../../../utils/showOrderStatus';
 
 class ListOrders extends Component {
   constructor(props) {
@@ -35,10 +37,10 @@ class ListOrders extends Component {
           <td><Link to={`/admin/order-details/${order._id}`}>{ order._id }</Link></td>
           <td>{ order.user }</td>
           <td>{ order.listItems.length }</td>
-          <td>{ /* Tonng tien */ } Tong tien</td>
-          <td>{ order.shipaddress}</td>
+          <td>{ formatMoney(order.grandtotal) } VND</td>
+          <td>{ order.shipaddress }</td>
           <td>{ order.date }</td>
-          <td>{ order.status }</td>
+          <td>{ showOrderStatus(order.status) }</td>
         </tr>
       );
     })

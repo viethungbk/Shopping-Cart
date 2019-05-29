@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import callApi from '../../../apiCaller';
 import arrayBufferToBase64 from '../../../utils/arrayBufferToBase64';
 import formatMoney from '../../../utils/formatMoney';
+import showOrderStatus from '../../../utils/showOrderStatus';
 
 export default class OrderDetails extends Component {
   constructor(props) {
@@ -40,13 +41,10 @@ export default class OrderDetails extends Component {
               });
             }
 
-            console.log(listProducts);
-
             this.setState({
-              order: { ...order, listItems: listProducts }
+              order: { ...order, listItems: listProducts },
+              sltOrderStatus: order.status
             });
-
-            console.log(this.state)
           });
 
       })
@@ -87,11 +85,34 @@ export default class OrderDetails extends Component {
   changeInput = (event) => {
     const target = event.target;
     const name = target.name;
-    const value = target.value;
+    const value = parseInt(target.value);
 
     this.setState({
       [name]: value
     });
+    console.log(this.state)
+  }
+
+  changeOrderStatus = (event, orderId) => {
+    event.preventDefault();
+
+    const orderStatus = {
+      orderStatus: this.state.sltOrderStatus
+    }
+
+    const headers = {
+      'Authorization': localStorage.getItem("token")
+    }
+
+    callApi(`api/orders/update/status/${orderId}`, 'patch', orderStatus, headers)
+      .then(result => {
+        console.log(result);
+        window.alert(result.data);
+      })
+      .catch(error => {
+        console.log(error);
+        window.alert(error);
+      })
   }
 
   render() {
@@ -111,7 +132,7 @@ export default class OrderDetails extends Component {
               </h4>
             </div>
             <div className="col-md-6">
-              <span className="text-warning">{ order.status }</span>
+              <span className="text-warning">{ showOrderStatus(this.state.sltOrderStatus) }</span>
               <div className="form-group col-md-3">
               <label htmlFor="sltOrderStatus">Trạng thái đơn hàng</label>
               <select className="form-control" value={ this.state.sltOrderStatus } name="sltOrderStatus" onChange={ (event) => this.changeInput(event) }>
@@ -121,13 +142,13 @@ export default class OrderDetails extends Component {
                 <option value={4}>Đã Hủy</option>
               </select>
               <hr />
-              <button type="button" className="btn btn-primary px-2">Cập nhật</button>
+              <button type="button" className="btn btn-primary px-2" onClick={(event) => this.changeOrderStatus(event, order._id)}>Cập nhật</button>
             </div>
             </div>
             <div className="col-md-12">
              <h4> Địa chỉ nhận hàng:</h4> {order.shipaddress}
             </div>
-            <h4 className="col-md-12">Tổng tiền: <span className="text-danger">1 000 000 VND</span></h4>
+            <h4 className="col-md-12">Tổng tiền: <span className="text-danger">{ (order.grandtotal) } VND</span></h4>
             <hr />
 
             <table className="table table-responsive table-striped">
