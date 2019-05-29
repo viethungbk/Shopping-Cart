@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Product from './Product';
-import { actDeleteCartItem, actUpdateCartItemQuantity, actAddToOrdersRequest, actFetchCart } from '../../actions/index';
+import { actDeleteCartItem, actUpdateCartItemQuantity, actAddToOrdersRequest, actFetchCart, actRemoveAllCartItemRequest } from '../../actions/index';
 import MessageCartEmpty from './MessageCartEmpty';
 import { actFetchProductDetail } from '../../actions/index';
 import formatMoney from '../../utils/formatMoney';
@@ -74,7 +74,7 @@ class ShoppingCart extends Component {
 
 	onSubmitOrder = (event) => {
 		event.preventDefault();
-		let { cart, user, onAddToOrders } = this.props;
+		let { cart, user, onAddToOrders, onRemoveAllCartItem } = this.props;
 		const address = this.state.txtAddress;
 
 		if (user._id === undefined) {
@@ -101,6 +101,8 @@ class ShoppingCart extends Component {
 		}
 
 		onAddToOrders(data);
+
+		onRemoveAllCartItem(cart);
 	}
 
 	showButtonUpdateCart() {
@@ -293,11 +295,10 @@ const mapDispatchToProps = dispatch => {
 		},
 		onFetchCart: (cart) => {
 			dispatch(actFetchCart(cart));
+		},
+		onRemoveAllCartItem: cart => {
+			dispatch(actRemoveAllCartItemRequest(cart));
 		}
-		// ,
-		// onRemoveAllCartItem: cart => {
-		// 	dispatch(actRemoveAllCartItem(cart));
-		// }
 	}
 }
 

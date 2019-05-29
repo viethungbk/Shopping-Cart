@@ -29,10 +29,6 @@ class Product extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    console.log(nextProps)
-  }
-
   onUpdateCartItemQuantity = (item, quantity) => {
     this.props.onUpdateCartItemQuantity(item, quantity);
   }

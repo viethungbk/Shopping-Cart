@@ -71,7 +71,6 @@ router.post('/create', passport.authenticate('jwt-user', { session: false }), (r
   const cartId = user.cart;
   const userId = user._id;
   const { address, grandtotal } = req.body;
-  console.log(address)
 
   Cart.findById(cartId)
     .then(cart => {

@@ -112,22 +112,6 @@ router.patch('/update', passport.authenticate('jwt-user', { session: false }), (
     });
 });
 
-// @route   DELETE api/cart/
-// @desc    Empty the cart
-// @access  Private
-// router.delete('/', passport.authenticate('jwt-user', { session: false }), (req, res) => {
-//   const cartId = req.user.cart;
-
-//   Cart.findByIdAndRemove(cartId)
-//     .exec()
-//     .then(cart => res.json(cart))
-//     .catch(err => {
-//       console.log(err.message);
-//       return res.status(500).json(err.message);
-//     });
-
-// });
-
 // @route   DELETE api/cart/delete/item/:id
 // @desc    Delete a product in cart
 // @access  Private
@@ -157,6 +141,35 @@ router.delete('/delete/item/:id', passport.authenticate('jwt-user', { session: f
         }
 
         return res.status(200).json('Removed item');
+      }
+    })
+    .catch(err => {
+      console.log(err.message);
+      return res.status(404).json('Error to remove product from your Cart');
+    });
+});
+
+// @route   DELETE api/cart/delete
+// @desc    Delete all products in cart
+// @access  Private
+router.delete('/delete', passport.authenticate('jwt-user', { session: false }), (req, res) => {
+  const cartId = req.user.cart;
+
+  Cart.findById(cartId)
+    .then((foundCart) => {
+      if (!foundCart) {
+        // Not found cart
+        return res.status(404).json('Not Found Cart');
+      } else {
+
+        try {
+          foundCart.listItems = [];
+          foundCart.save();
+        } catch (error) {
+          return res.status(500).json(error.message);
+        }
+
+        return res.status(200).json('Removed all items');
       }
     })
     .catch(err => {

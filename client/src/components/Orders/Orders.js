@@ -32,7 +32,6 @@ class Orders extends Component {
   }
   render() {
     let { orders } = this.props;
-    console.log(orders);
 
     return (
       <div className="col-xs-9 col-sm-9 col-md-9 col-lg-9">

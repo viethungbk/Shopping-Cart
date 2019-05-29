@@ -103,11 +103,24 @@ export function actUpdateCartItemQuantity(item, quantity) {
   }
 }
 
-// export funcion actRemoveAllCartItem(cart) {
-//   return {
+export const actRemoveAllCartItemRequest = (cart) => {
+  return dispatch => {
+    const headers = {
+      'Authorization': localStorage.getItem('token')
+    };
 
-//   }
-// }
+    return callApi(`api/cart/delete`, 'delete', null, headers).then(result => {
+      dispatch(actRemoveAllCartItem());
+    })
+
+  }
+}
+
+export const actRemoveAllCartItem = () => {
+  return {
+    type: Types.REMOVE_ALL_CART_ITEM
+  }
+}
 
 
 // ========================================== WISHLIST ==========================================
@@ -164,7 +177,6 @@ export function actDeleteWishItem(product) {
 // ===================== Fetch Orders =====================
 
 export const actFetchOrdersRequest = () => {
-  console.log('orders')
   const headers = {
     'Authorization': localStorage.getItem('token')
   }
@@ -197,7 +209,8 @@ export const actAddToOrdersRequest = (data) => {
     'Authorization': localStorage.getItem('token')
   };
 
-  return dispatch => { callApi('api/orders/create', 'post', data, headers)
+  return dispatch => {
+    callApi('api/orders/create', 'post', data, headers)
     .then(result => {
       console.log(result);
       window.alert(result.data.message);
@@ -213,7 +226,7 @@ export const actAddToOrdersRequest = (data) => {
   }
 }
 
-export const actAddToOrders= (order) => {
+export const actAddToOrders = (order) => {
   return {
     type: Types.ADD_TO_ORDERS,
     order

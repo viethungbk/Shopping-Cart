@@ -13,7 +13,6 @@ class Order extends Component {
 
 	render() {
 		const { order, index } = this.props;
-		console.log(order);
 
 		return (
 
