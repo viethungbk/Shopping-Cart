@@ -11,7 +11,7 @@ export default class Contact extends Component {
 							<li className="media">
 								<div className="pull-left"> <span className="icon fa-stack fa-lg"> <i className="fa fa-map-marker fa-stack-1x fa-inverse" /> </span> </div>
 								<div className="media-body">
-									<p>ThemesGround, 789 Main rd, Anytown, CA 12345 USA</p>
+									<p>So 1 Dai Co Viet, Truong DH Bach Khoa Ha Noi</p>
 								</div>
 							</li>
 							<li className="media">
@@ -22,7 +22,7 @@ export default class Contact extends Component {
 							</li>
 							<li className="media">
 								<div className="pull-left"> <span className="icon fa-stack fa-lg"> <i className="fa fa-envelope fa-stack-1x fa-inverse" /> </span> </div>
-								<div className="media-body"> <span><Link to="">marazzo@themesground.com</Link></span> </div>
+								<div className="media-body"> <span><Link to="">viethung@gmail.com</Link></span> </div>
 							</li>
 						</ul>
 					</div>

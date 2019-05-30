@@ -9,26 +9,26 @@ export default class InfoBoxes extends Component {
             <li>
               <div className="feature-box">
                 <div className="icon-truck" />
-                <div className="content-blocks">We ship worldwide</div>
+                <div className="content-blocks">Giao hàng nhanh chóng</div>
               </div>
             </li>
             <li>
               <div className="feature-box">
                 <div className="icon-support" />
-                <div className="content-blocks">call
+                <div className="content-blocks">
                   +1 800 789 0000</div>
               </div>
             </li>
             <li>
               <div className="feature-box">
                 <div className="icon-money" />
-                <div className="content-blocks">Money Back Guarantee</div>
+                <div className="content-blocks">Giá cả hợp lý</div>
               </div>
             </li>
             <li>
               <div className="feature-box">
                 <div className="icon-return" />
-                <div className="content">30 days return</div>
+                <div className="content">Bảo hàng 3 năm</div>
               </div>
             </li>
           </ul>
