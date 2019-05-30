@@ -27,13 +27,12 @@ class NewProduct extends Component {
 
 	render() {
 		const { products } = this.props;
-		console.log(products)
 
 		if (products === undefined || products.length === 0) {
 			return null;
 		}
 
-		const limitedNewDate = 1 * 60 * 60 * 1000 // ms
+		const limitedNewDate = 1 * 24 * 60 * 60 * 1000 // ms
 		const dateNow = Date.now();
 
 		let newProducts = products.filter(product => {
@@ -44,8 +43,6 @@ class NewProduct extends Component {
 		if (newProducts.length > 4) {
 			newProducts = newProducts.splice(0, 4);
 		}
-
-		console.log(newProducts);
 
 		return (
 			<div className="sidebar-widget outer-bottom-small">

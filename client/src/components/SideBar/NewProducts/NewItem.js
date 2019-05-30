@@ -12,7 +12,6 @@ export default class NewItem extends Component {
 
 	render() {
 		const { product } = this.props;
-		console.log(product)
 
 		return (
 			<div className="item">

@@ -111,7 +111,7 @@ class ProductInfo extends Component {
 							<div className="col-sm-6 col-xs-6">
 								<div className="price-box">
 									<span className="price">{formatMoney(product.price)} VNĐ</span>
-									<span className="price-strike">{formatMoney(product.pricebefore)} VNĐ</span>
+									<p><span className="price-strike">{formatMoney(product.pricebefore)} VNĐ</span></p>
 								</div>
 							</div>
 							<div className="col-sm-6 col-xs-6">
