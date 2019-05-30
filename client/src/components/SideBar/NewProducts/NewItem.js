@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import arrayBufferToBase64 from '../../../utils/arrayBufferToBase64';
+import formatMoney from '../../../utils/formatMoney';
+
 export default class NewItem extends Component {
+	showProductDetail = (event, product) => {
+		event.preventDefault();
+		this.props.showProductDetail(product);
+	}
+
 	render() {
+		const { product } = this.props;
+		console.log(product)
+
 		return (
 			<div className="item">
 				<div className="products special-product">
-					<div className="product">
+					<div className="product" onClick={(event) => this.showProductDetail(event, product) }>
 						<div className="product-micro">
 							<div className="row product-micro-row">
 
@@ -14,8 +25,8 @@ export default class NewItem extends Component {
 								<div className="col col-xs-5">
 									<div className="product-image">
 										<div className="image">
-											<Link to="">
-												<img src="/assets/images/products/iphone-xs-max.jpg" alt="New product" />
+											<Link to="/product-details">
+												<img src={'data:image/jpeg;base64,' + arrayBufferToBase64(product.image[0].data)} alt="New product" />
 											</Link>
 										</div>
 									</div>
@@ -24,12 +35,18 @@ export default class NewItem extends Component {
 								{/* Thong tin Item */}
 								<div className="col col-xs-7">
 									<div className="product-info">
-										<h3 className="name"><Link to="">Tên sản phẩm</Link></h3>
+										<h3 className="name">
+											<Link to="/product-details">
+												{ product.name }
+											</Link>
+										</h3>
 										<div className="rating rateit-small" />
 										<div className="product-price">
 											<span className="price">
-												$450.99
-                                            </span>
+												<span className="text-info">
+													{ formatMoney(product.price) } VNĐ
+												</span>
+											</span>
 										</div>
 									</div>
 								</div>
