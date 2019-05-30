@@ -10,7 +10,7 @@ class TopNav extends Component {
     return (
       <div className="side-menu animate-dropdown outer-bottom-xs">
         <div className="head">
-          <Link to="" onClick={() => this.props.onFetchKeySearch("")}>
+          <Link to="" onClick={() => this.props.onFetchKeySearch('')}>
             <i className="icon fa fa-align-justify fa-fw" />
             Tất cả sản phẩm
           </Link>
@@ -22,7 +22,7 @@ class TopNav extends Component {
                 to=""
                 className="dropdown-toggle"
                 data-toggle="dropdown"
-                onClick={() => this.props.onFetchKeySearch("Samsung")}>
+                onClick={() => this.props.onFetchKeySearch('Samsung')}>
                 SamSung
               </Link>
             </li>
@@ -32,7 +32,7 @@ class TopNav extends Component {
                 to=""
                 className="dropdown-toggle"
                 data-toggle="dropdown"
-                onClick={() => this.props.onFetchKeySearch("Iphone")}>
+                onClick={() => this.props.onFetchKeySearch('Iphone')}>
                 Iphone
               </Link>
             </li>
@@ -42,7 +42,7 @@ class TopNav extends Component {
                 to=""
                 className="dropdown-toggle"
                 data-toggle="dropdown"
-                onClick={() => this.props.onFetchKeySearch("Xiaomi")}>
+                onClick={() => this.props.onFetchKeySearch('Xiaomi')}>
                 Xiaomi
               </Link>
             </li>
@@ -52,7 +52,7 @@ class TopNav extends Component {
                 to=""
                 className="dropdown-toggle"
                 data-toggle="dropdown"
-                onClick={() => this.props.onFetchKeySearch("Lenovo")}>
+                onClick={() => this.props.onFetchKeySearch('Lenovo')}>
                 Lenovo
               </Link>
             </li>
@@ -62,7 +62,7 @@ class TopNav extends Component {
                 to=""
                 className="dropdown-toggle"
                 data-toggle="dropdown"
-                onClick={() => this.props.onFetchKeySearch("Huawei")}>
+                onClick={() => this.props.onFetchKeySearch('Huawei')}>
                 Huawei
               </Link>
             </li>
@@ -72,7 +72,7 @@ class TopNav extends Component {
                 to=""
                 className="dropdown-toggle"
                 data-toggle="dropdown"
-                onClick={() => this.props.onFetchKeySearch("Oppo")}>
+                onClick={() => this.props.onFetchKeySearch('Oppo')}>
                 Oppo
               </Link>
             </li>
@@ -82,7 +82,7 @@ class TopNav extends Component {
                 to=""
                 className="dropdown-toggle"
                 data-toggle="dropdown"
-                onClick={() => this.props.onFetchKeySearch("Nokia")}>
+                onClick={() => this.props.onFetchKeySearch('Nokia')}>
                 Nokia
               </Link>
             </li>
@@ -92,13 +92,14 @@ class TopNav extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     keySearch: state.keySearch
   }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onFetchKeySearch: (keySearch) => {
       dispatch(actFetchKeySearch(keySearch));

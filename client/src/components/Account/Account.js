@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import callApi from '../../apiCaller';
 import { actFetchUserData } from '../../actions/index';
 
 class Account extends Component {
