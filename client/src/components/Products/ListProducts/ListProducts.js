@@ -3,15 +3,40 @@ import Product from './Product';
 import ProductCategory from './ProductCategory';
 import { connect } from 'react-redux';
 import actAddToCart, { actFetchProductsRequest, actAddToWishList, actFetchProductDetail, actFetchKeySearch } from '../../../actions/index';
+import Pagination from '../../../utils/Pagination/Pagination';
 
 class ListProducts extends Component {
   state = {
-    sortBy: 0
+    sortBy: 0,
+    allProducts: [],
+    currentProducts: [],
+    currentPage: null,
+    totalPages: null
   }
 
   componentDidMount() {
     this.props.onFetchAllProducts();
   }
+
+  componentWillReceiveProps(nextProps) {
+    const allProducts = nextProps.products;
+
+    if (allProducts !== undefined) {
+      this.setState({
+        allProducts
+      });
+    }
+  }
+
+  onPageChanged = data => {
+    const { allProducts } = this.state;
+    const { currentPage, totalPages, pageLimit } = data;
+
+    const offset = (currentPage - 1) * pageLimit;
+    const currentProducts = allProducts.slice(offset, offset + pageLimit);
+
+    this.setState({ currentPage, currentProducts, totalPages });
+  };
 
   showProducts = (products) => {
     let sortBy = this.state.sortBy;
@@ -56,13 +81,25 @@ class ListProducts extends Component {
   }
 
   render() {
-    let { products, children, keySearch } = this.props;
+    let { children, keySearch } = this.props;
+
+    const {
+      allProducts,
+      currentProducts
+    } = this.state;
+    const totalProducts = allProducts.length;
+
+    if (totalProducts === 0) return null;
+
+    let showedProducts = currentProducts;
 
     if (keySearch) {
-      products = products.filter(product => {
+      const filteredProducts = currentProducts.filter(product => {
         return (product.name.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1) ||
           product.brand.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1
-      })
+      });
+
+      showedProducts = filteredProducts;
     }
 
     return (
@@ -71,9 +108,16 @@ class ListProducts extends Component {
           {children}
         </ProductCategory>
 
+        <Pagination
+          totalRecords={totalProducts}
+          pageLimit={8}
+          pageNeighbours={1}
+          onPageChanged={this.onPageChanged}
+        />
+
         <div className="product-slider">
           <div className="col-md-12">
-            {this.showProducts(products)}
+            {this.showProducts(showedProducts)}
           </div>
         </div>
       </div>
