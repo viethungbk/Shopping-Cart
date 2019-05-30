@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default class NotFound extends Component {
   render() {
     return (
-      <div class="col-md-9">
+      <div className="col-md-9">
         <div className="outer-top-bd">
           <div className="container">
             <div className="x-page inner-bottom-sm">

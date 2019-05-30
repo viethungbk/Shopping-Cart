@@ -14,11 +14,13 @@ class NewProduct extends Component {
 
 		const listProducts = products.map((product, index) => {
 			return (
-				<NewItem
-					key={index}
-					product={product}
-					showProductDetail= { watchingProductDetail }
-				/>
+				<div key={index}>
+					<NewItem
+						product={product}
+						showProductDetail= { watchingProductDetail }
+					/>
+					<hr />
+				</div>
 			);
 		});
 
@@ -40,8 +42,8 @@ class NewProduct extends Component {
 			return dateNow - productDate >= limitedNewDate;
 		})
 
-		if (newProducts.length > 4) {
-			newProducts = newProducts.splice(0, 4);
+		if (newProducts.length > 3) {
+			newProducts = newProducts.slice(0, 3);
 		}
 
 		return (

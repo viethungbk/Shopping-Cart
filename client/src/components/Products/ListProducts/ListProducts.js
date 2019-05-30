@@ -4,6 +4,7 @@ import ProductCategory from './ProductCategory';
 import { connect } from 'react-redux';
 import actAddToCart, { actFetchProductsRequest, actAddToWishList, actFetchProductDetail, actFetchKeySearch } from '../../../actions/index';
 import Pagination from '../../../utils/Pagination/Pagination';
+import NotFound from '../../NotFound/NotFound';
 
 class ListProducts extends Component {
   state = {
@@ -98,6 +99,10 @@ class ListProducts extends Component {
         return (product.name.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1) ||
           product.brand.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1
       });
+
+      if (filteredProducts.length === 0) {
+        return <NotFound />
+      }
 
       showedProducts = filteredProducts;
     }
