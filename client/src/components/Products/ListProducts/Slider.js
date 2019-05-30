@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { actFetchAllSlidersRequest } from '../../../actions/index';
-import arrayBufferToBase64 from '../../../utils/arrayBufferToBase64';
 
 class Slider extends Component {
   componentDidMount() {
@@ -11,7 +10,6 @@ class Slider extends Component {
   }
 
   showSliders(sliders) {
-    console.log(sliders);
     let listSliders = sliders.map((slider, index) => {
       return (
         <div key={index} className="item" style={{ backgroundImage: 'url(/assets/images/sliders/01.jpg)' }} >
@@ -26,14 +24,11 @@ class Slider extends Component {
         </div>
       );
     });
-    console.log(listSliders)
 
     return listSliders;
   }
 
   render() {
-    const { sliders } = this.props;
-
     return (
       <div id="hero">
         <div id="owl-main" className="owl-carousel owl-inner-nav owl-ui-sm">

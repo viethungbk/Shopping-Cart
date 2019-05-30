@@ -101,19 +101,21 @@ class Account extends Component {
 					<div className="panel-heading">
 						<h4>
 							Thông tin tài khoản
-                        </h4>
+						</h4>
 					</div>
 					{/* <!-- Table --> */}
 					<table className="table">
 						<thead>
 							<tr>
-								<th>Họ tên: {user.name}</th>
-							</tr>
-							<tr>
-								<th>Email: {user.email}</th>
+								<th>Họ tên</th>
+								<th>Email</th>
+								<th>Địa chỉ</th>
 							</tr>
 						</thead>
 						<tbody>
+							<td>{ user.name }</td>
+							<td>{ user.email }</td>
+							<td>{ user.address }</td>
 						</tbody>
 					</table>
 				</div>

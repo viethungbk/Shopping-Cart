@@ -48,8 +48,6 @@ class Product extends Component {
 		this.props.onAddToWishList(product);
 
 		if (user._id !== undefined) {
-			console.log(product);
-
 			const headers = {
 				'Authorization': localStorage.getItem('token')
 			}
