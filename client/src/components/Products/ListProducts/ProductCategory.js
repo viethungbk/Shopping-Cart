@@ -28,7 +28,7 @@ class ProductCategory extends Component {
                 </span>
 							</li>
 							<li>
-								<span className="label label-danger height-20 "
+								<span className="label label-danger height-20 mr-5"
 									onClick={() => { this.onSort(-1) }} >
 									Giá giảm dần
                 </span>
