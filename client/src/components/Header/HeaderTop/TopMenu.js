@@ -45,13 +45,13 @@ class TopMenu extends Component {
           <div className="cnt-block">
             <ul className="list-unstyled list-inline">
               <li className="dropdown dropdown-small">
-                <Link to="" className="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                <Link to="/contact" className="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
                   <span className="value">Hỗ trợ khách hàng</span>
                   <b className="caret" />
                 </Link>
                 <ul className="dropdown-menu">
-                  <li><Link to="">Hotline: 19001001</Link></li>
-                  <li><Link to="">Email: mobilethebest@gmail.com</Link></li>
+                  <li><Link to="/contact">Hotline: 19001001</Link></li>
+                  <li><Link to="/contact">Email: mobilethebest@gmail.com</Link></li>
                 </ul>
               </li>
             </ul>
