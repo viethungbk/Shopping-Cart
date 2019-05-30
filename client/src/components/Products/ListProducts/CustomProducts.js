@@ -3,21 +3,16 @@ import { connect } from 'react-redux';
 
 import Product from './Product';
 import ProductCategory from './ProductCategory';
-import actAddToCart, { actFetchProductsRequest, actAddToWishList, actFetchProductDetail, actFetchKeySearch } from '../../../actions/index';
+import actAddToCart, { actAddToWishList, actFetchProductDetail } from '../../../actions/index';
 import Pagination from '../../../utils/Pagination/Pagination';
-import NotFound from '../../NotFound/NotFound';
 
-class ListProducts extends Component {
+class CustomProducts extends Component {
   state = {
     sortBy: 0,
     allProducts: [],
     currentProducts: [],
     currentPage: null,
     totalPages: null
-  }
-
-  componentDidMount() {
-    this.props.onFetchAllProducts();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,7 +52,7 @@ class ListProducts extends Component {
       });
     }
 
-    const { onAddToCart, onAddToWishList, keySearch, watchingProductDetail } = this.props;
+    const { onAddToCart, onAddToWishList, watchingProductDetail } = this.props;
 
     let listProducts = products.map((product, index) => {
       return (
@@ -66,7 +61,6 @@ class ListProducts extends Component {
           product={product}
           onAddToCart={onAddToCart}
           onAddToWishList={onAddToWishList}
-          keySearch={keySearch}
           watchingProductDetail={watchingProductDetail}
         />
       );
@@ -83,27 +77,12 @@ class ListProducts extends Component {
   }
 
   render() {
-    let { children, keySearch } = this.props;
+    let { children, productsPerPage } = this.props;
 
     const { allProducts, currentProducts } = this.state;
     const totalProducts = allProducts.length;
 
     if (totalProducts === 0) return null;
-
-    let showedProducts = currentProducts;
-
-    if (keySearch) {
-      const filteredProducts = currentProducts.filter(product => {
-        return (product.name.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1) ||
-          product.brand.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1
-      });
-
-      if (filteredProducts.length === 0) {
-        return <NotFound />
-      }
-
-      showedProducts = filteredProducts;
-    }
 
     return (
       <div className="row">
@@ -113,14 +92,14 @@ class ListProducts extends Component {
 
         <Pagination
           totalRecords={totalProducts}
-          pageLimit={8}
+          pageLimit={productsPerPage}
           pageNeighbours={1}
           onPageChanged={this.onPageChanged}
         />
 
         <div className="product-slider">
           <div className="col-md-12">
-            {this.showProducts(showedProducts)}
+            {this.showProducts(currentProducts)}
           </div>
         </div>
       </div>
@@ -130,19 +109,12 @@ class ListProducts extends Component {
 
 const mapStateToProps = state => {
   return {
-    keySearch: state.keySearch,
     products: state.products
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchKeySearch: (keySearch) => {
-      dispatch(actFetchKeySearch(keySearch));
-    },
-    onFetchAllProducts: () => {
-      dispatch(actFetchProductsRequest());
-    },
     onAddToCart: (product, quantity) => {
       dispatch(actAddToCart(product, quantity));
     },
@@ -155,4 +127,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListProducts);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomProducts);
