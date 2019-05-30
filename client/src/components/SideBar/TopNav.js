@@ -23,7 +23,6 @@ class TopNav extends Component {
                 className="dropdown-toggle"
                 data-toggle="dropdown"
                 onClick={() => this.props.onFetchKeySearch("Samsung")}>
-                <i className="icon fa fa-shopping-bag" aria-hidden="true" />
                 SamSung
               </Link>
             </li>
@@ -34,7 +33,6 @@ class TopNav extends Component {
                 className="dropdown-toggle"
                 data-toggle="dropdown"
                 onClick={() => this.props.onFetchKeySearch("Iphone")}>
-                <i className="icon fa fa-shopping-bag" aria-hidden="true" />
                 Iphone
               </Link>
             </li>
@@ -45,7 +43,6 @@ class TopNav extends Component {
                 className="dropdown-toggle"
                 data-toggle="dropdown"
                 onClick={() => this.props.onFetchKeySearch("Xiaomi")}>
-                <i className="icon fa fa-shopping-bag" aria-hidden="true" />
                 Xiaomi
               </Link>
             </li>
@@ -56,7 +53,6 @@ class TopNav extends Component {
                 className="dropdown-toggle"
                 data-toggle="dropdown"
                 onClick={() => this.props.onFetchKeySearch("Lenovo")}>
-                <i className="icon fa fa-shopping-bag" aria-hidden="true" />
                 Lenovo
               </Link>
             </li>
@@ -67,7 +63,6 @@ class TopNav extends Component {
                 className="dropdown-toggle"
                 data-toggle="dropdown"
                 onClick={() => this.props.onFetchKeySearch("Huawei")}>
-                <i className="icon fa fa-shopping-bag" aria-hidden="true" />
                 Huawei
               </Link>
             </li>
@@ -78,7 +73,6 @@ class TopNav extends Component {
                 className="dropdown-toggle"
                 data-toggle="dropdown"
                 onClick={() => this.props.onFetchKeySearch("Oppo")}>
-                <i className="icon fa fa-shopping-bag" aria-hidden="true" />
                 Oppo
               </Link>
             </li>
@@ -89,7 +83,6 @@ class TopNav extends Component {
                 className="dropdown-toggle"
                 data-toggle="dropdown"
                 onClick={() => this.props.onFetchKeySearch("Nokia")}>
-                <i className="icon fa fa-shopping-bag" aria-hidden="true" />
                 Nokia
               </Link>
             </li>
