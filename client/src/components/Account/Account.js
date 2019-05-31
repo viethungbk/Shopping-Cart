@@ -112,9 +112,11 @@ class Account extends Component {
 							</tr>
 						</thead>
 						<tbody>
-							<td>{ user.name }</td>
-							<td>{ user.email }</td>
-							<td>{ user.address }</td>
+							<tr>
+								<td>{ user.name }</td>
+								<td>{ user.email }</td>
+								<td>{ user.address }</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
