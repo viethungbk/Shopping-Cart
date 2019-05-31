@@ -58,8 +58,6 @@ class OrderDetails extends Component {
 
   render() {
     const { order } = this.props;
-    console.log(order);
-
 
     return (
       <div className="col-xs-9 col-sm-9 col-md-9 col-lg-9">
@@ -77,10 +75,14 @@ class OrderDetails extends Component {
                 <h4>Trạng thái đơn hàng: <span className="text-warning">{showOrderStatus(order.status)}</span></h4>
               </div>
               <div>
+                <h4>Ngày đặt hàng: </h4>
+                {order.date}
+              </div>
+              <div>
                 <h4>Địa chỉ nhận hàng: </h4>
                 {order.shipaddress}
               </div>
-              <h4>Tổng tiền: <span className="text-primary">{formatMoney(order.grandtotal)} VND</span></h4>
+              <h4>Tổng tiền: <span className="text-primary">{formatMoney(order.grandtotal)} VNĐ</span></h4>
               <hr />
 
               <table className="table table-responsive table-striped">
