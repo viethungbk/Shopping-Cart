@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router } from "react-router-dom";
+
 import HeaderAdmin from './HeaderAdmin';
 import SideBar from './SideBar';
 import Content from './Content';
@@ -7,7 +7,7 @@ import Content from './Content';
 export default class Layout extends Component {
   render() {
     return (
-      <Router>
+      <div>
         <div>
           <HeaderAdmin></HeaderAdmin>
         </div>
@@ -22,7 +22,7 @@ export default class Layout extends Component {
             </div>
           </div>
         </div>
-      </Router>
+      </div>
     );
   }
 }

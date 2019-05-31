@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import AuthButton from './Auth/AuthButton';
+
 export default class HeaderAdmin extends Component {
   render() {
     return (
@@ -13,7 +15,8 @@ export default class HeaderAdmin extends Component {
           <span className="icon-bar" />
           <span className="icon-bar" />
         </button>
-        <Link to="/admin" className="navbar-brand">PHONE ONLINE</Link>
+        {/* <Link to="/admin" className="navbar-brand">PHONE ONLINE</Link> */}
+        <AuthButton />
       </div>
       <div className="navbar-collapse collapse">
         <ul className="nav navbar-nav navbar-right">

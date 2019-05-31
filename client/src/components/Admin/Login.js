@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import callApi from '../../apiCaller';
+import auth from './Auth/auth';
 
 export default class Login extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class Login extends Component {
       txtPassword: '111111',
       isShowMessage: false,
       message: '',
-      isLogin: false
+      redirectToReferrer: false
     }
   }
 
@@ -27,9 +28,10 @@ export default class Login extends Component {
     callApi('api/admin/login', 'post', admin)
       .then(res => {
         console.log(res);
-        this.setState({
-          isLogin: true
+        auth.login(() => {
+          this.setState({ redirectToReferrer: true });
         });
+
         localStorage.setItem("token", res.data.token);
       })
       .catch(err => {
@@ -63,20 +65,15 @@ export default class Login extends Component {
     });
   }
 
-  redirect() {
-    if (!this.state.isLogin) {
-      return null;
-    }
-    return (
-      <Redirect to="/admin/list-products" />
-    );
-  }
 
   render() {
+    let { from } = this.props.location.state || { from: { pathname: "/admin/list-products" } };
+    let { redirectToReferrer } = this.state;
+
+    if (redirectToReferrer) return <Redirect to={from} />;
+
     return (
       <div className="container">
-
-        { this.redirect() }
 
         <div className="row">
           <h3>Admin Login</h3>

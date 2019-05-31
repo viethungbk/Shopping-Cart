@@ -4,18 +4,18 @@ import App from './components/App/App';
 import LayoutAdmin from './components/Admin/LayoutAdmin';
 
 class MyRoute extends Component {
-  render() {
-      return (
-          <Router>
-              <div className="Route">
-                      <Switch>
-                          <Route path="/" exact component={App} />
-                          <Route path="/admin" exact component={LayoutAdmin} />
-                      </Switch>
-              </div>
-          </Router>
-      );
-  }
+	render() {
+		return (
+			<Router>
+				<div className="Route">
+					<Switch>
+						<Route path="/" exact component={App} />
+						<Route path="/admin" component={LayoutAdmin} />
+					</Switch>
+				</div>
+			</Router>
+		);
+	}
 }
 
 export default MyRoute;
