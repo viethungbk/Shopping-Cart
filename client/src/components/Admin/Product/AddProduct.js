@@ -127,7 +127,7 @@ export default class AddProduct extends Component {
     return (
       <div className="container">
         <div className="row">
-          <h3>Add Product</h3>
+          <h2>Thêm mới sản phẩm</h2>
         </div>
 
         { this.showMessage() }

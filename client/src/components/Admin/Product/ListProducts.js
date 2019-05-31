@@ -91,7 +91,7 @@ export default class ListProducts extends Component {
   render() {
     return (
       <div className="">
-        <h1 className="page-header">Product</h1>
+        <h2 className="page-header">Danh sách các sản phẩm</h2>
 
         {this.showMessage()}
 

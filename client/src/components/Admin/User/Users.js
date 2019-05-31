@@ -83,18 +83,16 @@ export default class Users extends Component {
   render() {
     return (
       <div className="">
-        <h1 className="page-header">Users</h1>
+        <h2 className="page-header">Danh sách người dùng</h2>
 
-        <h2 className="sub-header">User</h2>
         <div className="table-responsive">
           <table className="table table-striped">
             <thead>
               <tr>
                 <th>#id</th>
-                <th>Ảnh</th>
                 <th>Tên</th>
                 <th>Email</th>
-                <th>Số Điện Thoại</th>
+                <th>Địa chỉ</th>
                 <th>Xóa</th>
               </tr>
             </thead>
