@@ -11,7 +11,7 @@ class MyRoute extends Component {
 				<div className="Route">
 					<Switch>
 						<Route path="/" exact component={App} />
-						<Route path="/admin" exact component={LayoutAdmin} />
+						<Route path="/admin" component={LayoutAdmin} />
 					</Switch>
 				</div>
 			</Router>
