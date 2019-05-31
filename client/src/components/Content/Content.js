@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Slider from '../Products/ListProducts/Slider';
-import ListProducts from '../Products/ListProducts/ListProducts';
 import CustomProducts from '../Products/ListProducts/CustomProducts';
 import { actFetchKeySearch, actFetchProductsRequest } from '../../actions/index';
 

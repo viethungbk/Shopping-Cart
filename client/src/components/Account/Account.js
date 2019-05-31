@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+
 import { actFetchUserData } from '../../actions/index';
 
 class Account extends Component {
@@ -14,10 +15,10 @@ class Account extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			oldPassword: "",
-			newPassword: "",
-			confirmNewPassword: "",
-			message: ""
+			oldPassword: '',
+			newPassword: '',
+			confirmNewPassword: '',
+			message: ''
 		}
 	}
 
@@ -28,7 +29,7 @@ class Account extends Component {
 
 		this.setState({
 			[name]: value,
-			message: ""
+			message: ''
 		});
 	}
 
@@ -39,32 +40,32 @@ class Account extends Component {
 
 		if (!(oldPassword && newPassword && confirmNewPassword)) {
 			this.setState({
-				message: "Bạn phải nhập đầy đủ thông tin!"
+				message: 'Bạn phải nhập đầy đủ thông tin!'
 			})
 		} else {
 			if (user.password !== oldPassword) {
 				this.setState({
-					message: "Nhập mật sai!"
+					message: 'Nhập mật sai!'
 				})
 			} else {
 				if (newPassword !== confirmNewPassword) {
 					this.setState({
-						message: "Mật khẩu mới bạn nhập không trùng khớp!"
+						message: 'Mật khẩu mới bạn nhập không trùng khớp!'
 					})
 				} else {
 					if (user.password === newPassword) {
 						this.setState({
-							message: "Bạn đã sử dụng mật khẩu này rồi!"
+							message: 'Bạn đã sử dụng mật khẩu này rồi!'
 						})
 					} else {
 						if (user.password === oldPassword && newPassword === confirmNewPassword) {
 							this.setState({
-								message: "Đổi mật khẩu thành công!"
+								message: 'Đổi mật khẩu thành công!'
 							})
 							Object.assign(user, { password: newPassword })
 							onFetchUserData(user);
-							// localStorage.setItem("user", JSON.stringify(user));
-							// callApi(`/users/${user.id}`, "PUT", user);
+							// localStorage.setItem('user', JSON.stringify(user));
+							// callApi(`/users/${user.id}`, 'PUT', user);
 							// this.onClear();
 						}
 					}
@@ -75,9 +76,9 @@ class Account extends Component {
 
 	onClear = () => {
 		this.setState({
-			oldPassword: "",
-			newPassword: "",
-			confirmNewPassword: "",
+			oldPassword: '',
+			newPassword: '',
+			confirmNewPassword: '',
 		});
 	}
 	showMessage = (message) => {
@@ -87,7 +88,7 @@ class Account extends Component {
 			</h3>
 
 		else
-			return "";
+			return '';
 	}
 
 	render() {

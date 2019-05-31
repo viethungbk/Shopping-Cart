@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import TopNav from './TopNav';
 import HotDeals from './HotDeals/HotDeals';
 import NewProducts from './NewProducts/NewProducts';

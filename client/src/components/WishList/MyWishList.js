@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Product from "./Product";
-import actAddToCart, { actDeleteWishItem } from "./../../actions/index";
-import MessageWishListEmpty from "./MessageWishListEmpty";
+
+import Product from './Product';
+import actAddToCart, { actDeleteWishItem } from './../../actions/index';
+import MessageWishListEmpty from './MessageWishListEmpty';
 
 class MyWishList extends Component {
 

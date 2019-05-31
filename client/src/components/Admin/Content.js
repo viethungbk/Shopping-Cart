@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import PrivateRoute from './Auth/PrivateRoute';
-import AuthButton from './Auth/AuthButton';
 import AddProduct from './Product/AddProduct';
 import Users from './User/Users';
 import ListProducts from './Product/ListProducts';

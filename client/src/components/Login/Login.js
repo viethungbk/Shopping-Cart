@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+
 import callApi from '../../apiCaller';
 import { actFetchUserData, actRemoveUserData, actFetchCartRequest, actFetchWishListRequest, actFetchOrdersRequest } from '../../actions/index';
 import { connect } from 'react-redux';
