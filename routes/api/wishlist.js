@@ -27,7 +27,6 @@ router.post('/add', passport.authenticate('jwt-user', { session: false }), (req,
   const wishListId = req.user.wishList;
 
   const { product } = req.body;
-  console.log(product);
 
   WishList.findById(wishListId)
     .then((foundWishList) => {

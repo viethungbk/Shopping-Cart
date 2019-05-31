@@ -213,7 +213,7 @@ export const actAddToOrdersRequest = (data) => {
     callApi('api/orders/create', 'post', data, headers)
     .then(result => {
       console.log(result);
-      window.alert(result.data.message);
+      window.alert("Đặt hàng thành công, hãy kiểm tra trong đơn hàng.");
       const order = result.data.order
 
       dispatch(actAddToOrders(order))

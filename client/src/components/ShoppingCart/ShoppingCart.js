@@ -86,7 +86,7 @@ class ShoppingCart extends Component {
 		}
 
 		if (cart.length === 0) {
-			window.alert('Gio hang trong');
+			window.alert('Giỏ hàng trống');
 			return;
 		}
 
@@ -141,7 +141,7 @@ class ShoppingCart extends Component {
 
 		callApi('api/cart/update', 'patch', data, headers)
 			.then(result => {
-				window.alert(result.data.message);
+				window.alert('Cập nhật giỏ hàng thành công');
 			})
 			.catch(error => {
 				console.log(error);

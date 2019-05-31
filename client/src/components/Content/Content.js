@@ -3,25 +3,12 @@ import { connect } from 'react-redux';
 
 import Slider from '../Products/ListProducts/Slider';
 import CustomProducts from '../Products/ListProducts/CustomProducts';
+import SearchProducts from '../Products/ListProducts/SearchProducts';
 import { actFetchKeySearch, actFetchProductsRequest } from '../../actions/index';
 
 class Content extends Component {
 	componentDidMount() {
 		this.props.onFetchAllProducts();
-	}
-
-	showProductsSearch(products) {
-		const ListProducts = products.map((product, index) => {
-			return (
-				<CustomProducts 
-					key={index}
-					products={products}
-					productsPerPage={4}
-				/>
-			);
-		});
-
-		return ListProducts;
 	}
 
 	render() {
@@ -47,19 +34,19 @@ class Content extends Component {
 				return (
 					<div className="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
 							<h3>{keySearch}</h3>
-							{ this.showProductsSearch(filteredProducts) }
+							<SearchProducts products={filteredProducts} />
 					</div>
 				);
 			}
 		}
 
 		// New Products
-		const limitedNewDate = 1 * 24 * 60 * 60 * 1000 // ms
+		const limitedNewDate = 1 * 24 * 60 * 60 * 1000 // 1 day to ms
 		const dateNow = Date.now();
 
 		const newProducts = products.filter(product => {
 			const productDate = new Date(product.date).getTime();
-			return dateNow - productDate >= limitedNewDate;
+			return dateNow - productDate <= limitedNewDate;
 		})
 
 		// Hot products
