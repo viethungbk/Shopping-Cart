@@ -3,43 +3,25 @@ import { connect } from 'react-redux';
 
 import Slider from '../Products/ListProducts/Slider';
 import CustomProducts from '../Products/ListProducts/CustomProducts';
-import SearchProducts from '../Products/ListProducts/SearchProducts';
 import { actFetchKeySearch, actFetchProductsRequest } from '../../actions/index';
+import SearchProducts from '../Products/ListProducts/SearchProducts';
 
 class Content extends Component {
 	componentDidMount() {
 		this.props.onFetchAllProducts();
 	}
 
-	render() {
-		const { products, keySearch } = this.props;
+	hotDeals = (products) => {
+		// Hot products
+		const limitedDeal = 20 // %
+		const hotDeals = products.filter(product => {
+			return Math.floor((product.pricebefore - product.price) / product.pricebefore * 100) >= limitedDeal;
+		});
 
-		if (products === undefined || products.length === 0) {
-			return null;
-		}
+		return hotDeals;
+	}
 
-		if (keySearch) {
-			const filteredProducts = products.filter(product => {
-				return (product.name.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1) ||
-					product.brand.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1
-			});
-
-			if (filteredProducts.length === 0) {
-				return <h3>Khong tim thay san pham</h3>
-			} else {
-
-				console.log(filteredProducts)
-				console.log(keySearch)
-	
-				return (
-					<div className="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
-							<h3>{keySearch}</h3>
-							<SearchProducts products={filteredProducts} />
-					</div>
-				);
-			}
-		}
-
+	newProducts = (products) => {
 		// New Products
 		const limitedNewDate = 1 * 24 * 60 * 60 * 1000 // 1 day to ms
 		const dateNow = Date.now();
@@ -47,29 +29,46 @@ class Content extends Component {
 		const newProducts = products.filter(product => {
 			const productDate = new Date(product.date).getTime();
 			return dateNow - productDate <= limitedNewDate;
-		})
+		});
 
-		// Hot products
-		const limitedDeal = 13 // %
-		const hotDeals = products.filter(product => {
-			return Math.floor((product.pricebefore - product.price) / product.pricebefore * 100) >= limitedDeal;
-		})
+		return newProducts;
+	}
 
-		return (
-			<div className="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
-				<Slider></Slider>
+	render() {
+		let { products, keySearch } = this.props;
 
-				<CustomProducts products={hotDeals} productsPerPage={4}>Giảm giá sock</CustomProducts>
+		if (products === undefined || products.length === 0) {
+			return null;
+		}
 
-				<hr />
+		if (keySearch) {
+			console.log(keySearch)
+			const searchProducts = products.filter(product => {
+				return (product.name.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1) ||
+					product.brand.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1
+			});
 
-				<CustomProducts products={newProducts} productsPerPage={4}>Sản phẩm mới</CustomProducts>
+			console.log(searchProducts)
+			return <SearchProducts customProducts={searchProducts}>Giảm giá sock</SearchProducts>
+		} else {
 
-				<hr />
+			return (
+				<div className="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
+					<Slider></Slider>
+	
+					<CustomProducts customProducts={this.hotDeals(products)} productsPerPage={4}>Giảm giá sock</CustomProducts>
+	
+					<hr />
+	
+					<CustomProducts customProducts={this.newProducts(products)} productsPerPage={4}>Sản phẩm mới</CustomProducts>
+	
+					<hr />
+	
+					<CustomProducts customProducts={products} productsPerPage={8}>Tất cả</CustomProducts>
+				</div>
+			);
+		}
 
-				<CustomProducts products={products} productsPerPage={8}>Tất cả</CustomProducts>
-			</div>
-		);
 	}
 }
 

@@ -11,6 +11,8 @@ class SearchProducts extends Component {
   }
 
   showProducts = (products) => {
+    console.log(products);
+
     let sortBy = this.state.sortBy;
     // console.log(sortBy);
     if (sortBy === 0) {
@@ -52,7 +54,8 @@ class SearchProducts extends Component {
   }
 
   render() {
-    let { children, products } = this.props;
+    let { children, customProducts } = this.props;
+    console.log(customProducts);
 
     return (
       <div className="row">
@@ -62,17 +65,11 @@ class SearchProducts extends Component {
 
         <div className="product-slider">
           <div className="col-md-12">
-            {this.showProducts(products)}
+            {this.showProducts(customProducts)}
           </div>
         </div>
       </div>
     );
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    products: state.products
   }
 }
 
@@ -90,4 +87,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchProducts);
+export default connect(null, mapDispatchToProps)(SearchProducts);

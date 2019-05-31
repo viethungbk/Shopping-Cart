@@ -9,7 +9,7 @@ const AuthButton = withRouter(
       <p>
         <button
           type="button"
-          className="btn btn-default navbar-btn"
+          className="btn btn-primary navbar-btn"
           onClick={() => {
             auth.logout(() => history.push("/admin"));
           }}

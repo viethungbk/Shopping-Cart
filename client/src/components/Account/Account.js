@@ -127,14 +127,14 @@ class Account extends Component {
 					<div className="panel-heading">
 						<h4>
 							Đổi mật khẩu
-                        </h4>
+						</h4>
 					</div>
 				</div>
 				{/* <div className="container"> */}
 
 				<form >
 					<div className="form-group">
-						<label htmlFor="pwd">Old Password:</label>
+						<label htmlFor="pwd">Mật khẩu cũ:</label>
 						<input
 							type="password"
 							className="form-control"
@@ -144,7 +144,7 @@ class Account extends Component {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="pwd">New Password:</label>
+						<label htmlFor="pwd">Mật khẩu mới:</label>
 						<input
 							type="password"
 							className="form-control"
@@ -154,7 +154,7 @@ class Account extends Component {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="pwd">Confirm New Password:</label>
+						<label htmlFor="pwd">Xác nhận mật khẩu:</label>
 						<input
 							type="password"
 							className="form-control"

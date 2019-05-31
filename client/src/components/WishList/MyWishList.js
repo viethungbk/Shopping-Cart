@@ -40,7 +40,7 @@ class MyWishList extends Component {
 							<table className="table">
 								<thead>
 									<tr>
-										<th colSpan={4} className="heading-title">My Wishlist</th>
+										<th colSpan={4} className="heading-title">Yêu thích</th>
 									</tr>
 								</thead>
 								<tbody>

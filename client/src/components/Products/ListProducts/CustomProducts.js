@@ -16,7 +16,8 @@ class CustomProducts extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const allProducts = nextProps.products;
+    // console.log(nextProps.products)
+    const allProducts = nextProps.customProducts;
 
     if (allProducts !== undefined) {
       this.setState({
@@ -107,12 +108,6 @@ class CustomProducts extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    products: state.products
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddToCart: (product, quantity) => {
@@ -127,4 +122,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomProducts);
+export default connect(null, mapDispatchToProps)(CustomProducts);

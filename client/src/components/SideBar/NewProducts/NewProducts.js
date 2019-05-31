@@ -49,7 +49,7 @@ class NewProduct extends Component {
 		return (
 			<div className="sidebar-widget outer-bottom-small">
 				<h3 className="section-title">
-					New Products
+					Sản phẩm mới
         </h3>
 
 				<div className="sidebar-widget-body outer-top-xs">

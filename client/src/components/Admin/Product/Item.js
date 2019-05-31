@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import arrayBufferToBase64 from '../../../utils/arrayBufferToBase64';
+import formatMoney from '../../../utils/formatMoney';
 
 export default class Item extends Component {
   showImage(images) {
@@ -26,8 +27,8 @@ export default class Item extends Component {
           { this.showImage(product.image) }
         </td>
         <td>{product.name}</td>
-        <td>{product.price}</td>
-        <td>{product.pricebefore}</td>
+        <td>{formatMoney(product.price)} VNĐ</td>
+        <td>{formatMoney(product.pricebefore)} VNĐ</td>
         <td>
           <Link to={`/admin/edit-product/${product._id}`}><button type="button" className="btn btn-primary">Sửa</button></Link>
         </td>

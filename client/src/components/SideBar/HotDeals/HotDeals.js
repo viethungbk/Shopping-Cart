@@ -47,7 +47,7 @@ class HotDeals extends Component {
 
     return (
       <div className="sidebar-widget hot-deals outer-bottom-xs">
-        <h3 className="section-title">Hot deals</h3>
+        <h3 className="section-title">Giảm giá</h3>
         <div className="sidebar-carousel custom-carousel owl-theme outer-top-ss">
           { this.showProducts(hotDeals) }
         </div>

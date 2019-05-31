@@ -81,7 +81,7 @@ export default class Register extends Component {
       <div className="container">
         {this.redirect()}
         <div className="col-md-6 col-sm-6 col-md-push-3 create-new-account">
-          <h4 className="text title-tag-line">Create your new account.</h4>
+          <h4 className="text title-tag-line">Tạo tài khoản</h4>
 
           <hr />
           {this.showMessage()}
